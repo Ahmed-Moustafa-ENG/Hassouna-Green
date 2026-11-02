@@ -36,11 +36,13 @@ _DEFAULT_DESIGN_MODELS = [
     "nvidia/nemotron-3.5-super-vl:free",
     "recursive/flint-v1.0:free",
 ]
+# Inkling (thinkingmachines/inkling:free) is not listed: OpenRouter only serves it to
+# agentic coding apps and answers ordinary API calls with 403.
 _DEFAULT_JUDGE_MODELS = [
-    "thinkingmachines/inkling:free",
     "nvidia/nemotron-3-ultra-550b-a55b:free",
     "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
     "nvidia/nemotron-3.5-super-vl:free",
+    "google/gemma-4-31b-it:free",
 ]
 
 
@@ -182,8 +184,10 @@ def _call_one(model, system, user, temperature, max_tokens, use_cache, lang, max
                 time.sleep(2 * (attempt + 1))
                 continue
             if r.status_code in (401, 402, 403):
+                # 401/402 = bad key or no credit: every model would fail. 403 is usually
+                # a restriction on this one model, so the next model may still work.
                 return None, _msg(lang, f"رفض الطلب ({r.status_code}): {r.text[:200]}",
-                                  f"Request refused ({r.status_code}): {r.text[:200]}"), True
+                                  f"Request refused ({r.status_code}): {r.text[:200]}"), r.status_code != 403
             if r.status_code == 404:
                 return None, _msg(lang,
                                   "المودل ده مش متاح لحسابك (404). راجع إعدادات الخصوصية في OpenRouter "
