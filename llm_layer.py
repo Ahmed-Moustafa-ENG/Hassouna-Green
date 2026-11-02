@@ -25,8 +25,53 @@ import requests
 
 # ───────────────────────── الإعدادات (غيّر من هنا) ─────────────────────────
 BASE_URL     = os.environ.get("LLM_BASE_URL", "https://openrouter.ai/api/v1")
-JUDGE_MODEL  = os.environ.get("JUDGE_MODEL",  "thinkingmachines/inkling:free")
-DESIGN_MODEL = os.environ.get("DESIGN_MODEL", "google/gemma-4-31b-it:free")
+# Each role has a list of free models. The first one is tried first; if it is
+# rate-limited (429), unavailable (404), slow or returns unusable JSON, the app
+# moves on to the next one automatically. You can override a list with
+# DESIGN_MODEL / JUDGE_MODEL (one name, or several separated by commas), set
+# either as an environment variable or in Streamlit secrets.
+_DEFAULT_DESIGN_MODELS = [
+    "google/gemma-4-31b-it:free",
+    "nvidia/nemotron-3-ultra-550b-a55b:free",
+    "nvidia/nemotron-3.5-super-vl:free",
+    "recursive/flint-v1.0:free",
+]
+_DEFAULT_JUDGE_MODELS = [
+    "thinkingmachines/inkling:free",
+    "nvidia/nemotron-3-ultra-550b-a55b:free",
+    "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
+    "nvidia/nemotron-3.5-super-vl:free",
+]
+
+
+def _setting(name):
+    value = os.environ.get(name)
+    if value:
+        return value
+    try:
+        import streamlit as st
+        return st.secrets.get(name)
+    except Exception:
+        return None
+
+
+def _model_chain(name, defaults):
+    custom = _setting(name)
+    if custom:
+        names = [m.strip() for m in str(custom).split(",") if m.strip()]
+        if names:
+            return names
+    return list(defaults)
+
+
+def design_models():
+    return _model_chain("DESIGN_MODEL", _DEFAULT_DESIGN_MODELS)
+
+
+def judge_models():
+    return _model_chain("JUDGE_MODEL", _DEFAULT_JUDGE_MODELS)
+
+
 # The cache lives next to this file, so it does not depend on the folder the app is started from.
 CACHE_FILE   = os.environ.get("LLM_CACHE_FILE",
                               os.path.join(os.path.dirname(os.path.abspath(__file__)), "llm_cache.json"))
@@ -86,18 +131,18 @@ def forget_cached(model, system, user):
 
 
 # ───────────────────────────── النداء الأساسي ──────────────────────────────
-def call_llm(model, system, user, temperature=0.3, max_tokens=1800, use_cache=True, lang="ar"):
-    """يرجّع (text, error). واحد منهم None دايماً."""
+def _call_one(model, system, user, temperature, max_tokens, use_cache, lang, max_retries):
+    """Returns (text, error, fatal). fatal=True means another model would fail too (bad key, no credit)."""
     key = _get_api_key()
     if not key:
         return None, _msg(lang, "OPENROUTER_API_KEY غير موجود في متغيرات البيئة.",
-                          "OPENROUTER_API_KEY is not set in the environment.")
+                          "OPENROUTER_API_KEY is not set in the environment."), True
 
     ck = _cache_key(model, system, user)
     if use_cache:
         cache = _load_cache()
         if ck in cache:
-            return cache[ck], None
+            return cache[ck], None, False
 
     payload = {
         "model": model,
@@ -119,7 +164,7 @@ def call_llm(model, system, user, temperature=0.3, max_tokens=1800, use_cache=Tr
     }
 
     last_err = _msg(lang, "خطأ غير معروف.", "Unknown error.")
-    for attempt in range(MAX_RETRIES + 1):
+    for attempt in range(max_retries + 1):
         try:
             r = requests.post(f"{BASE_URL}/chat/completions", headers=headers,
                               json=payload, timeout=TIMEOUT_S)
@@ -130,7 +175,7 @@ def call_llm(model, system, user, temperature=0.3, max_tokens=1800, use_cache=Tr
                     cache = _load_cache()
                     cache[ck] = text
                     _save_cache(cache)
-                return text, None
+                return text, None, False
             if r.status_code == 429:
                 last_err = _msg(lang, "وصلت للحد اليومي/الدقيقي للمودلات المجانية (429). جرّب بعد شوية.",
                                 "The free models' rate limit was reached (429). Try again in a little while.")
@@ -138,20 +183,49 @@ def call_llm(model, system, user, temperature=0.3, max_tokens=1800, use_cache=Tr
                 continue
             if r.status_code in (401, 402, 403):
                 return None, _msg(lang, f"رفض الطلب ({r.status_code}): {r.text[:200]}",
-                                  f"Request refused ({r.status_code}): {r.text[:200]}")
+                                  f"Request refused ({r.status_code}): {r.text[:200]}"), True
             if r.status_code == 404:
                 return None, _msg(lang,
                                   "المودل ده مش متاح لحسابك (404). راجع إعدادات الخصوصية في OpenRouter "
                                   "أو غيّر اسم المودل في llm_layer.py.",
                                   "This model is not available to your account (404). Check your OpenRouter "
-                                  "privacy settings or change the model name in llm_layer.py.")
+                                  "privacy settings or change the model name in llm_layer.py."), False
             last_err = f"HTTP {r.status_code}: {r.text[:200]}"
         except requests.Timeout:
             last_err = _msg(lang, "انتهت مهلة الطلب.", "The request timed out.")
         except Exception as e:  # noqa
             last_err = _msg(lang, f"خطأ اتصال: {e}", f"Connection error: {e}")
         time.sleep(1.5 * (attempt + 1))
-    return None, last_err
+    return None, last_err, False
+
+
+def call_llm(model, system, user, temperature=0.3, max_tokens=1800, use_cache=True, lang="ar"):
+    """يرجّع (text, error). واحد منهم None دايماً."""
+    text, err, _ = _call_one(model, system, user, temperature, max_tokens, use_cache, lang, MAX_RETRIES)
+    return text, err
+
+
+def call_with_fallback(models, system, user, accept, temperature=0.3, max_tokens=1800, lang="ar"):
+    """Try each model in turn until one returns a reply that ``accept(text)`` approves.
+
+    Returns (text, error, model_used). Unusable replies are removed from the cache.
+    Only the last model gets the full retry-with-wait treatment; earlier ones fail fast
+    so the app moves to the next model instead of making the person wait.
+    """
+    last_err = _msg(lang, "خطأ غير معروف.", "Unknown error.")
+    for i, model in enumerate(models):
+        retries = MAX_RETRIES if i == len(models) - 1 else 0
+        text, err, fatal = _call_one(model, system, user, temperature, max_tokens, True, lang, retries)
+        if err:
+            last_err = err
+            if fatal:
+                return None, err, None
+            continue
+        if accept(text):
+            return text, None, model
+        forget_cached(model, system, user)
+        last_err = _msg(lang, "رد المودل مكانش صالح.", "The model's reply was not usable.")
+    return None, last_err, None
 
 
 def _extract_json(text):
@@ -254,15 +328,15 @@ def generate_design_plan(ctx, recommended, lang="ar"):
                   "be practical for the stated soil and temperature"],
     }, ensure_ascii=False)
 
-    text, err = call_llm(DESIGN_MODEL, system, user, temperature=0.5, max_tokens=2200, lang=lang)
+    def _good(t):
+        j = _extract_json(t)
+        return bool(j and _dict_list(j.get("zones")))
+
+    text, err, used = call_with_fallback(design_models(), system, user, _good,
+                                         temperature=0.5, max_tokens=2200, lang=lang)
     if err:
         return {"ok": False, "plan": None, "error": err}
     raw = _extract_json(text)
-    if not raw or not _dict_list(raw.get("zones")):
-        forget_cached(DESIGN_MODEL, system, user)
-        return {"ok": False, "plan": None,
-                "error": _msg(lang, "رد المودل مكانش JSON صالح. جرّب تاني.",
-                              "The model's reply was not valid JSON. Please try again.")}
 
     # ── تحقق بعدي (Guardrails): نشيل أي نبات المودل اخترعه ونوحّد شكل البيانات ──
     dropped, zones = [], []
@@ -285,6 +359,7 @@ def generate_design_plan(ctx, recommended, lang="ar"):
                                  for rk in _dict_list(raw.get("risks_and_mitigation"))],
     }
     total = sum(z["area_pct"] for z in zones)
+    plan["_model"] = used
     plan["_validation"] = {
         "dropped_unknown_plants": dropped,
         "area_pct_total": total,
@@ -324,16 +399,16 @@ def judge_design(ctx, recommended, plan, lang="ar"):
         },
     }, ensure_ascii=False)
 
-    text, err = call_llm(JUDGE_MODEL, system, user, temperature=0.1, max_tokens=1800, lang=lang)
+    def _good(t):
+        j = _extract_json(t)
+        return bool(j and safe_int(j.get("score")) is not None)
+
+    text, err, used = call_with_fallback(judge_models(), system, user, _good,
+                                         temperature=0.1, max_tokens=1800, lang=lang)
     if err:
         return {"ok": False, "review": None, "error": err}
     raw = _extract_json(text)
-    score = safe_int(raw.get("score")) if raw else None
-    if score is None:
-        forget_cached(JUDGE_MODEL, system, user)
-        return {"ok": False, "review": None,
-                "error": _msg(lang, "رد الحكم مكانش JSON صالح. جرّب تاني.",
-                              "The reviewer's reply was not valid JSON. Please try again.")}
+    score = safe_int(raw.get("score"))
     criteria = {}
     if isinstance(raw.get("criteria"), dict):
         for k, v in raw["criteria"].items():
@@ -349,5 +424,6 @@ def judge_design(ctx, recommended, plan, lang="ar"):
         "improvements": _text_list(raw.get("improvements")),
         "rationale": _text(raw.get("rationale")),
         "unknowns": _text_list(raw.get("unknowns")),
+        "model": used,
     }
     return {"ok": True, "review": review, "error": None}
