@@ -431,3 +431,28 @@ def judge_design(ctx, recommended, plan, lang="ar"):
         "model": used,
     }
     return {"ok": True, "review": review, "error": None}
+
+
+# ───────────────────── 3) شرح التوقعات المناخية بعيدة المدى ─────────────────────
+def explain_climate_outlook(facts, lang="ar"):
+    """Explain a climate projection in plain words, using only the numbers supplied.
+
+    The numbers come from climate models; the language model never predicts them.
+    Returns {"ok": bool, "text": str|None, "model": str|None, "error": str|None}.
+    """
+    system = (
+        "You are a careful climate analyst advising a landscape planner. Use ONLY the numbers "
+        "in the JSON; never invent figures, dates or sources. State plainly that these are "
+        "climate-model projections of typical conditions, not weather forecasts, and mention the "
+        f"uncertainty (model spread). Write in {_lang_name(lang)}. Format: one short paragraph of "
+        "3-4 sentences, then exactly 3 short practical recommendations, each on its own line "
+        "starting with '- '. No tables, no headings."
+    )
+    user = json.dumps({"task": "Explain this long-term climate outlook for the site and what it means "
+                               "for the planting plan.", "facts": facts}, ensure_ascii=False)
+    text, err, used = call_with_fallback(design_models(), system, user,
+                                         lambda t: bool(t and len(t.strip()) > 40),
+                                         temperature=0.2, max_tokens=1200, lang=lang)
+    if err:
+        return {"ok": False, "text": None, "model": None, "error": err}
+    return {"ok": True, "text": text.strip(), "model": used, "error": None}

@@ -690,10 +690,212 @@ def fetch_et0_weather(gov, design_date):
     if result["et0_mm_day"] is None:
         result["et0_mm_day"] = month_normal.get("et0_mm_day")
         result["source"] = "Open-Meteo five-year monthly climate normal" if result["et0_mm_day"] is not None else "ET0 unavailable"
+    if result["temperature_c"] is None and design_date > today + datetime.timedelta(days=16):
+        outlook = climate_outlook(gov, design_date.year)
+        if outlook and not math.isnan(outlook["monthly_proj"][design_date.month - 1]):
+            result["temperature_c"] = round(outlook["monthly_proj"][design_date.month - 1], 1)
+            result["temperature_source"] = "CMIP6 climate projection"
     if result["temperature_c"] is None:
         temp = month_normal.get("temperature_c")
         result["temperature_c"] = round(float(temp), 1) if temp is not None else None
     return result
+
+
+# ── Long-term climate outlook (CMIP6 climate-model projections) ─────────────
+@st.cache_data(ttl=86400, show_spinner=False)
+def _climate_projection_raw(lat, lon):
+    """Monthly temperatures 1991-2049 from two CMIP6 HighResMIP models (Open-Meteo Climate API)."""
+    r = requests.get(
+        "https://climate-api.open-meteo.com/v1/climate",
+        params={"latitude": lat, "longitude": lon, "start_date": "1991-01-01", "end_date": "2049-12-31",
+                "models": "EC_Earth3P_HR,MRI_AGCM3_2_S", "daily": "temperature_2m_mean,temperature_2m_max"},
+        timeout=45,
+    )
+    r.raise_for_status()
+    daily = r.json().get("daily", {})
+    times = daily.get("time", [])
+
+    def stack(prefix):
+        cols = [np.array([np.nan if v is None else float(v) for v in vals])
+                for k, vals in daily.items() if k.startswith(prefix)]
+        return np.vstack(cols) if cols else None
+
+    mean_s, max_s = stack("temperature_2m_mean"), stack("temperature_2m_max")
+    if not times or mean_s is None:
+        return None
+    years = np.array([int(t[:4]) for t in times])
+    months = np.array([int(t[5:7]) for t in times])
+    uniq = sorted(set(years.tolist()))
+    tmean = np.full((len(uniq), 12), np.nan)
+    tmax = np.full((len(uniq), 12), np.nan)
+    spread = []
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore")
+        for yi, y in enumerate(uniq):
+            ysel = years == y
+            spread.append(float(np.nanstd(np.nanmean(mean_s[:, ysel], axis=1))) if mean_s.shape[0] > 1 else 0.0)
+            for m in range(1, 13):
+                sel = ysel & (months == m)
+                if sel.any():
+                    tmean[yi, m - 1] = np.nanmean(mean_s[:, sel])
+                    if max_s is not None:
+                        tmax[yi, m - 1] = np.nanmean(max_s[:, sel])
+    return {"years": uniq, "tmean": tmean.tolist(), "tmax": tmax.tolist(),
+            "spread": spread, "n_models": int(mean_s.shape[0])}
+
+
+def climate_outlook(gov, target_year):
+    """Long-term temperature outlook for a location and year, or None when unavailable.
+
+    A straight-line trend (least squares) is fitted through the model years, for the
+    annual mean and for each calendar month separately. This smooths the year-to-year
+    noise of single model years. The result describes *typical* conditions of that year.
+    """
+    loc = GOVERNORATE_DATA.get(gov, {})
+    if loc.get("lat") is None or loc.get("lon") is None:
+        return None
+    try:
+        raw = _climate_projection_raw(loc["lat"], loc["lon"])
+    except Exception:
+        return None
+    if not raw:
+        return None
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore")
+        years = np.array(raw["years"], dtype=float)
+        tmean = np.array(raw["tmean"], dtype=float)
+        tmax = np.array(raw["tmax"], dtype=float)
+        annual = np.nanmean(tmean, axis=1)
+        ok = ~np.isnan(annual)
+        if ok.sum() < 10:
+            return None
+        ty = float(target_year)
+
+        def fit(series):
+            good = ~np.isnan(series)
+            if good.sum() < 10:
+                return float("nan")
+            slope, intercept = np.polyfit(years[good], series[good], 1)
+            return float(slope * ty + intercept)
+
+        slope, intercept = np.polyfit(years[ok], annual[ok], 1)
+        base = (years >= 1991) & (years <= 2020) & ok
+        baseline = float(annual[base].mean())
+        monthly = [fit(tmean[:, m]) for m in range(12)]
+        monthly_max = [fit(tmax[:, m]) for m in range(12)]
+        hot_idx = int(np.nanargmax(monthly_max)) if not np.all(np.isnan(monthly_max)) else None
+        decades = {}
+        for label, lo, hi in (("1991–2020", 1991, 2020), ("2021–2030", 2021, 2030),
+                              ("2031–2040", 2031, 2040), ("2041–2049", 2041, 2049)):
+            sel = (years >= lo) & (years <= hi) & ok
+            if sel.any():
+                decades[label] = round(float(annual[sel].mean()), 1)
+        projected = float(slope * ty + intercept)
+        return {
+            "years": years.tolist(), "annual": [None if np.isnan(v) else float(v) for v in annual],
+            "slope_per_decade": float(slope * 10), "intercept": float(intercept), "baseline": baseline,
+            "projected_annual": projected, "delta": projected - baseline,
+            "monthly_proj": monthly, "monthly_max_proj": monthly_max,
+            "hottest_month": None if hot_idx is None else hot_idx + 1,
+            "hottest_max": None if hot_idx is None else monthly_max[hot_idx],
+            "decades": decades, "spread": float(np.nanmean(raw["spread"])) if raw.get("spread") else 0.0,
+            "n_models": raw["n_models"], "extrapolated": ty > 2049, "year": int(target_year),
+        }
+
+
+def render_climate_outlook(lang, gov, year, recommended):
+    """Long-term climate section: projected warming, plant heat risk and an optional AI explanation."""
+    st.markdown("### 🔭 " + _label(lang, "التوقعات المناخية بعيدة المدى", "Long-term climate outlook"))
+    with st.spinner(_label(lang, "جارٍ تحميل إسقاطات المناخ...", "Loading climate projections...")):
+        o = climate_outlook(gov, year)
+    if not o:
+        st.info(_label(lang, "إسقاطات المناخ غير متاحة الآن؛ حاول لاحقاً.",
+                       "Climate projections are not available right now; please try again later."))
+        return
+    c1, c2, c3, c4 = st.columns(4)
+    c1.metric(_label(lang, "متوسط 1991–2020", "1991–2020 average"), f"{o['baseline']:.1f}°C")
+    c2.metric(_label(lang, f"المتوقع في {year}", f"Projected {year}"), f"{o['projected_annual']:.1f}°C",
+              f"{o['delta']:+.1f}°C")
+    c3.metric(_label(lang, "معدل الاتجاه", "Trend"), f"{o['slope_per_decade']:+.2f}°C",
+              _label(lang, "لكل عقد", "per decade"), delta_color="off")
+    if o["hottest_max"] is not None:
+        c4.metric(_label(lang, "أحرّ شهر (متوسط العظمى)", "Hottest month (avg. max)"),
+                  f"{o['hottest_max']:.1f}°C", T_month_name(lang, o["hottest_month"]), delta_color="off")
+
+    fig, ax = plt.subplots(figsize=(8, 3.2))
+    fig.patch.set_alpha(0)
+    ax.patch.set_alpha(0)
+    ys = [y for y, v in zip(o["years"], o["annual"]) if v is not None]
+    vs = [v for v in o["annual"] if v is not None]
+    ax.plot(ys, vs, color="#69f0ae", lw=1.6, label=_label(lang, "متوسط سنوي (نماذج)", "Annual mean (models)"))
+    ax.plot([ys[0], max(ys[-1], year)], [o["slope_per_decade"] / 10 * ys[0] + o["intercept"],
+                                         o["slope_per_decade"] / 10 * max(ys[-1], year) + o["intercept"]],
+            color="#ffb74d", lw=1.6, ls="--", label=_label(lang, "خط الاتجاه", "Trend line"))
+    ax.axvline(year, color="#ef9a9a", lw=1, ls=":")
+    ax.scatter([year], [o["projected_annual"]], color="#ef5350", zorder=5,
+               label=_label(lang, f"سنة التصميم {year}", f"Design year {year}"))
+    ax.set_ylabel("°C", color="#c9d1d9")
+    ax.tick_params(colors="#c9d1d9")
+    for sp in ax.spines.values():
+        sp.set_color("#30363d")
+    ax.grid(alpha=0.15)
+    ax.legend(facecolor="none", edgecolor="none", labelcolor="#c9d1d9", fontsize=8)
+    st.pyplot(fig, clear_figure=True)
+    plt.close(fig)
+
+    if o["decades"]:
+        st.dataframe(pd.DataFrame({_label(lang, "الفترة", "Period"): list(o["decades"].keys()),
+                                   _label(lang, "متوسط الحرارة °C", "Mean temperature °C"): list(o["decades"].values())}),
+                     hide_index=True, width="stretch")
+
+    if o["hottest_max"] is not None and recommended is not None and len(recommended):
+        risky = [(r["name"] if lang == "ar" else r["name_en"], float(r["temp_max"]))
+                 for _, r in recommended.iterrows() if float(r["temp_max"]) < o["hottest_max"]]
+        if risky:
+            st.warning(_label(lang,
+                f"نباتات قد تتعرض لإجهاد حراري في {year} (حدها الأقصى أقل من {o['hottest_max']:.1f}°C): "
+                + "، ".join(f"{n} ({t:g}°C)" for n, t in risky),
+                f"Plants that may face heat stress in {year} (catalog maximum below {o['hottest_max']:.1f}°C): "
+                + ", ".join(f"{n} ({t:g}°C)" for n, t in risky)))
+        else:
+            st.success(_label(lang, f"كل النباتات الموصى بها تتحمل أحرّ شهر متوقع في {year}.",
+                              f"All recommended plants tolerate the hottest projected month of {year}."))
+
+    st.caption(_label(lang,
+        f"المصدر: إسقاطات مناخية CMIP6 (HighResMIP، {o['n_models']} نماذج) عبر Open-Meteo، مع خط اتجاه بالمربعات الصغرى. "
+        f"هذه تقديرات للظروف المناخية «المعتادة» وليست توقعات طقس يومية؛ لا يمكن التنبؤ بالطقس لأكثر من أسبوعين تقريباً. "
+        f"عدم اليقين بين النماذج ≈ ±{o['spread']:.1f}°C" + ("؛ السنة خارج نطاق النماذج (2049) فتم تمديد الاتجاه." if o["extrapolated"] else "."),
+        f"Source: CMIP6 HighResMIP climate projections ({o['n_models']} models) via Open-Meteo, with a least-squares trend line. "
+        f"These describe typical climate conditions, not day-by-day weather forecasts; weather cannot be predicted beyond about two weeks. "
+        f"Model spread ≈ ±{o['spread']:.1f}°C" + ("; the year is beyond the models (2049), so the trend was extended." if o["extrapolated"] else ".")))
+
+    # AI explanation (optional): written only from the numbers above.
+    if not llm_layer.llm_available():
+        return
+    key = f"clim_ai_{gov}_{year}_{lang}"
+    if st.button(_label(lang, "🧠 اشرح التوقعات بالذكاء الاصطناعي", "🧠 Explain this outlook with AI"), key="btn_clim_ai"):
+        facts = {"location": label_location(gov, "en"), "design_year": year,
+                 "baseline_1991_2020_mean_c": round(o["baseline"], 1),
+                 "projected_annual_mean_c": round(o["projected_annual"], 1),
+                 "warming_vs_baseline_c": round(o["delta"], 1),
+                 "trend_c_per_decade": round(o["slope_per_decade"], 2),
+                 "hottest_month_avg_max_c": None if o["hottest_max"] is None else round(o["hottest_max"], 1),
+                 "decade_means_c": o["decades"], "model_spread_c": round(o["spread"], 1),
+                 "plants_recommended": [r["name_en"] for _, r in recommended.iterrows()] if recommended is not None else []}
+        with st.spinner(_label(lang, "الذكاء الاصطناعي يحلل...", "AI is analysing...")):
+            st.session_state[key] = llm_layer.explain_climate_outlook(facts, lang)
+    res = st.session_state.get(key)
+    if res:
+        if res["ok"]:
+            st.markdown(res["text"])
+            st.caption(_label(lang, f"النموذج: {res['model']} — الشرح مبني على الأرقام أعلاه فقط.",
+                              f"Model: {res['model']} — the explanation is based only on the numbers above."))
+        else:
+            st.error(res["error"])
+
+
+def T_month_name(lang, month):
+    return TRANSLATIONS[lang]["months"][int(month)] if month else ""
 
 
 # PART 5 — TRANSPARENT RULE-BASED SCORING
@@ -2977,6 +3179,8 @@ def main():
 
         render_advanced_intelligence_suite(lang, country, governorate, region, soil, avg_temp, area_sqm, water_budget, water_data, recommended)
         render_irrigation_water_suitability(lang, soil, water_data)
+        st.markdown("---")
+        render_climate_outlook(lang, governorate, int(year), recommended)
 
         st.markdown("---")
 
