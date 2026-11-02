@@ -2918,6 +2918,7 @@ def main():
                 f'{_label(lang, "داخل النطاق", "within range")}</b></div>')
         st.markdown(f"### {T['summary_title']}")
 
+        wi = T["water_icons"]
         plant_rows = "".join([
             f'<div class="summary-row">'
             f'<span>{"⭐"*int(r["beauty"])} {r["name"] if lang=="ar" else r["name_en"]}</span>'

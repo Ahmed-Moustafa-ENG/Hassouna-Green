@@ -1,8 +1,11 @@
+# Never upload these
 .venv/
 venv/
 .streamlit/secrets.toml
 __pycache__/
 *.pyc
+
+# Files the app creates while running
 llm_cache.json
 hassouna_feedback.json
 isef_feedback.json
