@@ -1642,8 +1642,6 @@ def inject_css():
         }
         .plant-grid { grid-template-columns: repeat(3, 1fr); }
         .form-card { padding: 1.5rem; }
-        [data-testid="stSidebar"] { border: 0 !important; }
-        [data-testid="stSidebar"][aria-expanded="false"] { display: none !important; }
         .main-header { padding: 1.5rem 1.2rem 1.2rem; }
     }
 
@@ -2405,6 +2403,9 @@ def render_irrigation_water_suitability(lang, soil, water_data):
         """, unsafe_allow_html=True)
 
 
+SHOW_SIDEBAR = False   # quick-stats sidebar (see main())
+
+
 def main():
     st.set_page_config(
         page_title="Hassouna Green — Sustainable Land Planning",
@@ -2437,18 +2438,26 @@ def main():
         key="lang_choice",
     )
 
-    with st.sidebar:
-        # Quick stats sidebar
-        df_stats = get_plants_database()
-        T_s = TRANSLATIONS[st.session_state.lang]
-        st.markdown(f"**{T_s['stats_title']}**")
-        st.metric(T_s['total_plants_db'],   len(df_stats))
-        st.metric(_label(st.session_state.lang, '\u0627\u0644\u062f\u0648\u0644 / \u0627\u0644\u0645\u0648\u0627\u0642\u0639', 'Countries / locations'), f'{len(COUNTRY_LOCATION_KEYS)} / {len(GOVERNORATE_DATA)}')
-        st.metric(T_s['soil_types_count'],   len(ALL_SOIL_TYPES))
-        st.caption(_label(st.session_state.lang,
-            "التقييم القاعدي بأوزان مبرمجة شفافة؛ دقة حَكَم تعلّم الآلة مقاسة بتحقق متقاطع مكاني (AUC) ومعروضة في صفحة النتائج.",
-            "The rule-based score uses transparent programmed weights; the ML judge's accuracy is measured by spatial "
-            "cross-validation (AUC) and shown on the results page."))
+    # The sidebar is off by default. Its open button lives in the Streamlit header, which this app
+    # hides, so nobody could open it - and in Arabic (right-to-left) a collapsed sidebar can leave a
+    # stray line on screen. Set SHOW_SIDEBAR = True above main() to bring it back.
+    if SHOW_SIDEBAR:
+        with st.sidebar:
+            # Quick stats sidebar
+            df_stats = get_plants_database()
+            T_s = TRANSLATIONS[st.session_state.lang]
+            st.markdown(f"**{T_s['stats_title']}**")
+            st.metric(T_s['total_plants_db'],   len(df_stats))
+            st.metric(_label(st.session_state.lang, '\u0627\u0644\u062f\u0648\u0644 / \u0627\u0644\u0645\u0648\u0627\u0642\u0639', 'Countries / locations'), f'{len(COUNTRY_LOCATION_KEYS)} / {len(GOVERNORATE_DATA)}')
+            st.metric(T_s['soil_types_count'],   len(ALL_SOIL_TYPES))
+            st.caption(_label(st.session_state.lang,
+                "التقييم القاعدي بأوزان مبرمجة شفافة؛ دقة حَكَم تعلّم الآلة مقاسة بتحقق متقاطع مكاني (AUC) ومعروضة في صفحة النتائج.",
+                "The rule-based score uses transparent programmed weights; the ML judge's accuracy is measured by spatial "
+                "cross-validation (AUC) and shown on the results page."))
+    else:
+        st.markdown("<style>[data-testid='stSidebar'],[data-testid='stSidebarCollapsedControl'],"
+                    "[data-testid='collapsedControl']{display:none!important}</style>",
+                    unsafe_allow_html=True)
 
     lang = st.session_state.lang
     T    = TRANSLATIONS[lang]
