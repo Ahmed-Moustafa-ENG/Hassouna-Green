@@ -9,7 +9,9 @@ import matplotlib.patheffects as pe
 import streamlit as st
 import datetime
 import calendar
+import base64
 import html
+import io
 import json
 import os
 import requests
@@ -35,6 +37,11 @@ TRANSLATIONS = {
         "project_name": "حسونة جرين",
         "project_sub": "منصة ذكية لتخطيط الأراضي والزراعة المستدامة وترشيد المياه",
         "brand_badge": "Hassouna Green",
+        "creators_label": "إعداد وتطوير",
+        "creators_and": "و",
+        "creator_1": "أحمد مصطفى",
+        "creator_2": "عبد الرحمن خالد",
+        "fig_swipe_hint": "اسحب يمينًا ويسارًا لرؤية الرسم كاملًا",
         "app_title": "حسونة جرين — تخطيط الأراضي المستدام",
         "app_subtitle": "توصيات زراعية ومائية مبنية على بيانات الموقع",
         "step_location": "الموقع والتاريخ",
@@ -142,6 +149,11 @@ TRANSLATIONS = {
         "project_name": "Hassouna Green",
         "project_sub": "A smart platform for sustainable land and planting plans",
         "brand_badge": "Hassouna Green",
+        "creators_label": "Created by",
+        "creators_and": "&",
+        "creator_1": "Ahmed Moustafa",
+        "creator_2": "Abdelrahman Khaled",
+        "fig_swipe_hint": "Swipe sideways to see the whole figure",
         "app_title": "Hassouna Green — Sustainable Land Planning",
         "app_subtitle": "Climate-aware planting and irrigation planning",
         "step_location": "Location & Date",
@@ -1590,8 +1602,182 @@ def inject_css():
     /* ══ HIDE UI ═════════════════════════════════════════════════════════ */
     #MainMenu, footer, header { visibility: hidden; }
     .block-container { padding-top: 1.5rem !important; }
+
+    /* ══ CREATORS CREDIT ═════════════════════════════════════════════════ */
+    .creators {
+        display: flex; flex-wrap: wrap; justify-content: center; align-items: baseline;
+        gap: .2rem .5rem; margin-top: .9rem;
+        font-size: .92rem; color: var(--textSub);
+    }
+    .creators .creator-name { color: var(--green3); font-weight: 700; }
+    .creators .creator-pair, .creators .creator-name { white-space: nowrap; }
+    .intro-creators { margin: -1.2rem 0 2rem; padding: 0 1rem; }
+
+    /* ══ PLANT GRID (replaces st.columns so it can reflow on small screens) ═ */
+    .plant-grid {
+        display: grid; grid-template-columns: repeat(4, 1fr);
+        gap: .8rem; margin: .5rem 0 1rem;
+    }
+
+    /* ══ FIGURES: full width on desktop, swipeable on phones ═════════════ */
+    .fig-scroll {
+        overflow-x: auto; -webkit-overflow-scrolling: touch;
+        border: 1px solid var(--border2); border-radius: 14px;
+        direction: ltr;
+    }
+    .fig-scroll img { display: block; width: 100%; height: auto; }
+    .fig-hint { display: none; font-size: .78rem; color: var(--textSub); margin: .2rem 0 .4rem; }
+
+    /* ══ TABLETS (≤ 900px) ═══════════════════════════════════════════════ */
+    @media (max-width: 900px) {
+        .block-container, [data-testid="stMainBlockContainer"] {
+            padding-left: 1.2rem !important; padding-right: 1.2rem !important;
+            padding-top: 1rem !important;
+        }
+        .plant-grid { grid-template-columns: repeat(3, 1fr); }
+        .form-card { padding: 1.5rem; }
+        .main-header { padding: 1.5rem 1.2rem 1.2rem; }
+        /* the Streamlit header is hidden above; keep the sidebar button reachable on touch screens */
+        [data-testid="stSidebarCollapsedControl"],
+        [data-testid="collapsedControl"],
+        [data-testid="stExpandSidebarButton"] { visibility: visible !important; }
+    }
+
+    /* ══ PHONES (≤ 640px) ════════════════════════════════════════════════ */
+    @media (max-width: 640px) {
+        .block-container, [data-testid="stMainBlockContainer"] {
+            padding-left: .8rem !important; padding-right: .8rem !important;
+            padding-top: .8rem !important;
+        }
+        .main-header { border-radius: 18px; padding: 1.2rem .9rem 1rem; margin-bottom: 1rem; }
+        .main-header p { font-size: .85rem; }
+        .isef-badge { font-size: .75rem; padding: .25rem 1rem; }
+        .creators { font-size: .85rem; margin-top: .7rem; }
+
+        .step-wizard { flex-wrap: nowrap; margin: 1rem 0 1.4rem; }
+        .step-circle { width: 34px; height: 34px; font-size: .9rem; }
+        .step-label { font-size: .66rem; max-width: 62px; line-height: 1.25; }
+        .step-connector { width: 10px; margin: 0 2px; }
+
+        .form-card { padding: 1.1rem .9rem; border-radius: 18px; }
+        .form-card-title { font-size: 1.05rem; margin-bottom: 1rem; }
+        .info-pill { font-size: .78rem; padding: .3rem .7rem; }
+
+        .plant-grid { grid-template-columns: repeat(2, 1fr); gap: .6rem; }
+        .plant-card { padding: .8rem .4rem; }
+
+        .saving-big { font-size: 2.3rem; }
+        .judge-card { padding: 1.2rem .9rem; border-radius: 18px; }
+        .judge-score { font-size: 3.2rem; }
+        .criteria-bar { flex-wrap: wrap; gap: 4px 10px; }
+        .criteria-name { min-width: 0; width: 100%; text-align: start; }
+        .bar-val { min-width: 34px; }
+
+        .summary-box, .feedback-box { padding: 1.1rem .9rem; border-radius: 16px; }
+        .summary-row { flex-wrap: wrap; gap: .2rem .8rem; }
+        .status-chip { white-space: normal; }
+        .stats-grid { grid-template-columns: repeat(2, 1fr); gap: .6rem; }
+        .stats-card { padding: .9rem .6rem; }
+        .stats-num { font-size: 1.5rem; }
+        [data-testid="stMetricValue"] { font-size: 1.35rem !important; }
+        [data-testid="metric-container"] { padding: .8rem !important; }
+
+        .fig-hint { display: block; }
+        .fig-scroll img { min-width: 640px; }
+        [data-testid="stMarkdownContainer"] table { display: block; overflow-x: auto; max-width: 100%; }
+
+        /* comfortable touch targets; 16px inputs stop iOS Safari from zooming in on focus */
+        .stButton > button { width: 100%; min-height: 46px; padding: .6rem 1rem !important; font-size: .95rem !important; }
+        input, textarea, select, [data-baseweb="select"] input { font-size: 16px !important; }
+
+        .intro-logo-ring { width: 130px; height: 130px; margin-bottom: 1.2rem; }
+        .intro-logo-inner { width: 108px; height: 108px; font-size: 2.8rem; }
+        .intro-sub { padding: 0 1.2rem; font-size: .9rem; margin-bottom: 1.6rem; }
+        .intro-progress-bar { width: min(260px, 70vw); }
+    }
+
+    /* ══ VERY SMALL PHONES (≤ 360px) ═════════════════════════════════════ */
+    @media (max-width: 360px) {
+        .plant-grid, .stats-grid { grid-template-columns: 1fr; }
+        .step-label { font-size: .6rem; max-width: 54px; }
+    }
+
+    /* ══ SHORT SCREENS / PHONES IN LANDSCAPE ═════════════════════════════ */
+    @media (max-height: 520px) and (orientation: landscape) {
+        .intro-overlay { justify-content: flex-start; overflow-y: auto; padding-top: 1rem; }
+        .intro-logo-ring { display: none; }
+    }
+
+    /* ══ TOUCH: no sticky hover lift after a tap ═════════════════════════ */
+    @media (hover: none) {
+        .plant-card:hover, .stats-card:hover, .info-pill:hover,
+        [data-testid="metric-container"]:hover, .stButton > button:hover {
+            transform: none !important;
+        }
+    }
+
+    /* ══ REDUCED MOTION ══════════════════════════════════════════════════ */
+    @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+            animation-duration: .01ms !important; animation-iteration-count: 1 !important;
+            transition-duration: .01ms !important;
+        }
+    }
     </style>
     """, unsafe_allow_html=True)
+
+
+def creators_html(T):
+    """Creator credit line, in the active language."""
+    return (
+        '<div class="creators">'
+        f'<span>{html.escape(T["creators_label"])}</span>'
+        f'<span class="creator-name">{html.escape(T["creator_1"])}</span>'
+        '<span class="creator-pair">'
+        f'{html.escape(T["creators_and"])} '
+        f'<span class="creator-name">{html.escape(T["creator_2"])}</span>'
+        '</span>'
+        '</div>'
+    )
+
+
+def show_figure(fig, alt, T):
+    """Show a Matplotlib figure as an image that fills the width on desktop and
+    can be swiped sideways on phones (a 14x9 layout squeezed into 360px is unreadable)."""
+    buf = io.BytesIO()
+    fig.savefig(buf, format="png", dpi=110, bbox_inches="tight", facecolor=fig.get_facecolor())
+    data = base64.b64encode(buf.getvalue()).decode("ascii")
+    st.markdown(
+        f'<div class="fig-hint">{html.escape(T["fig_swipe_hint"])}</div>'
+        f'<div class="fig-scroll"><img src="data:image/png;base64,{data}" alt="{html.escape(alt)}"></div>',
+        unsafe_allow_html=True,
+    )
+
+
+def plant_cards_html(plants_df, T, lang):
+    """All plant cards in one responsive grid (4 columns -> 3 -> 2 -> 1 as the screen narrows)."""
+    wi = T['water_icons']
+    cards = []
+    for _, p in plants_df.iterrows():
+        stars = "⭐" * int(p['beauty'])
+        name  = p['name_en'] if lang == 'en' else p['name']
+        other = p['name_en'] if lang == 'ar' else p['name']
+        cards.append(
+            '<div class="plant-card">'
+            '<div style="font-size:1.6rem">🌿</div>'
+            f'<div class="plant-name">{html.escape(str(name))}</div>'
+            f'<div class="plant-en">{html.escape(str(other))}</div>'
+            f'<div style="margin:.3rem 0">{wi.get(p["water"], "💧")}</div>'
+            '<div style="background:rgba(0,230,118,.1);border-radius:6px;'
+            'padding:.15rem .4rem;font-size:.78rem;color:#69f0ae">'
+            f'{label_use(p["use"], lang)}</div>'
+            f'<div style="color:#ffd600;font-size:.88rem">{stars}</div>'
+            f'<div class="plant-temp">🌡️ {p["temp_min"]}° — {p["temp_max"]}°C</div>'
+            f'<div class="plant-temp">{_label(lang, "Kc تقديري", "Provisional Kc")}: {estimated_landscape_kc(p):.2f}</div>'
+            f'<div class="plant-temp">🌳 CO₂: {p.get("co2", 0)} kg/yr</div>'
+            '</div>'
+        )
+    return '<div class="plant-grid">' + ''.join(cards) + '</div>'
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -1614,6 +1800,7 @@ def show_intro_screen(T):
         <div class="intro-sub">
             تخطيط زراعي مستدام يراعي المناخ والمياه والتربة
         </div>
+        __CREATORS__
         <div class="intro-progress-bar">
             <div class="intro-progress-inner"></div>
         </div>
@@ -1633,7 +1820,9 @@ def show_intro_screen(T):
         }
     }, 4000);
     </script>
-    """, unsafe_allow_html=True)
+    """.replace("__CREATORS__",
+                creators_html(T).replace('class="creators"', 'class="creators intro-creators"', 1)),
+        unsafe_allow_html=True)
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -2295,6 +2484,7 @@ def main():
         <div>
             <span class="isef-badge">{T['brand_badge']}</span>
         </div>
+        {creators_html(T)}
     </div>
     """, unsafe_allow_html=True)
 
@@ -2585,27 +2775,7 @@ def main():
         filtered_df = recommended if plant_filter == T['all_types'] \
                       else recommended[recommended['use'] == plant_filter]
 
-        wi   = T['water_icons']
-        cols = st.columns(4)
-        for i, (_, p) in enumerate(filtered_df.iterrows()):
-            with cols[i % 4]:
-                stars = "⭐" * int(p['beauty'])
-                name  = p['name_en'] if lang == 'en' else p['name']
-                st.markdown(f"""
-                <div class="plant-card">
-                    <div style="font-size:1.6rem">🌿</div>
-                    <div class="plant-name">{name}</div>
-                    <div class="plant-en">{p['name_en'] if lang=='ar' else p['name']}</div>
-                    <div style="margin:.3rem 0">{wi.get(p['water'],'💧')}</div>
-                    <div style="background:rgba(0,230,118,.1);border-radius:6px;
-                                padding:.15rem .4rem;font-size:.78rem;color:#69f0ae">
-                        {label_use(p['use'], lang)}</div>
-                    <div style="color:#ffd600;font-size:.88rem">{stars}</div>
-                    <div class="plant-temp">🌡️ {p['temp_min']}° — {p['temp_max']}°C</div>
-                    <div class="plant-temp">{_label(lang, "Kc تقديري", "Provisional Kc")}: {estimated_landscape_kc(p):.2f}</div>
-                    <div class="plant-temp">🌳 CO₂: {p.get('co2',0)} kg/yr</div>
-                </div>
-                """, unsafe_allow_html=True)
+        st.markdown(plant_cards_html(filtered_df, T, lang), unsafe_allow_html=True)
         # ── Optional generative design and independent AI review ────────────
         st.markdown("---")
         st.markdown("### 🧠 " + _label(lang, "خطة تصميم ومراجعة اختيارية بالذكاء الاصطناعي", "Optional Generative Design & Review"))
@@ -2689,7 +2859,7 @@ def main():
         with st.spinner("جارٍ رسم المخطط..." if lang == 'ar' else "Generating layout..."):
             fig = generate_layout(recommended, w_val, h_val, label_location(governorate, lang),
                                   label_region(governorate, region, lang), season_str, lang, unit=unit_opt)
-            st.pyplot(fig, width="stretch")
+            show_figure(fig, T['layout_title'], T)
             plt.close(fig)
 
         st.markdown("---")
@@ -2700,7 +2870,7 @@ def main():
             f"التقديرات الأسبوعية مبنية على يوم التصميم؛ التقديرات السنوية: {_annual_basis_label(water_data['annual_basis'], lang)}.",
             f"Weekly values use the selected design day's ET₀; annual values use {water_data['annual_basis']}."))
         fig2 = render_water_chart(water_data, T)
-        st.pyplot(fig2, width="stretch")
+        show_figure(fig2, T['chart_title'], T)
         plt.close(fig2)
 
         st.markdown("---")
@@ -2923,9 +3093,10 @@ def main():
         """, unsafe_allow_html=True)
 
         # ── Footer ────────────────────────────────────────────────────────────
-        st.markdown("""
+        st.markdown(f"""
         <div style="text-align:center; padding:2rem 0 1rem; color:#2e4a30; font-size:0.8rem;">
             🌿 حسونة جرين — تخطيط مستدام للأراضي — Hassouna Green
+            {creators_html(T)}
         </div>
         """, unsafe_allow_html=True)
 # ═══════════════════════════════════════════════════════════════════════════════

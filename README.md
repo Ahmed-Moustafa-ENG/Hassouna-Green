@@ -1,5 +1,7 @@
 # Hassouna Green — Sustainable Land Planning
 
+**Created by Ahmed Moustafa & Abdelrahman Khaled.**
+
 A bilingual (Arabic / English) Streamlit app that designs a planting plan for a piece of land in Egypt, the UAE or Qatar. It picks plants from a database of the plant catalog, estimates irrigation water with the FAO-56 method (ET₀ × crop coefficient), draws a layout, and scores the design.
 
 The design is checked by three separate judges:
@@ -25,3 +27,7 @@ OPENROUTER_API_KEY = "sk-or-v1-..."
 ```
 
 On Streamlit Community Cloud, paste the same line into the app's **Secrets** setting instead.
+
+## Phones and tablets
+
+The layout adapts to the screen: the plant cards reflow from 4 columns to 3, 2 and 1, the layout figure can be swiped sideways on phones, and buttons and inputs are sized for touch.
