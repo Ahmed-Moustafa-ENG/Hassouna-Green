@@ -1079,9 +1079,11 @@ def inject_css():
         background: radial-gradient(ellipse at 50% 50%, #04180a 0%, #020c05 100%);
         display: flex; flex-direction: column;
         align-items: center; justify-content: center;
-        animation: intro-fade-in 0.8s ease;
+        pointer-events: none;
+        animation: intro-fade-in 0.8s ease, intro-fade-out 0.9s ease 3.4s forwards;
     }
     @keyframes intro-fade-in { from{opacity:0} to{opacity:1} }
+    @keyframes intro-fade-out { to { opacity: 0; visibility: hidden; } }
 
     .intro-logo-ring {
         width: 180px; height: 180px;
@@ -1637,10 +1639,6 @@ def inject_css():
         .plant-grid { grid-template-columns: repeat(3, 1fr); }
         .form-card { padding: 1.5rem; }
         .main-header { padding: 1.5rem 1.2rem 1.2rem; }
-        /* the Streamlit header is hidden above; keep the sidebar button reachable on touch screens */
-        [data-testid="stSidebarCollapsedControl"],
-        [data-testid="collapsedControl"],
-        [data-testid="stExpandSidebarButton"] { visibility: visible !important; }
     }
 
     /* ══ PHONES (≤ 640px) ════════════════════════════════════════════════ */
@@ -1692,6 +1690,7 @@ def inject_css():
 
         .intro-logo-ring { width: 130px; height: 130px; margin-bottom: 1.2rem; }
         .intro-logo-inner { width: 108px; height: 108px; font-size: 2.8rem; }
+        .intro-isef { font-size: 1.1rem; padding: 0 .8rem; }
         .intro-sub { padding: 0 1.2rem; font-size: .9rem; margin-bottom: 1.6rem; }
         .intro-progress-bar { width: min(260px, 70vw); }
     }
@@ -1808,18 +1807,6 @@ def show_intro_screen(T):
             جارٍ تحميل قاعدة بيانات النباتات والمحافظات...
         </div>
     </div>
-    <script>
-    setTimeout(function(){
-        var overlay = document.getElementById('introOverlay');
-        if(overlay){
-            overlay.style.transition = 'opacity 0.8s ease';
-            overlay.style.opacity = '0';
-            setTimeout(function(){
-                if(overlay) overlay.style.display = 'none';
-            }, 800);
-        }
-    }, 4000);
-    </script>
     """.replace("__CREATORS__",
                 creators_html(T).replace('class="creators"', 'class="creators intro-creators"', 1)),
         unsafe_allow_html=True)
@@ -2428,19 +2415,21 @@ def main():
     if 'results_done' not in st.session_state: st.session_state.results_done = False
     if 'lang'         not in st.session_state: st.session_state.lang         = "ar"
 
+    # The intro is shown once per session, as an overlay that fades out by itself.
+    show_intro = not st.session_state.intro_done
+    st.session_state.intro_done = True
+
     # ── Language (main screen) ─────────────────────────────────────────────
     # A single control at the top of the main page sets st.session_state.lang.
-    # It is hidden only while the brief intro overlay is shown.
-    if st.session_state.intro_done:
-        lang_codes = ["ar", "en"]
-        st.session_state.lang = st.radio(
-            "🌐 اللغة / Language",
-            lang_codes,
-            index=lang_codes.index(st.session_state.lang),
-            format_func=lambda code: "العربية" if code == "ar" else "English",
-            horizontal=True,
-            key="lang_choice",
-        )
+    lang_codes = ["ar", "en"]
+    st.session_state.lang = st.radio(
+        "🌐 اللغة / Language",
+        lang_codes,
+        index=lang_codes.index(st.session_state.lang),
+        format_func=lambda code: "العربية" if code == "ar" else "English",
+        horizontal=True,
+        key="lang_choice",
+    )
 
     with st.sidebar:
         # Quick stats sidebar
@@ -2462,19 +2451,10 @@ def main():
     st.markdown(f"<style>.stApp,.main,.form-card,.summary-box,.judge-card,.plant-card,.status-bar,.saving-banner{{direction:{ui_dir}!important;text-align:{ui_align}!important;unicode-bidi:plaintext}} div[data-testid='stTabs'] button{{font-weight:800}}</style>", unsafe_allow_html=True)
 
     # ── INTRO SCREEN ───────────────────────────────────────────────────────
-    if not st.session_state.intro_done:
+    # A fixed overlay on top of the page. The page below is already rendered, and
+    # the overlay fades out on its own after about 3.5 seconds (CSS animation).
+    if show_intro:
         show_intro_screen(T)
-        col_skip = st.columns([3, 1])
-        with col_skip[1]:
-            if st.button(T["intro_skip"], key="skip_intro"):
-                st.session_state.intro_done = True
-                st.rerun()
-        time.sleep(0.3)
-        if not st.session_state.intro_done:
-            # Auto-advance after short delay
-            st.session_state.intro_done = True
-            st.rerun()
-        return
 
     # ── HEADER ────────────────────────────────────────────────────────────
     st.markdown(f"""
