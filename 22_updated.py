@@ -503,30 +503,98 @@ def get_season(month, lang="ar"):
     return T["seasons"][key]
 def get_temp(gov, month):
     return GOVERNORATE_DATA[gov]["monthly_temp"][month - 1]
-@st.cache_data(ttl=900, show_spinner=False)
-def fetch_live_weather(gov):
-    """Return the current temperature when available; cached for 15 minutes."""
+def _hour_key():
+    """Changes at the start of every UTC hour, so cached weather is re-fetched each hour."""
+    return datetime.datetime.now(datetime.timezone.utc).strftime("%Y%m%d%H")
+
+
+_WEATHER_CODES = {
+    0: ("☀️", "صافٍ", "Clear sky"), 1: ("🌤️", "صافٍ غالباً", "Mostly clear"),
+    2: ("⛅", "غائم جزئياً", "Partly cloudy"), 3: ("☁️", "غائم", "Overcast"),
+    45: ("🌫️", "ضباب", "Fog"), 48: ("🌫️", "ضباب جليدي", "Rime fog"),
+    51: ("🌦️", "رذاذ خفيف", "Light drizzle"), 53: ("🌦️", "رذاذ", "Drizzle"), 55: ("🌦️", "رذاذ كثيف", "Dense drizzle"),
+    61: ("🌧️", "مطر خفيف", "Light rain"), 63: ("🌧️", "مطر", "Rain"), 65: ("🌧️", "مطر غزير", "Heavy rain"),
+    71: ("🌨️", "ثلج خفيف", "Light snow"), 73: ("🌨️", "ثلج", "Snow"), 75: ("🌨️", "ثلج كثيف", "Heavy snow"),
+    80: ("🌦️", "زخات مطر", "Rain showers"), 81: ("🌧️", "زخات قوية", "Strong showers"), 82: ("⛈️", "زخات عنيفة", "Violent showers"),
+    95: ("⛈️", "عاصفة رعدية", "Thunderstorm"), 96: ("⛈️", "عاصفة رعدية مع برد", "Thunderstorm with hail"),
+    99: ("⛈️", "عاصفة رعدية مع برد", "Thunderstorm with hail"),
+}
+
+
+@st.cache_data(ttl=3600, show_spinner=False)
+def _fetch_current_weather(lat, lon, hour_key):
+    """Current conditions from Open-Meteo. ``hour_key`` makes the cache refresh every hour."""
+    r = requests.get(
+        "https://api.open-meteo.com/v1/forecast",
+        params={"latitude": lat, "longitude": lon, "timezone": "auto",
+                "current": "temperature_2m,apparent_temperature,relative_humidity_2m,"
+                           "precipitation,wind_speed_10m,weather_code"},
+        timeout=8,
+    )
+    r.raise_for_status()
+    cur = r.json().get("current", {})
+    if cur.get("temperature_2m") is None:
+        return None
+    return {
+        "temp": round(float(cur["temperature_2m"]), 1),
+        "feels": cur.get("apparent_temperature"),
+        "humidity": cur.get("relative_humidity_2m"),
+        "rain": cur.get("precipitation"),
+        "wind": cur.get("wind_speed_10m"),
+        "code": cur.get("weather_code"),
+        "time": cur.get("time"),
+    }
+
+
+def fetch_current_weather(gov):
+    """Latest real weather for a location, refreshed every hour; None when unavailable."""
     data = GOVERNORATE_DATA.get(gov, {})
-    lat = data.get("lat")
-    lon = data.get("lon")
-    if lat is None or lon is None:
+    if data.get("lat") is None or data.get("lon") is None:
         return None
     try:
-        r = requests.get(
-            "https://api.open-meteo.com/v1/forecast",
-            params={"latitude": lat, "longitude": lon, "current": "temperature_2m", "timezone": "auto"},
-            timeout=8,
-        )
-        r.raise_for_status()
-        current = r.json().get("current", {}).get("temperature_2m")
-        return round(float(current), 1) if current is not None else None
+        return _fetch_current_weather(data["lat"], data["lon"], _hour_key())
     except Exception:
         return None
 
 
+def fetch_live_weather(gov):
+    """Return the current temperature when available (refreshed every hour)."""
+    w = fetch_current_weather(gov)
+    return w["temp"] if w else None
+
+
+@st.fragment(run_every=3600)
+def render_live_weather(lang, gov):
+    """Live-weather card. The fragment re-runs itself every hour, so an open page stays current."""
+    w = fetch_current_weather(gov)
+    if not w:
+        st.caption(_label(lang, "تعذّر الحصول على الطقس المباشر الآن؛ يُستخدم المتوسط الشهري.",
+                          "Live weather is unavailable right now; the monthly average is used."))
+        return
+    icon, name_ar, name_en = _WEATHER_CODES.get(w.get("code"), ("🌡️", "", ""))
+    desc = _label(lang, name_ar, name_en)
+    parts = [f"{icon} <b>{w['temp']}°C</b>" + (f" — {desc}" if desc else "")]
+    if w.get("feels") is not None:
+        parts.append(f"{_label(lang, 'المحسوسة', 'Feels like')} {round(float(w['feels']), 1)}°C")
+    if w.get("humidity") is not None:
+        parts.append(f"💧 {int(round(float(w['humidity'])))}%")
+    if w.get("wind") is not None:
+        parts.append(f"🌬️ {round(float(w['wind']), 1)} {_label(lang, 'كم/س', 'km/h')}")
+    if w.get("rain"):
+        parts.append(f"🌧️ {w['rain']} {_label(lang, 'مم', 'mm')}")
+    stamp = (w.get("time") or "").replace("T", " ")
+    st.markdown(
+        f'<div class="info-pill" style="margin:.4rem 0">{" &nbsp;·&nbsp; ".join(parts)}</div>',
+        unsafe_allow_html=True)
+    st.caption(_label(lang,
+        f"طقس مباشر في {label_location(gov, 'ar')} — آخر تحديث {stamp} (توقيت الموقع). المصدر: Open-Meteo، يتجدد كل ساعة.",
+        f"Live weather in {label_location(gov, 'en')} — updated {stamp} (local time). Source: Open-Meteo, refreshed every hour."))
+
+
 @st.cache_data(ttl=21600, show_spinner=False)
-def _open_meteo_daily(endpoint, lat, lon, start_date, end_date):
-    """Fetch daily Open-Meteo data; results are cached for six hours."""
+def _open_meteo_daily(endpoint, lat, lon, start_date, end_date, hour_key=""):
+    """Fetch daily Open-Meteo data. Forecast calls pass hour_key so they refresh every hour;
+    archive calls leave it empty because past data does not change."""
     params = {
         "latitude": lat,
         "longitude": lon,
@@ -605,7 +673,8 @@ def fetch_et0_weather(gov, design_date):
         if endpoint:
             try:
                 daily = _open_meteo_daily(endpoint, lat, lon,
-                                          design_date.isoformat(), design_date.isoformat())
+                                          design_date.isoformat(), design_date.isoformat(),
+                                          _hour_key() if source == "Open-Meteo daily forecast" else "")
                 times = daily.get("time", [])
                 if times:
                     et0s = daily.get("et0_fao_evapotranspiration", [])
@@ -2542,6 +2611,7 @@ def main():
         col_s1.markdown(f'<div class="info-pill">🗓️ {month_name} {year}</div>', unsafe_allow_html=True)
         col_s2.markdown(f'<div class="info-pill">{season_str}</div>', unsafe_allow_html=True)
         col_s3.markdown(f'<div class="info-pill">🌡️ ~{base_temp}°C {T["est_temp"]}</div>', unsafe_allow_html=True)
+        render_live_weather(lang, governorate)
         st.markdown('</div>', unsafe_allow_html=True)
         _, btn_col = st.columns([3, 1])
         with btn_col:
@@ -2725,6 +2795,7 @@ def main():
             ''.join(f'<span class="status-chip">{c}</span>' for c in chips) +
             '</div>', unsafe_allow_html=True
         )
+        render_live_weather(lang, governorate)
         et0_caption = (f"ET₀={water_data['et0_mm_day']} {_label(lang, 'مم/يوم', 'mm/day')}"
                        if water_data['et0_mm_day'] is not None else _label(lang, "ET₀ غير متاح", "ET₀ unavailable"))
         source_label = _et0_source_label(weather['source'], lang)
