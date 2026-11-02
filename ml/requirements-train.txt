@@ -1,0 +1,13 @@
+# Only needed to REBUILD or RETRAIN the ML judge (ml/build_training_data.py,
+# ml/train_ml_judge.py). The app itself runs the trained model with numpy and
+# needs only requirements.txt.
+#
+# Windows: install PyTorch's CPU build first, then the rest:
+#   .\.venv\Scripts\python.exe -m pip install torch==2.15.0 --index-url https://download.pytorch.org/whl/cpu
+#   .\.venv\Scripts\python.exe -m pip install -r ml\requirements-train.txt
+torch==2.15.0
+scikit-learn==1.9.1
+numpy==2.5.4
+requests==2.34.2
+Pillow==13.0.0
+mapbox-vector-tile==2.2.0

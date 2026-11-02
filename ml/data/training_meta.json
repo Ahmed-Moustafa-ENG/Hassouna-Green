@@ -1,0 +1,23 @@
+{
+  "built_at_utc": "2026-11-02T18:47:40+00:00",
+  "source": "inat",
+  "source_label": "iNaturalist observations: wild (research grade) and cultivated with agreed identification (api.inaturalist.org)",
+  "record_kinds": [
+    "wild",
+    "cultivated"
+  ],
+  "records_by_kind": {
+    "wild": 150054,
+    "cultivated": 134437
+  },
+  "min_year": 1950,
+  "worldclim": "WorldClim 2.1, 10 arc-minute bioclimatic variables (1970-2000); Fick & Hijmans 2017",
+  "names_in_catalog": 173,
+  "names_matched": 173,
+  "taxa_matched": 173,
+  "taxa_modeled": 173,
+  "min_cells": 20,
+  "grid_cells": 36258,
+  "records_used": 284491,
+  "points_dropped_no_climate": 188
+}

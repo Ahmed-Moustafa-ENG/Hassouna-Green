@@ -1,0 +1,203 @@
+plant_id,name_en,scientific_name,note
+1,Ornamental Palm,,generic entry - no single taxon
+2,Doum Palm,Hyphaene thebaica,
+3,Date Palm,Phoenix dactylifera,
+4,Camphor Tree,Cinnamomum camphora,English name used; in Egypt كافور can also mean Eucalyptus
+5,Olive Tree,Olea europaea,
+6,Egyptian Acacia,Vachellia nilotica,
+7,Yellow Cassia,Cassia,genus level - species not specified
+8,Jacaranda,Jacaranda mimosifolia,
+9,Royal Poinciana,Delonix regia,
+10,Ornamental Pomegranate,Punica granatum,
+11,Fig Tree,Ficus carica,
+12,Carob Tree,Ceratonia siliqua,
+13,Tamarind,Tamarindus indica,
+14,Moringa,Moringa oleifera,
+15,Willow,Salix babylonica,
+16,Tamarix,Tamarix aphylla,
+17,Italian Cypress,Cupressus sempervirens,
+18,Bottlebrush,Melaleuca citrina,syn. Callistemon citrinus
+19,Ornamental Orange,Citrus aurantium,
+20,Heglig,Balanites aegyptiaca,
+21,Casuarina,Casuarina,genus level
+22,Ficus benjamina,Ficus benjamina,
+23,Baobab,Adansonia digitata,
+24,Casuarina equisetifolia,Casuarina equisetifolia,
+25,Eureka Lemon,Citrus limon,
+26,Eucalyptus,Eucalyptus camaldulensis,most widely planted species in Egypt
+27,Nile Acacia,Vachellia nilotica,
+28,Dodonaea,Dodonaea viscosa,
+29,Jatropha Tree,Jatropha curcas,
+30,Melia azedarach,Melia azedarach,
+31,Indian Laburnum,Cassia fistula,
+32,Lote Tree (Ziziphus),Ziziphus spina-christi,
+33,Sycamore Fig,Ficus sycomorus,
+34,Oriental Plane,Platanus orientalis,
+35,Bougainvillea,Bougainvillea,genus level - garden hybrids
+36,Oleander,Nerium oleander,
+37,Hibiscus,Hibiscus rosa-sinensis,
+38,Damask Rose,Rosa damascena,
+39,Yellow Lantana,Lantana camara,
+40,Plumbago,Plumbago auriculata,
+41,Ixora,Ixora coccinea,
+42,Gardenia,Gardenia jasminoides,
+43,Desert Rose (Adenium),Adenium obesum,
+44,Tecoma stans,Tecoma stans,
+45,Dwarf Cassia,Senna,genus level - species not specified
+46,Tecomaria,Tecomaria capensis,syn. Tecoma capensis
+47,Red Lantana,Lantana camara,
+48,Red Nerium,Nerium oleander,
+49,White Oleander,Nerium oleander,
+50,Codiaeum (Croton),Codiaeum variegatum,
+51,Abelia,Abelia,genus level - garden hybrid
+52,Scaevola,Scaevola taccada,
+53,Melaleuca,Melaleuca,genus level
+54,Acalypha,Acalypha wilkesiana,
+55,Dwarf Doum,Chamaerops humilis,dwarf fan palm (called doum in North Africa)
+56,Streptosolen,Streptosolen jamesonii,
+57,Thevetia,Cascabela thevetia,syn. Thevetia peruviana
+58,Raviourus,,unidentified name
+59,Arabian Jasmine,Jasminum sambac,
+60,Yellow Jasmine,Jasminum mesnyi,
+61,Double Bougainvillea,Bougainvillea,genus level - garden hybrids
+62,Morning Glory,Ipomoea purpurea,
+63,Passionflower,Passiflora caerulea,
+64,Thunbergia,Thunbergia grandiflora,
+65,Bignonia,Bignonia,genus level
+66,Pyrostegia,Pyrostegia venusta,
+67,Stephanotis,Marsdenia floribunda,syn. Stephanotis floribunda
+68,Clematis,Clematis,genus level
+69,Ivy,Hedera helix,
+70,Wisteria,Wisteria sinensis,
+71,Coral Vine,Antigonon leptopus,
+72,Arauja,Araujia sericifera,
+73,Trumpet Vine,Campsis radicans,
+74,Lavender,Lavandula angustifolia,
+75,Ornamental Sage,Salvia officinalis,
+76,Mint,Mentha spicata,
+77,White Plumbago,Plumbago auriculata,white-flowered form
+78,Wild Thyme,Thymus serpyllum,
+79,Rosemary,Salvia rosmarinus,syn. Rosmarinus officinalis
+80,Gazania,Gazania rigens,
+81,Sempervivum,Sempervivum tectorum,
+82,Verbascum,Verbascum,genus level
+83,Osteospermum,Dimorphotheca ecklonis,syn. Osteospermum ecklonis
+84,Ground Ipomoea,Convolvulus sabatius,ground morning glory
+85,Agapanthus,Agapanthus praecox,
+86,Spider Plant,Chlorophytum comosum,
+87,Maidenhair Fern,Adiantum capillus-veneris,
+88,Cissus,Cissus,genus level
+89,Oregano,Origanum vulgare,
+90,Sedum,Sedum,genus level
+91,Aubrieta,Aubrieta deltoidea,
+92,Rock Pink,Dianthus,genus level
+93,Sun Rose,Helianthemum nummularium,
+94,Duranta,Duranta erecta,
+95,Ageratum,Ageratum houstonianum,
+96,Cactus Pear,Opuntia ficus-indica,
+97,Bamboo,Bambusa vulgaris,
+98,Carissa,Carissa macrocarpa,
+99,Croton Hedge,Codiaeum variegatum,
+100,Ficus Hedge,Ficus microcarpa,
+101,Boxwood,Buxus sempervirens,
+102,Cherry Laurel,Prunus laurocerasus,
+103,Duranta Hedge,Duranta erecta,
+104,Leyland Cypress Hedge,Cuprocyparis leylandii,hybrid - few wild records
+105,Bermuda Grass,Cynodon dactylon,
+106,Local Turf,,generic entry - no single taxon
+107,Zoysia Grass,Zoysia,genus level
+108,Fescue Grass,Festuca arundinacea,
+109,St. Augustine Grass,Stenotaphrum secundatum,
+110,Bahia Grass,Paspalum notatum,
+111,Buffalo Grass,Bouteloua dactyloides,
+112,Agave,Agave americana,
+113,Common Cactus,,generic entry - no single taxon
+114,Yucca,Yucca,genus level
+115,Dracaena,Dracaena,genus level
+116,Aloe Vera,Aloe vera,
+117,Adenium,Adenium obesum,
+118,Echeveria,Echeveria,genus level
+119,Opuntia,Opuntia,genus level
+120,Crassula,Crassula ovata,
+121,Haworthia,Haworthia,genus level
+122,Cereus Cactus,Cereus,genus level
+123,Nolina,Beaucarnea recurvata,ponytail palm (often sold as Nolina)
+124,Stapelia,Stapelia,genus level
+125,Barrel Cactus,Ferocactus,genus level
+126,Yucca filamentosa,Yucca filamentosa,
+127,Amaryllis,Hippeastrum,genus level - garden amaryllis
+128,Bird of Paradise,Strelitzia reginae,
+129,Sunflower,Helianthus annuus,
+130,Zinnia,Zinnia elegans,
+131,Cosmos,Cosmos bipinnatus,
+132,Petunia,Petunia,genus level - garden hybrids
+133,Geranium,Pelargonium,genus level - garden geranium
+134,Marigold,Tagetes erecta,
+135,Narcissus,Narcissus tazetta,
+136,Carnation,Dianthus caryophyllus,
+137,Pansy,Viola wittrockiana,garden hybrid
+138,Dahlia,Dahlia,genus level
+139,Verbena,Verbena,genus level
+140,Calendula,Calendula officinalis,
+141,Portulaca,Portulaca grandiflora,
+142,Tulip,Tulipa,genus level
+143,Iris,Iris germanica,
+144,Gladiolus,Gladiolus,genus level
+145,Alstroemeria,Alstroemeria,genus level
+146,Anemone,Anemone coronaria,
+147,Ranunculus,Ranunculus asiaticus,
+148,Delphinium,Delphinium elatum,
+149,Papyrus,Cyperus papyrus,
+150,Egyptian Lotus,Nymphaea lotus,
+151,Common Reed,Phragmites australis,
+152,Bulrush,Typha domingensis,
+153,Water Lily,Nymphaea,genus level
+154,Coastal Palm,,generic entry - no single taxon
+155,Arabian Jasmine (Ful),Jasminum sambac,
+156,Taif Rose,Rosa damascena,Taif rose is a damask rose
+157,Ylang-Ylang,Cananga odorata,
+158,Sweet Basil,Ocimum basilicum,
+159,Lavender (Khuzama),Lavandula dentata,
+160,Ornamental Jasmine,Jasminum officinale,
+161,Night-blooming Jasmine,Cestrum nocturnum,
+162,Vanilla,Vanilla planifolia,
+163,Philodendron,Philodendron,genus level
+164,Areca Palm,Dypsis lutescens,
+165,Peace Lily,Spathiphyllum,genus level
+166,Aglaonema,Aglaonema,genus level
+167,Calla Lily,Zantedeschia aethiopica,
+168,Dieffenbachia,Dieffenbachia,genus level
+169,Anthurium,Anthurium andraeanum,
+170,Beach Morning Glory,Ipomoea pes-caprae,
+171,Tournefortia,Heliotropium arboreum,syn. Tournefortia argentea
+172,Sea Holly (Eryngium),Eryngium maritimum,
+173,Coastal Soda,Salsola soda,
+174,Salt Cedar,Tamarix nilotica,
+175,Sea Purslane,Sesuvium portulacastrum,
+176,Saltbush (Atriplex),Atriplex halimus,
+177,Salt Grass,Distichlis spicata,
+178,Suaeda (Seablite),Suaeda,genus level
+179,Limestone Lavender,,unidentified name
+180,Limestone Thyme,,unidentified name
+181,Wild Savory,Satureja thymbra,
+182,Bladiana Succulent,,unidentified name
+183,Lepidus Rock Plant,,unidentified name
+184,Rocky Echeveria,Echeveria,genus level
+185,Ghaf (Prosopis cineraria),Prosopis cineraria,
+186,Gulf Sidr (Ziziphus spina-christi),Ziziphus spina-christi,
+187,Grey Mangrove (Avicennia marina),Avicennia marina,
+188,Samr Acacia (Acacia tortilis),Vachellia tortilis,
+189,Haloxylon (Saxaul),Haloxylon persicum,
+190,Khalas Date Palm,Phoenix dactylifera,
+191,Barhi Date Palm,Phoenix dactylifera,
+192,Calligonum (Arta),Calligonum comosum,
+193,Desert Lavender,Lavandula subnuda,Gulf native lavender
+194,Gulf Rosemary,Salvia rosmarinus,
+195,Dodonaea (Hopbush),Dodonaea viscosa,
+196,Desert Cassia,Senna artemisioides,
+197,Gulf Tecoma,Tecoma stans,
+198,Coastal Bougainvillea,Bougainvillea,genus level - garden hybrids
+199,Leucaena,Leucaena leucocephala,
+200,Blue Agave,Agave tequilana,
+201,Heat-Tolerant Zoysia Grass,Zoysia matrella,
+202,Desert Grass (native mix),,generic entry - no single taxon
