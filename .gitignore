@@ -1,0 +1,9 @@
+.venv/
+venv/
+.streamlit/secrets.toml
+__pycache__/
+*.pyc
+llm_cache.json
+hassouna_feedback.json
+isef_feedback.json
+*.tmp
