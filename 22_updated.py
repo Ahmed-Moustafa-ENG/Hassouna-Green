@@ -1062,9 +1062,13 @@ def inject_css():
         background: var(--darker) !important;
         color: var(--text) !important;
     }
-    ::-webkit-scrollbar { width: 5px; }
-    ::-webkit-scrollbar-track { background: var(--darker); }
-    ::-webkit-scrollbar-thumb { background: var(--green1); border-radius: 3px; }
+    /* Custom scrollbar only where a mouse is used. On touch screens a styled scrollbar
+       stays visible all the time as a green line that follows the scroll position. */
+    @media (hover: hover) and (pointer: fine) {
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: var(--darker); }
+        ::-webkit-scrollbar-thumb { background: var(--green1); border-radius: 3px; }
+    }
 
     .main > div:first-child {
         background:
@@ -1638,6 +1642,8 @@ def inject_css():
         }
         .plant-grid { grid-template-columns: repeat(3, 1fr); }
         .form-card { padding: 1.5rem; }
+        [data-testid="stSidebar"] { border: 0 !important; }
+        [data-testid="stSidebar"][aria-expanded="false"] { display: none !important; }
         .main-header { padding: 1.5rem 1.2rem 1.2rem; }
     }
 
