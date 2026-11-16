@@ -1,0 +1,21 @@
+# Everything that does not belong in the image.
+.git
+.gitignore
+.venv
+venv
+__pycache__
+*.pyc
+*.tmp
+
+.streamlit/secrets.toml
+llm_cache.json
+hassouna_feedback.json
+isef_feedback.json
+
+# Re-downloadable caches of the machine-learning build
+ml/data/occurrence_cache
+ml/data/worldclim
+ml/data/build_log.txt
+
+# The deployment secrets
+deploy/.env

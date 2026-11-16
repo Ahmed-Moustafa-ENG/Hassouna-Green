@@ -1529,7 +1529,10 @@ def calc_water(recommended, area_sqm, et0_mm_day=None, et0_monthly=None, target_
 # ═══════════════════════════════════════════════════════════════════════════════
 
 APP_DIR = os.path.dirname(os.path.abspath(__file__))
-FEEDBACK_FILE = os.path.join(APP_DIR, "hassouna_feedback.json")
+# The feedback and the cache live outside the code folder when the app runs
+# from a container, so the files survive a rebuild.
+FEEDBACK_FILE = os.environ.get("HASSOUNA_FEEDBACK_FILE",
+                               os.path.join(APP_DIR, "hassouna_feedback.json"))
 LEGACY_FEEDBACK_FILE = os.path.join(APP_DIR, "isef_feedback.json")   # older versions' file name
 
 

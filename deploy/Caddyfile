@@ -1,0 +1,20 @@
+# Caddy reverse proxy.
+#
+# Caddy asks Let's Encrypt for a certificate for {$DOMAIN} and renews it
+# itself. The only requirement is that the domain points at this server and
+# that ports 80 and 443 are reachable.
+
+{$DOMAIN} {
+	encode zstd gzip
+
+	reverse_proxy app:8501 {
+		header_up X-Forwarded-Proto {scheme}
+		header_up X-Forwarded-Host {host}
+		header_up X-Real-IP {remote_host}
+	}
+
+	log {
+		output stdout
+		format console
+	}
+}

@@ -2,6 +2,7 @@
 .venv/
 venv/
 .streamlit/secrets.toml
+.streamlit/config.toml
 __pycache__/
 *.pyc
 
@@ -15,3 +16,6 @@ isef_feedback.json
 ml/data/occurrence_cache/
 ml/data/worldclim/
 ml/data/build_log.txt
+
+# The deployment secrets of the own-server setup (deploy/.env.example is kept)
+deploy/.env
