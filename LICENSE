@@ -1,0 +1,29 @@
+Copyright (c) 2026 Ahmed Moustafa and Abdelrahman Khaled
+All rights reserved.
+
+This project - its source code, the plant catalog in hassouna_green.db, the
+trained models in ml/, the documentation and the figures - is protected by
+copyright law and by the terms below.
+
+No part of this project may be reproduced, copied, modified, merged,
+published, distributed, sublicensed, sold, translated, adapted or otherwise
+used, in whole or in part, in any medium, without the prior written
+permission of the copyright holders.
+
+The software is provided for reading, running, evaluation and educational
+use. The names of the authors are not to be removed or altered, and the
+project may not be presented as their work without their agreement.
+
+THIRD-PARTY MATERIAL
+
+This project uses or derives from third-party material that remains under
+its own terms, as listed in the "Third-party notices" section of README.md.
+Those terms apply to that material and are not limited, changed or waived by
+this notice. In particular, the copyright in this notice does not extend to
+the iNaturalist observations, the WorldClim climate surfaces, the FAO-56
+method, or the data and models of the services the app calls.
+
+WHERE THE AUTHORS CAN BE REACHED
+
+  Ahmed Moustafa        https://github.com/Ahmed-Moustafa-ENG
+  Abdelrahman Khaled

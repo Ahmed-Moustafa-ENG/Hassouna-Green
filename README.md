@@ -2,6 +2,11 @@
 
 **Created by Ahmed Moustafa & Abdelrahman Khaled.**
 
+© 2026 Ahmed Moustafa and Abdelrahman Khaled. **All rights reserved** — see
+[LICENSE](LICENSE). The third-party material the project uses is listed under
+[Third-party notices](#third-party-notices); it is not covered by that
+copyright.
+
 A bilingual (Arabic / English) Streamlit app that designs a planting plan for a piece of land in Egypt, the UAE or Qatar. It picks plants from a database of the plant catalog, estimates irrigation water with the FAO-56 method (ET₀ × crop coefficient), draws a layout, and scores the design.
 
 The design is checked by three separate judges:
@@ -89,3 +94,39 @@ On Streamlit Community Cloud, paste the same line into the app's **Secrets** set
 ## Phones and tablets
 
 The layout adapts to the screen: the plant cards reflow from 4 columns to 3, 2 and 1, the layout figure can be swiped sideways on phones, and buttons and inputs are sized for touch.
+
+## Third-party notices
+
+The copyright of the authors covers the source code, the plant catalog in
+`hassouna_green.db`, the crop data in `catalog/edible_plants.csv` and the
+documentation. The project also uses material that belongs to other people.
+That material keeps its own terms, and those terms are not changed by the
+project's licence.
+
+| Material | Who owns it | How it is used | Where it is used |
+|---|---|---|---|
+| **iNaturalist observations** | the iNaturalist community, under the licence each observer chose | to train the climate judge | **not redistributed** — the raw records are downloaded by `ml/build_training_data.py` and cached outside the repository. Only the derived model weights and a per-taxon summary are published. |
+| **WorldClim 2.1 climate surfaces** | Fick, S.E. & Hijmans, R.J. (2017) | the climate variables the judge is trained on | **not redistributed** — downloaded at build time, cached outside the repository. Only the nearest-cell normals for each location are published. |
+| **The FAO-56 method** | FAO (Allen, Pereira, Raes & Smith) | the ET₀ × Kc irrigation method and the crop coefficient approach | cited, not copied; the FAO text itself is not reproduced |
+| **Plant names and taxonomy** | iNaturalist and GBIF | the scientific names and taxon ids in `plant_taxa` | taxon ids are identifiers, not content |
+| **Open-Meteo** | open-meteo.com | the weather, the ET₀ and the CMIP6 climate projections | called at run time; free for non-commercial use, attribution appreciated |
+| **OpenRouter** | openrouter.ai | the optional AI planner and reviewer | called at run time, only when you supply your own key; each model keeps its own terms |
+
+If you use this project in a paper, a competition entry or a talk, please
+cite the authors of the project and the two data sources above. The iNaturalist
+observations are the work of thousands of volunteers; crediting them is what
+makes their contribution visible.
+
+## Citation
+
+```bibtex
+@misc{hassounagreen2026,
+  author       = {Ahmed Moustafa and Abdelrahman Khaled},
+  title        = {Hassouna Green: Sustainable Land Planning},
+  year         = {2026},
+  howpublished = {\url{https://github.com/Ahmed-Moustafa-ENG/Hassouna-Green}},
+  note         = {FAO-56 irrigation method; climate judge trained on
+                  iNaturalist observations and WorldClim 2.1}
+}
+```
+

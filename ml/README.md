@@ -83,5 +83,9 @@ You only need to retrain after adding plants to the catalog: add their scientifi
 
 ## Data credits
 
-- iNaturalist (api.inaturalist.org). Observations are contributed by the iNaturalist community under the licences chosen by each observer.
-- Fick, S.E. & Hijmans, R.J. (2017). WorldClim 2: new 1-km spatial resolution climate surfaces for global land areas. *International Journal of Climatology* 37: 4302–4315.
+- iNaturalist (api.inaturalist.org). Observations are contributed by the iNaturalist community under the licences chosen by each observer. **The raw observations are not redistributed here**: `build_training_data.py` downloads them and keeps them in `ml/data/occurrence_cache/`, which is outside the repository. What is published is the derived model (`ml_judge_model.npz`) and a per-taxon summary (`data/taxa_summary.csv`).
+- Fick, S.E. & Hijmans, R.J. (2017). WorldClim 2: new 1-km spatial resolution climate surfaces for global land areas. *International Journal of Climatology* 37: 4302–4315. The climate surfaces are also downloaded at build time and not redistributed; only the nearest-cell normals for each app location are published.
+
+The project's own copyright and the terms of this material are described in
+[LICENSE](../LICENSE) and in the third-party notices of the main
+[README](../README.md).
