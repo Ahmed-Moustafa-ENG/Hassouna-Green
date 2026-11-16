@@ -6,10 +6,9 @@
 set -eu
 
 DOMAIN="${DOMAIN:-}"
-CONFIG_DIR="${STREAMLIT_CONFIG_DIR:-/config}"
 APP_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 
-mkdir -p "$CONFIG_DIR" "$APP_DIR/.streamlit"
+mkdir -p "$APP_DIR/.streamlit"
 
 # The port and the address are set in the image; the domain decides which
 # hostnames and origins the app answers to.
