@@ -19,3 +19,8 @@ ml/data/build_log.txt
 
 # The deployment secrets
 deploy/.env
+
+# The tunnel client, downloaded on demand
+deploy/cloudflared
+deploy/cloudflared.exe
+deploy/tunnel.log

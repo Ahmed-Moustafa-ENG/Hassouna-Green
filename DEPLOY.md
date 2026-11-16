@@ -10,6 +10,10 @@ visitor ──https://hassounagreen.com──▶ Caddy (your server) ──▶ a
                                         Let's Encrypt certificate
 ```
 
+> **Do not want to buy a domain?** Jump to
+> [The free way](#the-free-way-a-public-address-without-a-domain) - one
+> command gives you a public HTTPS address, at no cost.
+
 ## How the deployment works
 
 `deploy/entrypoint.sh` is what the container starts. It reads your domain from
@@ -32,6 +36,52 @@ about the domain is baked into the image, it is only read at start-up.
 
 The visitor's feedback and the cache of the AI replies are written to the
 `app-data` volume, so they survive a rebuild.
+
+## The free way: a public address without a domain
+
+A domain is only needed for a **fixed** address. If you are happy with an
+address that changes when you restart, a tunnel gives you a public HTTPS URL
+for free, and the app keeps running on your own computer - still no hosting
+platform, still no third-party application.
+
+```powershell
+# Windows
+.\deploy\tunnel.ps1
+```
+
+```bash
+# Linux or macOS
+./deploy/tunnel.sh
+```
+
+The script starts the app on `127.0.0.1:8501`, starts cloudflared, and
+prints something like:
+
+```
+Your app is online at:
+
+https://pregnancy-medications-developmental-biol.trycloudflare.com
+```
+
+That address works for anybody, from anywhere, over HTTPS, with no account
+and no domain. Keep the window open: closing it stops the address.
+
+**What this costs you**
+
+- the address is different every time you start the script, so it cannot be
+  printed on a poster;
+- your computer has to be switched on and connected for the app to answer;
+- if you use the OpenRouter key, anybody who has the address can spend your
+  credits - take the key out of the environment while you share it.
+
+**What it does not cost you**
+
+- nothing. No domain, no server, no account, and the code stays in your own
+  repository on GitHub.
+
+If you later want a fixed address, keep using the same app and only the
+address changes: buy a domain, point it at a small server, and use the
+Docker setup above.
 
 ## What you need
 
