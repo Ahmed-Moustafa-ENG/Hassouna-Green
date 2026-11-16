@@ -139,6 +139,42 @@ TRANSLATIONS = {
         "area_total": "إجمالي المساحة",
         "plant_filter": "فلتر النباتات",
         "all_types": "جميع الأنواع",
+        "group_vegetables": "خضروات",
+        "group_fruits": "فواكه",
+        "group_ornamental": "نباتات زينة",
+        "planting_calendar": "تقويم الزراعة",
+        "sow_now": "يمكن زراعته في {month}",
+        "harvest_in": "الحصاد بعد {days} يوم",
+        "perennial_tree": "يُزرع مرة ويؤتي كل عام",
+        "crop_type": "نوع المحصول",
+        "lifecycle": "دورة الحياة",
+        "lifecycle_annual": "حولي",
+        "lifecycle_biennial": "ثنائي الحول",
+        "lifecycle_perennial": "معمر",
+        "spacing": "المسافات",
+        "crop_kc": "Kc المحصول",
+        "no_sowing_now": "لا يوجد محصول يُزرع في هذا الشهر من المجموعة المختارة.",
+        "edible_count": "محاصيل صالحة للأكل",
+        "crop_types": {
+            "leafy": ("ورقي", "Leafy"),
+            "root": ("جذري", "Root"),
+            "brassica": ("صليبي", "Brassica"),
+            "fruiting": ("ثمري", "Fruiting"),
+            "cucurbit": ("قرعي", "Cucurbit"),
+            "legume": ("بقولي", "Legume"),
+            "bulb": ("بصلي", "Bulb"),
+            "tuber": ("درني", "Tuber"),
+            "herb": ("عشبي", "Herb"),
+            "cereal": ("حبوب", "Cereal"),
+            "spice": ("توابل", "Spice"),
+            "citrus": ("حمضي", "Citrus"),
+            "tree_fruit": ("شجرة مثمرة", "Tree fruit"),
+            "tropical": ("استوائي", "Tropical"),
+            "vine_fruit": ("متسلق", "Vine fruit"),
+            "berry": ("توت", "Berry"),
+            "palm": ("نخيل", "Palm"),
+            "mushroom": ("فطر", "Mushroom"),
+        },
         "stats_title": "إحصائيات النظام",
         "total_plants_db": "نباتات في قاعدة البيانات",
         "mapped_locations_count": "مواقع ومناطق مدرجة",
@@ -251,6 +287,42 @@ TRANSLATIONS = {
         "area_total": "Total Area",
         "plant_filter": "Plant Filter",
         "all_types": "All Types",
+        "group_vegetables": "Vegetables",
+        "group_fruits": "Fruits",
+        "group_ornamental": "Ornamental plants",
+        "planting_calendar": "Planting Calendar",
+        "sow_now": "Can be sown in {month}",
+        "harvest_in": "Harvest after {days} days",
+        "perennial_tree": "Planted once, yields every year",
+        "crop_type": "Crop type",
+        "lifecycle": "Life cycle",
+        "lifecycle_annual": "Annual",
+        "lifecycle_biennial": "Biennial",
+        "lifecycle_perennial": "Perennial",
+        "spacing": "Spacing",
+        "crop_kc": "Crop Kc",
+        "no_sowing_now": "No crop in the selected group is sown in this month.",
+        "edible_count": "Edible crops",
+        "crop_types": {
+            "leafy": ("Leafy", "Leafy"),
+            "root": ("Root", "Root"),
+            "brassica": ("Brassica", "Brassica"),
+            "fruiting": ("Fruiting", "Fruiting"),
+            "cucurbit": ("Cucurbit", "Cucurbit"),
+            "legume": ("Legume", "Legume"),
+            "bulb": ("Bulb", "Bulb"),
+            "tuber": ("Tuber", "Tuber"),
+            "herb": ("Herb", "Herb"),
+            "cereal": ("Cereal", "Cereal"),
+            "spice": ("Spice", "Spice"),
+            "citrus": ("Citrus", "Citrus"),
+            "tree_fruit": ("Tree fruit", "Tree fruit"),
+            "tropical": ("Tropical", "Tropical"),
+            "vine_fruit": ("Vine fruit", "Vine fruit"),
+            "berry": ("Berry", "Berry"),
+            "palm": ("Palm", "Palm"),
+            "mushroom": ("Mushroom", "Mushroom"),
+        },
         "stats_title": "System Stats",
         "total_plants_db": "Plants in Database",
         "mapped_locations_count": "Mapped regions and locations",
@@ -279,6 +351,7 @@ GULF_AI_COUNTRIES = _REFERENCE_DATA["countries"]
 COUNTRY_LABELS_EN = _REFERENCE_DATA["country_labels_en"]
 ALL_SOIL_TYPES = _REFERENCE_DATA["soil_types"]
 SOIL_COMPAT = _REFERENCE_DATA["soil_compatibility"]
+SOIL_PROPERTIES = _REFERENCE_DATA["soil_properties"]
 LANDSCAPE_KC_BY_USE = _REFERENCE_DATA["use_kc"]
 SOIL_LABELS_EN = _REFERENCE_DATA["soil_labels_en"]
 USE_LABELS_EN = _REFERENCE_DATA["use_labels_en"]
@@ -308,6 +381,26 @@ def label_soil(soil, lang):
 
 def label_use(use, lang):
     return USE_LABELS_EN.get(use, use) if lang == "en" else use
+
+
+def label_crop_type(crop_type, lang):
+    """The display name of a crop group, in the active language."""
+    if not crop_type or (isinstance(crop_type, float) and pd.isna(crop_type)):
+        return ""
+    pair = TRANSLATIONS[lang]["crop_types"].get(str(crop_type))
+    if not pair:
+        return str(crop_type)
+    return pair[0] if lang == "ar" else pair[1]
+
+
+def soil_property(soil, key, default=None):
+    """One character rule of a soil, read from the database.
+
+    The rules live in the ``soil_properties`` table so the app never repeats a
+    soil name. A database without that table falls back to ``default``.
+    """
+    return SOIL_PROPERTIES.get(soil, {}).get(key, default)
+
 
 def get_plants_database():
     """Return a copy of the plant catalog loaded from hassouna_green.db."""
@@ -508,6 +601,9 @@ def _hour_key():
     return datetime.datetime.now(datetime.timezone.utc).strftime("%Y%m%d%H")
 
 
+FORECAST_DAYS = 16   # the Open-Meteo daily forecast window: today and the next 15 days
+
+
 _WEATHER_CODES = {
     0: ("☀️", "صافٍ", "Clear sky"), 1: ("🌤️", "صافٍ غالباً", "Mostly clear"),
     2: ("⛅", "غائم جزئياً", "Partly cloudy"), 3: ("☁️", "غائم", "Overcast"),
@@ -593,8 +689,8 @@ def render_live_weather(lang, gov):
 
 @st.cache_data(ttl=21600, show_spinner=False)
 def _open_meteo_daily(endpoint, lat, lon, start_date, end_date, hour_key=""):
-    """Fetch daily Open-Meteo data. Forecast calls pass hour_key so they refresh every hour;
-    archive calls leave it empty because past data does not change."""
+    """Fetch daily Open-Meteo data. Archive calls leave hour_key empty because
+    past data does not change."""
     params = {
         "latitude": lat,
         "longitude": lon,
@@ -603,11 +699,37 @@ def _open_meteo_daily(endpoint, lat, lon, start_date, end_date, hour_key=""):
         "daily": "et0_fao_evapotranspiration,temperature_2m_mean",
         "timezone": "auto",
     }
-    if endpoint.endswith("/v1/forecast"):
-        params["forecast_days"] = 16
     r = requests.get(endpoint, params=params, timeout=12)
     r.raise_for_status()
     return r.json().get("daily", {})
+
+
+@st.cache_data(ttl=21600, show_spinner=False)
+def _open_meteo_forecast(lat, lon, hour_key=""):
+    """The Open-Meteo daily forecast for the whole forecast window.
+
+    The forecast API rejects ``forecast_days`` together with ``start_date`` and
+    ``end_date`` ("mutually exclusive"), and its ``start_date`` range is one
+    day shorter than its ``forecast_days`` window. So the window is fetched
+    once here and the design day is picked out of it.
+    """
+    r = requests.get(
+        "https://api.open-meteo.com/v1/forecast",
+        params={"latitude": lat, "longitude": lon, "forecast_days": FORECAST_DAYS,
+                "daily": "et0_fao_evapotranspiration,temperature_2m_mean", "timezone": "auto"},
+        timeout=12,
+    )
+    r.raise_for_status()
+    return r.json().get("daily", {})
+
+
+def _daily_value(daily, index, field):
+    """One value of a daily series, or None when it is missing."""
+    values = daily.get(field) or []
+    if index >= len(values):
+        return None
+    value = values[index]
+    return None if value is None else float(value)
 
 
 @st.cache_data(ttl=900, show_spinner=False)
@@ -661,38 +783,44 @@ def fetch_et0_weather(gov, design_date):
         if value.get("et0_mm_day") is not None
     }
     today = datetime.date.today()
-    endpoint = None
-    source = None
     if lat is not None and lon is not None:
-        if today <= design_date <= today + datetime.timedelta(days=16):
-            endpoint = "https://api.open-meteo.com/v1/forecast"
+        if today <= design_date <= today + datetime.timedelta(days=FORECAST_DAYS - 1):
             source = "Open-Meteo daily forecast"
-        elif design_date < today:
-            endpoint = "https://archive-api.open-meteo.com/v1/archive"
-            source = "Open-Meteo historical archive"
-        if endpoint:
             try:
-                daily = _open_meteo_daily(endpoint, lat, lon,
-                                          design_date.isoformat(), design_date.isoformat(),
-                                          _hour_key() if source == "Open-Meteo daily forecast" else "")
+                daily = _open_meteo_forecast(lat, lon, _hour_key())
                 times = daily.get("time", [])
-                if times:
-                    et0s = daily.get("et0_fao_evapotranspiration", [])
-                    temps = daily.get("temperature_2m_mean", [])
-                    if et0s and et0s[0] is not None:
-                        result["et0_mm_day"] = float(et0s[0])
+                if design_date.isoformat() in times:
+                    index = times.index(design_date.isoformat())
+                    et0 = _daily_value(daily, index, "et0_fao_evapotranspiration")
+                    temp = _daily_value(daily, index, "temperature_2m_mean")
+                    if et0 is not None:
+                        result["et0_mm_day"] = et0
                         result["source"] = source
-                    if temps and temps[0] is not None:
-                        result["temperature_c"] = round(float(temps[0]), 1)
+                    if temp is not None:
+                        result["temperature_c"] = round(temp, 1)
+            except Exception:
+                pass
+        elif design_date < today:
+            source = "Open-Meteo historical archive"
+            try:
+                daily = _open_meteo_daily("https://archive-api.open-meteo.com/v1/archive", lat, lon,
+                                          design_date.isoformat(), design_date.isoformat())
+                et0 = _daily_value(daily, 0, "et0_fao_evapotranspiration")
+                temp = _daily_value(daily, 0, "temperature_2m_mean")
+                if et0 is not None:
+                    result["et0_mm_day"] = et0
+                    result["source"] = source
+                if temp is not None:
+                    result["temperature_c"] = round(temp, 1)
             except Exception:
                 pass
     month_normal = normals.get(design_date.month, {})
     if result["et0_mm_day"] is None:
         result["et0_mm_day"] = month_normal.get("et0_mm_day")
         result["source"] = "Open-Meteo five-year monthly climate normal" if result["et0_mm_day"] is not None else "ET0 unavailable"
-    if result["temperature_c"] is None and design_date > today + datetime.timedelta(days=16):
+    if result["temperature_c"] is None and design_date > today + datetime.timedelta(days=FORECAST_DAYS - 1):
         outlook = climate_outlook(gov, design_date.year)
-        if outlook and not math.isnan(outlook["monthly_proj"][design_date.month - 1]):
+        if outlook and "error" not in outlook and not math.isnan(outlook["monthly_proj"][design_date.month - 1]):
             result["temperature_c"] = round(outlook["monthly_proj"][design_date.month - 1], 1)
             result["temperature_source"] = "CMIP6 climate projection"
     if result["temperature_c"] is None:
@@ -702,46 +830,76 @@ def fetch_et0_weather(gov, design_date):
 
 
 # ── Long-term climate outlook (CMIP6 climate-model projections) ─────────────
-@st.cache_data(ttl=86400, show_spinner=False)
-def _climate_projection_raw(lat, lon):
-    """Monthly temperatures 1991-2049 from two CMIP6 HighResMIP models (Open-Meteo Climate API)."""
-    r = requests.get(
-        "https://climate-api.open-meteo.com/v1/climate",
-        params={"latitude": lat, "longitude": lon, "start_date": "1991-01-01", "end_date": "2049-12-31",
-                "models": "EC_Earth3P_HR,MRI_AGCM3_2_S", "daily": "temperature_2m_mean,temperature_2m_max"},
-        timeout=45,
-    )
-    r.raise_for_status()
-    daily = r.json().get("daily", {})
-    times = daily.get("time", [])
+CLIMATE_API_URL = "https://climate-api.open-meteo.com/v1/climate"
+CLIMATE_SAMPLE_YEARS = list(range(1991, 2050, 3))   # every third year: 20 small requests, not one huge one
 
-    def stack(prefix):
+
+def _fetch_climate_year(lat, lon, year):
+    """One small request (one year, two models). Retries politely when rate-limited."""
+    for attempt in range(3):
+        r = requests.get(
+            CLIMATE_API_URL,
+            params={"latitude": lat, "longitude": lon, "start_date": f"{year}-01-01", "end_date": f"{year}-12-31",
+                    "models": "EC_Earth3P_HR,MRI_AGCM3_2_S", "daily": "temperature_2m_mean,temperature_2m_max"},
+            timeout=30,
+        )
+        if r.status_code == 429:
+            time.sleep(2 * (attempt + 1))
+            continue
+        if r.status_code >= 400:
+            raise RuntimeError(f"HTTP {r.status_code}: {r.text[:150]}")
+        return r.json().get("daily", {})
+    raise RuntimeError("Open-Meteo rate limit reached (429); try again later")
+
+
+@st.cache_data(ttl=604800, show_spinner=False)
+def _climate_projection_raw(lat, lon):
+    """Monthly temperatures for sampled years 1991-2049 from two CMIP6 HighResMIP models.
+
+    Raises on failure, so a failed download is never cached.
+    """
+    from concurrent.futures import ThreadPoolExecutor
+    with ThreadPoolExecutor(max_workers=4) as pool:
+        futures = {y: pool.submit(_fetch_climate_year, lat, lon, y) for y in CLIMATE_SAMPLE_YEARS}
+    results, errors = {}, []
+    for y, fut in futures.items():
+        try:
+            results[y] = fut.result()
+        except Exception as exc:  # noqa
+            errors.append(str(exc))
+    if len(results) < 10:
+        raise RuntimeError(errors[0] if errors else "no climate data returned")
+
+    uniq = sorted(results)
+    tmean = np.full((len(uniq), 12), np.nan)
+    tmax = np.full((len(uniq), 12), np.nan)
+    spread, n_models = [], 1
+
+    def stack(daily, prefix):
         cols = [np.array([np.nan if v is None else float(v) for v in vals])
                 for k, vals in daily.items() if k.startswith(prefix)]
         return np.vstack(cols) if cols else None
 
-    mean_s, max_s = stack("temperature_2m_mean"), stack("temperature_2m_max")
-    if not times or mean_s is None:
-        return None
-    years = np.array([int(t[:4]) for t in times])
-    months = np.array([int(t[5:7]) for t in times])
-    uniq = sorted(set(years.tolist()))
-    tmean = np.full((len(uniq), 12), np.nan)
-    tmax = np.full((len(uniq), 12), np.nan)
-    spread = []
     with warnings.catch_warnings():
         warnings.simplefilter("ignore")
         for yi, y in enumerate(uniq):
-            ysel = years == y
-            spread.append(float(np.nanstd(np.nanmean(mean_s[:, ysel], axis=1))) if mean_s.shape[0] > 1 else 0.0)
+            daily = results[y]
+            times = daily.get("time", [])
+            mean_s, max_s = stack(daily, "temperature_2m_mean"), stack(daily, "temperature_2m_max")
+            if not times or mean_s is None:
+                spread.append(0.0)
+                continue
+            n_models = max(n_models, mean_s.shape[0])
+            months = np.array([int(t[5:7]) for t in times])
+            spread.append(float(np.nanstd(np.nanmean(mean_s, axis=1))) if mean_s.shape[0] > 1 else 0.0)
             for m in range(1, 13):
-                sel = ysel & (months == m)
+                sel = months == m
                 if sel.any():
                     tmean[yi, m - 1] = np.nanmean(mean_s[:, sel])
                     if max_s is not None:
                         tmax[yi, m - 1] = np.nanmean(max_s[:, sel])
     return {"years": uniq, "tmean": tmean.tolist(), "tmax": tmax.tolist(),
-            "spread": spread, "n_models": int(mean_s.shape[0])}
+            "spread": spread, "n_models": n_models}
 
 
 def climate_outlook(gov, target_year):
@@ -756,10 +914,10 @@ def climate_outlook(gov, target_year):
         return None
     try:
         raw = _climate_projection_raw(loc["lat"], loc["lon"])
-    except Exception:
-        return None
+    except Exception as exc:  # noqa
+        return {"error": str(exc)[:200]}
     if not raw:
-        return None
+        return {"error": "empty response"}
     with warnings.catch_warnings():
         warnings.simplefilter("ignore")
         years = np.array(raw["years"], dtype=float)
@@ -768,7 +926,7 @@ def climate_outlook(gov, target_year):
         annual = np.nanmean(tmean, axis=1)
         ok = ~np.isnan(annual)
         if ok.sum() < 10:
-            return None
+            return {"error": "not enough climate data"}
         ty = float(target_year)
 
         def fit(series):
@@ -803,14 +961,16 @@ def climate_outlook(gov, target_year):
         }
 
 
-def render_climate_outlook(lang, gov, year, recommended):
+def render_climate_outlook(lang, gov, year, recommended, compact=False):
     """Long-term climate section: projected warming, plant heat risk and an optional AI explanation."""
     st.markdown("### 🔭 " + _label(lang, "التوقعات المناخية بعيدة المدى", "Long-term climate outlook"))
     with st.spinner(_label(lang, "جارٍ تحميل إسقاطات المناخ...", "Loading climate projections...")):
         o = climate_outlook(gov, year)
-    if not o:
+    if not o or o.get("error"):
         st.info(_label(lang, "إسقاطات المناخ غير متاحة الآن؛ حاول لاحقاً.",
                        "Climate projections are not available right now; please try again later."))
+        if o and o.get("error"):
+            st.caption(_label(lang, "السبب: ", "Reason: ") + o["error"])
         return
     c1, c2, c3, c4 = st.columns(4)
     c1.metric(_label(lang, "متوسط 1991–2020", "1991–2020 average"), f"{o['baseline']:.1f}°C")
@@ -821,6 +981,12 @@ def render_climate_outlook(lang, gov, year, recommended):
     if o["hottest_max"] is not None:
         c4.metric(_label(lang, "أحرّ شهر (متوسط العظمى)", "Hottest month (avg. max)"),
                   f"{o['hottest_max']:.1f}°C", T_month_name(lang, o["hottest_month"]), delta_color="off")
+
+    if compact:
+        st.caption(_label(lang,
+            "إسقاطات مناخية CMIP6 (Open-Meteo) — ظروف مناخية معتادة وليست توقع طقس يومي. التفاصيل في صفحة النتائج.",
+            "CMIP6 climate projections (Open-Meteo): typical climate, not a day-by-day forecast. Details on the results page."))
+        return
 
     fig, ax = plt.subplots(figsize=(8, 3.2))
     fig.patch.set_alpha(0)
@@ -899,6 +1065,24 @@ def T_month_name(lang, month):
 
 
 # PART 5 — TRANSPARENT RULE-BASED SCORING
+def soil_fit_for(row, soil_type):
+    """How well the soil of the site suits one plant.
+
+    A plant that lists the soil of the site (or accepts any soil) fits it
+    completely. A crop that tolerates the soil but does not prefer it fits it
+    well, because it is grown in a bed prepared for it. Any other plant fits it
+    only partly.
+    """
+    soils = row["soil"]
+    if isinstance(soils, str):
+        soils = [soils]
+    if "any" in soils or soil_type in soils:
+        return 1.0
+    if row.get("crop_type") and not row.get("soil_strict"):
+        return 0.75
+    return 0.5
+
+
 class RuleBasedJudge:
     """Transparent compatibility score; no synthetic training or accuracy claim."""
 
@@ -914,11 +1098,8 @@ class RuleBasedJudge:
         climate_fit = float(recommended.apply(
             lambda r: 1 if r["temp_min"] <= avg_temp <= r["temp_max"] else 0, axis=1
         ).mean())
-        soil_fit = float(recommended.apply(
-            lambda r: 1 if ("any" in r["soil"] or soil_type in r["soil"]) else 0.5,
-            axis=1
-        ).mean())
-        diversity = min(len(recommended["use"].unique()) / 5.0, 1.0)
+        soil_fit = float(recommended.apply(lambda r: soil_fit_for(r, soil_type), axis=1).mean())
+        diversity = min(len(recommended.apply(diversity_key, axis=1).unique()) / 5.0, 1.0)
         beauty_avg = float(np.clip((recommended["beauty"].mean() - 1) / 4.0, 0, 1))
         co2_score = float(np.clip(recommended["co2"].mean() / 60.0, 0, 1))
         score = round(water_eff * 30 + climate_fit * 25 + soil_fit * 20
@@ -957,12 +1138,22 @@ def recommend_plants(df, water_budget, soil_type, temp_avg, top_n=8):
         if isinstance(soils, str):
             soils = [soils]
         soil_ok = ("any" in soils) or any(s in valid for s in soils)
+        # An edible crop is normally grown in a bed prepared for it, so it is
+        # offered on the other soils of the site as well. A crop that is marked
+        # as strict needs the soil it is listed with.
+        if not soil_ok and row.get("crop_type") and not row.get("soil_strict"):
+            soil_ok = True
         if (
             row['water'] <= water_budget and
             row['temp_min'] <= temp_avg <= row['temp_max'] and
             soil_ok
         ):
             score = row['beauty'] * (4 - row['water']) + row.get('co2', 10) / 10
+            # A crop that prefers the soil of the site is the better choice. The
+            # landscape plants are already filtered by the soil rules, so this
+            # only applies to the crops, whose preferred soils are a hint.
+            if row.get("crop_type") and soil_type in soils:
+                score += 1.5
             results.append({**row.to_dict(), 'rec_score': score})
 
     if not results:
@@ -978,14 +1169,16 @@ def recommend_plants(df, water_budget, soil_type, temp_avg, top_n=8):
 
     res_df = pd.DataFrame(results).sort_values('rec_score', ascending=False, kind='stable')
     # تنويع الأنواع — take the best plant of each type first, then fill the
-    # remaining places with the next-best plants of any type.
+    # remaining places with the next-best plants of any type. An edible plant
+    # counts as its own type (crop group), so a garden is varied as well.
     picked, used_types = [], set()
     for _, row in res_df.iterrows():
         if len(picked) >= top_n:
             break
-        if row['use'] not in used_types:
+        key = diversity_key(row)
+        if key not in used_types:
             picked.append(row)
-            used_types.add(row['use'])
+            used_types.add(key)
     picked_names = {row['name'] for row in picked}
     for _, row in res_df.iterrows():
         if len(picked) >= top_n:
@@ -995,6 +1188,50 @@ def recommend_plants(df, water_budget, soil_type, temp_avg, top_n=8):
             picked_names.add(row['name'])
     return (pd.DataFrame(picked).sort_values('rec_score', ascending=False, kind='stable')
             .reset_index(drop=True))
+
+
+# The plant filter offers the three groups of the catalog and, below them, the
+# individual use categories.
+FILTER_ALL = "all"
+
+
+def filter_options(catalog, lang):
+    """Options of the plant filter: (key, label) pairs, in display order.
+
+    A use category whose name is the same as a group (the vegetable and the
+    fruit category) is not repeated, because the group already covers it.
+    """
+    T = TRANSLATIONS[lang]
+    options = [(FILTER_ALL, T["all_types"])]
+    group_labels = set()
+    for group, key in (("vegetable", "group_vegetables"), ("fruit", "group_fruits"),
+                       ("ornamental", "group_ornamental")):
+        if (catalog["group"] == group).any():
+            options.append((f"group:{group}", T[key]))
+            group_labels.add(T[key])
+    for use in sorted(catalog["use"].unique(), key=lambda u: label_use(u, lang)):
+        label = label_use(use, lang)
+        if label in group_labels:
+            continue
+        options.append((f"use:{use}", label))
+    return options
+
+
+def filter_catalog(catalog, key):
+    """The part of the catalog the filter selects."""
+    if key == FILTER_ALL:
+        return catalog
+    kind, _, value = key.partition(":")
+    if kind == "group":
+        return catalog[catalog["group"] == value]
+    return catalog[catalog["use"] == value]
+
+
+def selection_size(key):
+    """How many plants a selection aims for on the map."""
+    if key.startswith("group:"):
+        return {"vegetable": 12, "fruit": 10}.get(key.split(":", 1)[1], 8)
+    return 8
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -1071,6 +1308,8 @@ def generate_layout(plants_df, area_w, area_h, gov, region, season_str, lang="ar
         'نباتات مائية':    '#00b0ff',
         'نباتات عطرية':    '#e040fb',
         'نباتات ظل':       '#8d6e63',
+        'خضروات':          '#66bb6a',
+        'فواكه':           '#ff7043',
     }
     marker_map = {
         'شجرة':           ('o',  320),
@@ -1084,14 +1323,23 @@ def generate_layout(plants_df, area_w, area_h, gov, region, season_str, lang="ar
         'نباتات مائية':   ('v',  170),
         'نباتات عطرية':   ('+',  170),
         'نباتات ظل':      ('x',  160),
+        'خضروات':         ('v',  210),
+        'فواكه':          ('d',  190),
     }
 
-    # مواضع 3D موزعة
+    # مواضع موزعة على الأرض، خارج الممر المركزي. The first eight are the
+    # original landscape positions; the rest let a garden of crops fill the plot.
     positions = [
         (0.12, 0.80), (0.50, 0.83), (0.88, 0.80),
         (0.12, 0.22), (0.50, 0.18), (0.88, 0.22),
         (0.88, 0.50), (0.12, 0.50),
+        (0.31, 0.79), (0.69, 0.79),
+        (0.31, 0.21), (0.69, 0.21),
+        (0.12, 0.67), (0.88, 0.67),
+        (0.12, 0.35), (0.88, 0.35),
     ]
+    dense = len(plants_df) > 8
+    label_size = 6.5 if dense else 7.5
 
     for i, (_, plant) in enumerate(plants_df.iterrows()):
         if i >= len(positions):
@@ -1116,8 +1364,8 @@ def generate_layout(plants_df, area_w, area_h, gov, region, season_str, lang="ar
 
         # اسم النبات
         label = plant['name_en'] if lang == 'en' else plant['name']
-        ax.text(x, y - 0.13, label,
-                ha='center', va='top', fontsize=7.5,
+        ax.text(x, y - (0.10 if dense else 0.13), label,
+                ha='center', va='top', fontsize=label_size,
                 color='#e8f5e9', fontfamily='DejaVu Sans',
                 bbox=dict(
                     boxstyle='round,pad=0.25',
@@ -1192,8 +1440,28 @@ WEEKS_PER_MONTH = 365.25 / 12 / 7   # ≈ 4.35
 
 
 def estimated_landscape_kc(plant):
-    """Return the provisional group Kc assigned to one catalog plant."""
+    """Return the provisional Kc assigned to one catalog plant.
+
+    An edible crop carries its own coefficient in ``crop_details``, because a
+    tomato bed and a fruit tree use very different amounts of water. Everything
+    else falls back to the coefficient of its landscape use group.
+    """
+    crop_kc = plant.get("crop_kc")
+    if crop_kc is not None and not pd.isna(crop_kc):
+        return float(crop_kc)
     return LANDSCAPE_KC_BY_USE.get(str(plant.get("use", "")), 0.55)
+
+
+def diversity_key(row):
+    """The attribute a selection should vary on.
+
+    Edible plants vary by crop group (leafy, root, fruiting, ...), so a garden
+    of one crop type is not diverse; landscape plants vary by their use.
+    """
+    crop_type = row.get("crop_type")
+    if crop_type and not pd.isna(crop_type):
+        return f"crop:{crop_type}"
+    return f"use:{row['use']}"
 
 
 def calc_water(recommended, area_sqm, et0_mm_day=None, et0_monthly=None, target_year=None):
@@ -2031,11 +2299,30 @@ def show_figure(fig, alt, T):
 def plant_cards_html(plants_df, T, lang):
     """All plant cards in one responsive grid (4 columns -> 3 -> 2 -> 1 as the screen narrows)."""
     wi = T['water_icons']
+    lifecycle_key = {
+        "annual": "lifecycle_annual",
+        "biennial": "lifecycle_biennial",
+        "perennial": "lifecycle_perennial",
+    }
     cards = []
     for _, p in plants_df.iterrows():
         stars = "⭐" * int(p['beauty'])
         name  = p['name_en'] if lang == 'en' else p['name']
         other = p['name_en'] if lang == 'ar' else p['name']
+        crop_type = p.get("crop_type", "")
+        extra = ""
+        if crop_type and not pd.isna(crop_type):
+            kc = estimated_landscape_kc(p)
+            spacing = p.get("row_spacing_cm")
+            lines = [f'🌿 {label_crop_type(crop_type, lang)}']
+            if spacing and not pd.isna(spacing):
+                lines.append(f'↔️ {spacing:g} {_label(lang, "سم", "cm")}')
+            lines.append(f'💧 {T["crop_kc"]}: {kc:.2f}')
+            life = lifecycle_key.get(p.get("lifecycle", ""), "")
+            if life:
+                lines.append(f'🔄 {T[life]}')
+            extra = ('<div style="color:#9ccc65;font-size:.74rem;margin-top:2px">'
+                     + "<br>".join(lines) + "</div>")
         cards.append(
             '<div class="plant-card">'
             '<div style="font-size:1.6rem">🌿</div>'
@@ -2049,9 +2336,40 @@ def plant_cards_html(plants_df, T, lang):
             f'<div class="plant-temp">🌡️ {p["temp_min"]}° — {p["temp_max"]}°C</div>'
             f'<div class="plant-temp">{_label(lang, "Kc تقديري", "Provisional Kc")}: {estimated_landscape_kc(p):.2f}</div>'
             f'<div class="plant-temp">🌳 CO₂: {p.get("co2", 0)} kg/yr</div>'
+            f'{extra}'
             '</div>'
         )
     return '<div class="plant-grid">' + ''.join(cards) + '</div>'
+
+
+def render_planting_calendar(lang, recommended, month):
+    """Show which of the selected crops are sown in the design month."""
+    T = TRANSLATIONS[lang]
+    month = int(month)
+    month_name = T["months"][month]
+    crops = []
+    for _, r in recommended.iterrows():
+        months = r.get("sowing_months") or []
+        if not months:
+            continue
+        if month not in months:
+            continue
+        name = r["name"] if lang == "ar" else r["name_en"]
+        days = int(r.get("harvest_days") or 0)
+        note = (T["harvest_in"].format(days=days) if days
+                else T["perennial_tree"])
+        crops.append((name, note, label_crop_type(r.get("crop_type", ""), lang)))
+    if not crops:
+        return False
+    st.markdown("### 🌱 " + T["planting_calendar"])
+    rows = []
+    for name, note, crop_type in crops:
+        rows.append(
+            f'<div class="summary-row"><span>🌱 {html.escape(str(name))}</span>'
+            f'<b>{html.escape(str(crop_type))} — {html.escape(note)}</b></div>'
+        )
+    st.markdown('<div class="summary-box">' + "".join(rows) + "</div>", unsafe_allow_html=True)
+    return True
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -2235,7 +2553,6 @@ UAE = "\u0627\u0644\u0625\u0645\u0627\u0631\u0627\u062a"
 QATAR = "\u0642\u0637\u0631"
 # Country names, labels and location lists are loaded from the database (PART 2).
 EGYPT_LOCATION_KEYS = COUNTRY_LOCATION_KEYS.get(EGYPT, [])
-SAND_DESERT="\u0631\u0645\u0644\u064a\u0629 \u0635\u062d\u0631\u0627\u0648\u064a\u0629"; SAND_LIME="\u0631\u0645\u0644\u064a\u0629 \u0643\u0644\u0633\u064a\u0629"; SABKHA="\u0633\u0628\u062e\u064a\u0629 \u0645\u0644\u062d\u064a\u0629"; GRAVEL="\u062d\u0635\u0648\u064a\u0629"; OASIS="\u0637\u064a\u0646\u064a\u0629 \u0648\u0627\u062d\u0627\u062a"; COAST="\u0631\u0645\u0644\u064a\u0629 \u0633\u0627\u062d\u0644\u064a\u0629"; URBAN="\u062a\u0631\u0628\u0629 \u0639\u0645\u0631\u0627\u0646\u064a\u0629 \u0645\u062d\u0633\u0646\u0629"; MOUNTAIN="\u062d\u0635\u0648\u064a\u0629 \u062c\u0628\u0644\u064a\u0629"; LIME="\u0643\u0644\u0633\u064a\u0629"
 def get_country_options(lang="ar"):
     return [COUNTRY_LABELS_EN[c] for c in GULF_AI_COUNTRIES] if lang == "en" else GULF_AI_COUNTRIES[:]
 
@@ -2280,10 +2597,10 @@ def analyze_satellite_input(uploaded_file, soil, avg_temp, lang="ar"):
         brightness = float(np.clip(arr.mean(), 0, 1))
         dryness = float(np.clip((r.mean() + brightness - vegetation) / 2, 0, 1))
 
-    # Combine into a single suitability score (0-100). Salt-prone or
-    # sandy/desert soils get a suitability penalty; everything else gets
-    # a smaller baseline penalty to keep scores realistic.
-    soil_penalty = 18 if soil in [SABKHA, SAND_DESERT, SAND_LIME] else 6
+    # Combine into a single suitability score (0-100). Saline and sandy soils
+    # hold little water and need more irrigation than the proxy assumes, so
+    # the penalty comes from the soil_properties table.
+    soil_penalty = int(soil_property(soil, "image_penalty", 6) or 0)
     suitability = round(np.clip(
         (1 - dryness) * 45 + vegetation * 25 + 72 - soil_penalty, 0, 100
     ))
@@ -2587,7 +2904,9 @@ def classify_irrigation_water(ec_us_cm, sar, rsc, chloride_meq, sulfate_meq, bor
     chloride_risk = 5 if chloride_meq < 4 else 18 if chloride_meq <= 10 else 34
     sulfate_risk = 4 if sulfate_meq < 10 else 14 if sulfate_meq <= 20 else 26
     boron_risk = 4 if boron_mg_l < 0.7 else 18 if boron_mg_l <= 3 else 36
-    soil_extra = 10 if soil in ["طينية", "طينية نيلية", "طينية ساحلية", "طينية واحات"] and sar >= 18 else 0
+    # Slow-draining clay-like soil holds sodium where it hurts; the clay
+    # rule comes from the soil_properties table.
+    soil_extra = 10 if soil_property(soil, "clay_like", False) and sar >= 18 else 0
     risk = min(100, round(salinity_risk + sar_risk + rsc_risk + chloride_risk + sulfate_risk + boron_risk + soil_extra))
     suitability = max(0, 100 - risk)
     if suitability >= 75:
@@ -2814,6 +3133,14 @@ def main():
         col_s2.markdown(f'<div class="info-pill">{season_str}</div>', unsafe_allow_html=True)
         col_s3.markdown(f'<div class="info-pill">🌡️ ~{base_temp}°C {T["est_temp"]}</div>', unsafe_allow_html=True)
         render_live_weather(lang, governorate)
+        # The long-term outlook downloads 20 CMIP6 model years, so it is loaded
+        # on request here; the full version is shown on the results page.
+        if st.session_state.get("outlook_loaded"):
+            render_climate_outlook(lang, governorate, int(year), None, compact=True)
+        elif st.button(_label(lang, "🌡️ حمّل التوقعات المناخية بعيدة المدى",
+                              "🌡️ Load the long-term climate outlook"), key="btn_outlook_step1"):
+            st.session_state["outlook_loaded"] = True
+            st.rerun()
         st.markdown('</div>', unsafe_allow_html=True)
         _, btn_col = st.columns([3, 1])
         with btn_col:
@@ -2855,23 +3182,33 @@ def main():
             unit_opt = st.selectbox(f"📐 {T['area_unit']}", unit_opts,
                                     index=unit_opts.index(saved_unit), key="unit_sel",
                                     format_func=lambda u: T['meters'] if u == "m" else T['km'])
+        # The land keeps its real size when the unit changes: the dimensions are
+        # stored in metres and shown in the selected unit.
+        unit_factor = 1000.0 if unit_opt == "km" else 1.0
+        previous_unit = st.session_state.form_data.get('unit')
+        if previous_unit is not None and _unit_code(previous_unit) != unit_opt:
+            # Restart the two inputs from the same land, now in the new unit.
+            st.session_state.pop('width_in', None)
+            st.session_state.pop('height_in', None)
         col_w, col_h = st.columns(2)
         width_label = T['width'] if unit_opt == "m" else _label(lang, "العرض (كم)", "Width (km)")
         height_label = T['height'] if unit_opt == "m" else _label(lang, "الطول (كم)", "Length (km)")
-        w_val = col_w.number_input(width_label, min_value=0.1,
-                                   value=float(st.session_state.form_data.get('w_val', 10.0)),
-                                   step=0.5, key="width_in")
-        h_val = col_h.number_input(height_label, min_value=0.1,
-                                   value=float(st.session_state.form_data.get('h_val', 10.0)),
-                                   step=0.5, key="height_in")
-        area_sqm = w_val * h_val
-        if unit_opt == "km":
-            area_sqm_display = area_sqm * 1_000_000
-        else:
-            area_sqm_display = area_sqm
-        st.session_state.form_data.update({'soil': soil, 'unit': unit_opt, 'w_val': w_val, 'h_val': h_val,
-                                           'area_sqm': area_sqm_display})
-        st.markdown(f'<div class="info-pill">📐 {T["area_total"]}: <b>{area_sqm_display:,.1f} m²</b></div>',
+        # The smallest size and the step follow the unit: 0.1 m is 0.0001 km,
+        # which the metre-scale minimum would reject.
+        min_dim, step_dim = (0.1, 0.5) if unit_opt == "m" else (0.0001, 0.001)
+        w_default = round(float(st.session_state.form_data.get('w_m', 10.0)) / unit_factor, 4)
+        h_default = round(float(st.session_state.form_data.get('h_m', 10.0)) / unit_factor, 4)
+        w_val = col_w.number_input(width_label, min_value=min_dim,
+                                   value=w_default, step=step_dim, key="width_in")
+        h_val = col_h.number_input(height_label, min_value=min_dim,
+                                   value=h_default, step=step_dim, key="height_in")
+        w_m, h_m = w_val * unit_factor, h_val * unit_factor
+        area_sqm = w_m * h_m
+        st.session_state.form_data.update({'soil': soil, 'unit': unit_opt,
+                                           'w_val': w_val, 'h_val': h_val,
+                                           'w_m': w_m, 'h_m': h_m,
+                                           'area_sqm': area_sqm})
+        st.markdown(f'<div class="info-pill">📐 {T["area_total"]}: <b>{area_sqm:,.1f} m²</b></div>',
                     unsafe_allow_html=True)
         # soil info chips (bilingual, from the soil_traits table)
         traits = SOIL_TRAITS.get(soil, [])
@@ -2890,7 +3227,8 @@ def main():
                 st.session_state.form_data.update({
                     'soil': soil, 'unit': unit_opt,
                     'w_val': w_val, 'h_val': h_val,
-                    'area_sqm': area_sqm_display,
+                    'w_m': w_m, 'h_m': h_m,
+                    'area_sqm': area_sqm,
                 })
                 st.session_state.form_step = 3
                 st.rerun()
@@ -2975,8 +3313,21 @@ def main():
             et0_for_day = weather.get("monthly_et0", {}).get(month)
 
         # ── Core Logic ──────────────────────────────────────────────────────
-        df          = get_plants_database()
-        recommended = recommend_plants(df, water_budget, soil, avg_temp, top_n=8)
+        df = get_plants_database()
+        # The plant filter decides what the design is made of, so the map, the
+        # cards, the judges and the water estimate all follow the selection.
+        # The widget itself is drawn further down, under the plant cards; its
+        # saved value is read here so the design is built from it.
+        options = filter_options(df, lang)
+        option_keys = [key for key, _ in options]
+        filter_labels = dict(options)
+        chosen = st.session_state.get("plant_filter_sel", FILTER_ALL)
+        if chosen not in option_keys:
+            chosen = FILTER_ALL
+
+        selected_catalog = filter_catalog(df, chosen)
+        recommended = recommend_plants(selected_catalog, water_budget, soil, avg_temp,
+                                       top_n=selection_size(chosen))
         water_data  = calc_water(recommended, area_sqm, et0_for_day,
                                  weather.get("monthly_et0"), target_year=year)
         judge       = RuleBasedJudge()
@@ -2991,6 +3342,7 @@ def main():
             f"🪨 {label_soil(soil, lang)}",
             f"📐 {float(w_val):g}×{float(h_val):g} {dim_unit}",
             f"💧 {wl_map[water_budget]}",
+            f"🌱 {filter_labels.get(chosen, chosen)} ({len(recommended)})",
         ]
         st.markdown(
             f'<div class="status-bar">✅ {T["analysis_success"]} — ' +
@@ -3034,16 +3386,21 @@ def main():
         # ── Recommended Plants ───────────────────────────────────────────────
         st.markdown(f"### {T['recommended_plants']}")
 
-        # فلتر
-        use_types = [T['all_types']] + sorted(recommended['use'].unique().tolist(),
-                                              key=lambda u: label_use(u, lang))
-        plant_filter = st.selectbox(f"🔍 {T['plant_filter']}", use_types, key="plant_filter_sel",
-                                    format_func=lambda u: u if u == T['all_types'] else label_use(u, lang))
-
-        filtered_df = recommended if plant_filter == T['all_types'] \
-                      else recommended[recommended['use'] == plant_filter]
+        # The filter that built the design. It is drawn here, under the cards,
+        # and the design above is already the one it selects.
+        st.selectbox(
+            f"🔍 {T['plant_filter']}", option_keys,
+            index=option_keys.index(chosen),
+            format_func=lambda k: filter_labels.get(k, k),
+            key="plant_filter_sel",
+        )
+        filtered_df = recommended
 
         st.markdown(plant_cards_html(filtered_df, T, lang), unsafe_allow_html=True)
+
+        # ── Planting calendar for the crops of the selection ────────────────
+        render_planting_calendar(lang, recommended, month)
+
         # ── Optional generative design and independent AI review ────────────
         st.markdown("---")
         st.markdown("### 🧠 " + _label(lang, "خطة تصميم ومراجعة اختيارية بالذكاء الاصطناعي", "Optional Generative Design & Review"))
@@ -3198,7 +3555,9 @@ def main():
             f'<div class="summary-row">'
             f'<span>{"⭐"*int(r["beauty"])} {r["name"] if lang=="ar" else r["name_en"]}</span>'
             f'<b>{r["name_en"] if lang=="ar" else r["name"]} — {label_use(r["use"], lang)} — '
-            f'{wi.get(r["water"],"💧")} — {r["temp_min"]}–{r["temp_max"]}°C</b>'
+            f'{wi.get(r["water"],"💧")} — {r["temp_min"]}–{r["temp_max"]}°C'
+            + (f' — {label_crop_type(r.get("crop_type", ""), lang)}' if r.get("crop_type") and not pd.isna(r.get("crop_type")) else "")
+            + '</b>'
             f'</div>'
             for _, r in recommended.iterrows()
         ])
@@ -3216,8 +3575,7 @@ def main():
         soil_tip = (
             ("أضف مواد عضوية لتحسين الاحتفاظ بالرطوبة" if lang == "ar"
              else "Add organic matter to improve moisture retention")
-            if soil in ["رملية", "رملية صحراوية", "رملية ساحلية", "رملية كلسية", "حصوية", "حصوية جبلية",
-                        "صخرية", "صخرية جيرية", "صخرية جرانيتية"]
+            if soil_property(soil, "needs_organic", False)
             else (
                 "التربة مناسبة — تأكد من الصرف الجيد" if lang == "ar"
                 else "Soil is suitable — ensure good drainage"
@@ -3244,6 +3602,8 @@ def main():
             <div class="summary-row"><span>{T['soil_label']}</span><b>{label_soil(soil, lang)}</b></div>
             <div class="summary-row"><span>{T['area_label']}</span><b>{float(w_val):g}×{float(h_val):g} {dim_unit} = {area_sqm:,.0f} m²</b></div>
             <div class="summary-row"><span>{T['water_budget']}</span><b>{wl_map[water_budget]}</b></div>
+            <div class="summary-row"><span>{T['plant_filter']}</span>
+                <b>{html.escape(str(filter_labels.get(chosen, chosen)))}</b></div>
             <div class="summary-row"><span>{_label(lang, "التقييم القاعدي", "Rule-based score")}</span>
                 <b style="color:#ffd600">{judge_res['score']}/100 — {judge_res['label']}</b></div>
             {ml_summary_row}

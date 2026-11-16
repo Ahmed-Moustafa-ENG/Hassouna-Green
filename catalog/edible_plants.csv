@@ -1,0 +1,226 @@
+name_en,name_ar,scientific_name,use,crop_type,lifecycle,water_class,temp_min_c,temp_max_c,beauty,co2_kg_year,kc,spacing_cm,row_spacing_cm,sowing_months,harvest_days,soils,catalog,soil_strict
+Lettuce,خس,Lactuca sativa,خضروات,leafy,annual,2,4,25,2,2,0.55,25,40,9|10|11|12|1|2,55,طمييه|طمييه نيلية|طينية|رملية,egypt,0
+Spinach,سبانخ,Spinacia oleracea,خضروات,leafy,annual,2,2,24,2,2,0.55,20,35,9|10|11|12|1,50,طمييه|طينية|ملحية|سبخية ملحية,egypt,0
+Arugula,جرجير,Eruca vesicaria,خضروات,leafy,annual,1,5,28,3,2,0.50,15,30,9|10|11|12|1|2,40,طمييه|طمييه نيلية|رملية,egypt,0
+Watercress,جرجير الماء,Nasturtium officinale,خضروات,leafy,perennial,2,2,26,3,2,0.60,20,30,9|10|11|12|1|2,60,طمييه|طينية|طينية نيلية,egypt,0
+Tatsoi,تاتسوي,Brassica rapa var. narinosa,خضروات,leafy,annual,1,3,28,3,2,0.50,20,30,9|10,50,طمييه|طمييه نيلية|طينية,egypt,0
+Mustard Greens,خردل,Brassica juncea,خضروات,leafy,annual,2,3,32,3,2,0.60,25,40,9|10|11,60,طمييه|طينية,egypt,0
+Swiss Chard,سو,Beta vulgaris var. cicla,خضروات,leafy,biennial,2,4,32,3,2,0.60,30,50,8|9|10,60,طمييه|طينية|ملحية,egypt,0
+Garden Cress,رشاد,Lepidium sativum,خضروات,leafy,annual,1,2,25,2,2,0.45,10,25,9|10|11,35,طمييه|طمييه نيلية,egypt,0
+Lamb's Lettuce,خس صغير,Valerianella locusta,خضروات,leafy,annual,1,2,25,2,2,0.45,15,30,9|10|11,45,طمييه|طمييه نيلية,egypt,0
+Chicory,شيكوري,Cichorium intybus,خضروات,leafy,biennial,2,2,32,2,2,0.55,25,40,9|10|11,70,طمييه|طينية,egypt,0
+Endive,إنديف,Cichorium endivia,خضروات,leafy,biennial,2,3,28,2,2,0.55,25,40,9|10,80,طمييه|طينية,egypt,0
+Sorrel,مخل,Rumex acetosa,خضروات,leafy,perennial,1,2,28,2,2,0.50,25,40,9|10|11,60,طمييه|طينية,egypt,0
+Purslane,بقلة,Portulaca oleracea,خضروات,leafy,annual,1,12,42,2,1,0.40,20,30,3|4|5,50,رملية|رملية ساحلية|طمييه,egypt,0
+Mallow,ملوخية,Malva parviflora,خضروات,leafy,annual,1,5,38,2,1,0.45,25,40,9|10|11,60,طمييه|رملية,egypt,0
+Dandelion,دانديليون,Taraxacum officinale,خضروات,leafy,perennial,1,2,35,2,1,0.40,15,30,9|10,0,طمييه|رملية,egypt,0
+Plantain Leaf,لسان,Plantago major,خضروات,leafy,perennial,1,5,38,2,1,0.45,25,40,9|10,0,طمييه|رملية,egypt,0
+Nettle,قرصة,Urtica dioica,خضروات,leafy,perennial,1,2,35,2,1,0.45,30,45,9|10,0,طمييه|طينية,egypt,0
+Buckwheat,بوكويت,Fagopyrum esculentum,خضروات,cereal,annual,2,5,30,2,2,0.60,15,30,9|10,90,طمييه|رملية,egypt,0
+Barley,شعير,Hordeum vulgare,خضروات,cereal,annual,2,5,35,2,2,0.60,10,25,10|11,120,طمييه|رملية|طينية,egypt,0
+Wheat,قمح,Triticum aestivum,خضروات,cereal,annual,2,5,35,2,2,0.65,12,25,10|11,150,طمييه|رملية|طينية,egypt,0
+Maize,ذرة,Zea mays,خضروات,cereal,annual,3,10,42,3,3,1.00,30,75,4|5,110,طمييه|طينية,egypt,0
+Sorghum,سورغم,Sorghum bicolor,خضروات,cereal,annual,3,15,45,3,3,1.00,25,70,4|5|6,110,طمييه|رملية|طينية,egypt,0
+Rice,أرز,Oryza sativa,خضروات,cereal,annual,3,18,36,3,3,1.10,20,25,5|6,130,طينية|طمييه نيلية,egypt,1
+Cotton,قطن,Gossypium hirsutum,خضروات,cereal,annual,3,20,42,3,3,1.05,40,80,3|4,180,رملية|رملية صحراوية|طمييه,egypt,0
+Sesame,سمسم,Sesamum indicum,خضروات,cereal,annual,2,18,42,3,2,0.75,20,50,4|5,110,رملية|طمييه|طينية,egypt,0
+Safflower,قرطم,Carthamus tinctorius,خضروات,cereal,annual,2,10,38,2,2,0.65,20,40,10|11,120,رملية|طمييه,egypt,0
+Quinoa,كينوا,Chenopodium quinoa,خضروات,cereal,annual,2,5,35,3,2,0.65,30,45,9|10,120,طمييه|رملية,egypt,0
+Amaranth Grain,قطيفة حب,Amaranthus cruentus,خضروات,cereal,annual,2,12,40,3,2,0.65,40,60,3|4,110,طمييه|رملية,egypt,0
+Berseem,برسيم,Trifolium alexandrinum,خضروات,legume,annual,2,5,38,3,2,0.70,10,25,9|10,0,طمييه|طينية|ملحية,egypt,0
+Alfalfa,فصفصة,Medicago sativa,خضروات,legume,perennial,3,8,38,2,2,0.75,15,40,9|10,0,طمييه|طينية|ملحية,egypt,0
+Clover,نفل,Trifolium repens,خضروات,legume,perennial,2,4,35,3,2,0.60,20,40,9|10,0,طمييه|طينية,egypt,0
+Cabbage,ملفوف,Brassica oleracea var. capitata,خضروات,brassica,biennial,3,3,28,3,3,0.75,45,70,8|9|10,110,طمييه|طمييه نهرية|طينية,egypt,0
+Cauliflower,قرنبيط,Brassica oleracea var. botrytis,خضروات,brassica,annual,3,3,28,3,3,0.75,50,75,8|9|10,120,طمييه|طمييه نهرية|طينية,egypt,0
+Broccoli,بروكلي,Brassica oleracea var. italica,خضروات,brassica,annual,3,3,28,4,3,0.75,50,75,8|9|10,110,طمييه|طمييه نهرية|طينية,egypt,0
+Kale,كرنب,Brassica oleracea var. acephala,خضروات,brassica,biennial,2,3,30,3,3,0.70,45,60,8|9|10,80,طمييه|طينية|طمييه نهرية,egypt,0
+Collard Greens,كرنب مسoton,Brassica oleracea var. viridis,خضروات,brassica,biennial,2,3,30,3,3,0.70,45,60,8|9|10,80,طمييه|طينية|طمييه نهرية,egypt,0
+Chinese Broccoli,بروكلي صيني,Brassica oleracea var. alboglabra,خضروات,brassica,annual,2,3,28,3,3,0.70,30,45,8|9|10,70,طمييه|طينية,egypt,0
+Kohlrabi,كول رابي,Brassica oleracea var. gongylodes,خضروات,brassica,biennial,2,3,30,3,3,0.70,30,45,8|9|10,80,طمييه|طينية,egypt,0
+Brussels Sprouts,بروكلي بلجي,Brassica oleracea var. gemmifera,خضروات,brassica,biennial,3,3,25,3,3,0.75,60,90,8|9,140,طمييه|طمييه نهرية|طينية,egypt,0
+Chinese Cabbage,ملفوف صيني,Brassica rapa var. pekinensis,خضروات,brassica,annual,2,3,28,3,3,0.70,40,60,8|9|10,90,طمييه|طينية,egypt,0
+Pak Choi,باك تشوي,Brassica rapa subsp. chinensis,خضروات,brassica,annual,2,3,30,3,3,0.70,30,45,8|9|10,60,طمييه|طينية,egypt,0
+Broccoli Rabe,بروكلي رابي,Brassica rapa var. perviridis,خضروات,brassica,annual,2,3,30,3,3,0.70,30,45,8|9|10,70,طمييه|طينية,egypt,0
+Wasabi,واسابي,Eutrema japonicum,خضروات,brassica,perennial,3,4,28,4,3,0.70,30,45,9|10,150,طينية|طمييه نيلية,egypt,0
+Turnip,لفت,Brassica rapa,خضروات,root,biennial,2,4,30,2,2,0.60,20,35,9|10|11,70,طمييه|رملية|طينية,egypt,0
+Rutabaga,لفت سويدي,Brassica napus subsp. rapifera,خضروات,root,biennial,2,4,28,2,2,0.60,25,40,9|10,90,طمييه|طينية,egypt,0
+Radish,فجل,Raphanus sativus,خضروات,root,annual,1,4,32,2,2,0.55,10,25,9|10|11|12|1|2|3,45,طمييه|رملية|ملحية,egypt,0
+Horseradish,فجل بري,Armoracia rusticana,خضروات,root,perennial,2,10,30,2,2,0.60,40,60,9|10,180,طمييه|طينية,egypt,0
+Carrot,جزر,Daucus carota,خضروات,root,biennial,2,5,30,3,2,0.60,8,25,8|9|10|11,90,طمييه|رملية|طمييه نيلية,egypt,0
+Parsnip,جزر أبيض,Pastinaca sativa,خضروات,root,biennial,2,3,28,2,2,0.60,12,30,9|10,110,طمييه|طينية,egypt,0
+Beetroot,بنجر,Beta vulgaris,خضروات,root,biennial,2,5,32,3,2,0.60,12,30,8|9|10,80,طمييه|طينية|ملحية,egypt,0
+Sugar Beet,بنجر سكري,Beta vulgaris subsp. vulgaris,خضروات,root,biennial,3,5,32,2,2,0.70,20,40,9|10,180,طمييه|رملية,egypt,0
+Celeriac,كرفس الدرعية,Apium graveolens var. rapaceum,خضروات,root,biennial,2,5,28,2,2,0.60,25,40,8|9|10,140,طمييه|طينية,egypt,0
+Salsify,سالفسي,Tragopogon porrifolius,خضروات,root,biennial,2,5,28,2,2,0.60,15,30,9|10,120,طمييه|رملية,egypt,0
+Onion,بصل,Allium cepa,خضروات,bulb,biennial,2,5,32,3,2,0.70,10,25,9|10|11|12|1,120,طمييه|رملية|طينية,egypt,0
+Shallot,شالوت,Allium cepa var. aggregatum,خضروات,bulb,biennial,2,5,32,3,2,0.70,10,25,9|10|11,110,طمييه|رملية,egypt,0
+Garlic,ثوم,Allium sativum,خضروات,bulb,annual,2,2,32,3,2,0.70,12,25,9|10|11,150,طمييه|رملية|طينية,egypt,0
+Leek,كراث,Allium ampeloprasum var. porrum,خضروات,bulb,biennial,2,3,30,3,2,0.70,12,30,8|9|10,150,طمييه|طينية,egypt,0
+Spring Onion,بصل أخضر,Allium fistulosum,خضروات,bulb,perennial,1,3,32,3,2,0.60,8,20,9|10|11|12|1|2|3,60,طمييه|رملية,egypt,0
+Chives,ثوم معمر,Allium schoenoprasum,خضروات,herb,perennial,2,10,30,3,3,0.60,20,30,9|10,90,طمييه|طينية,egypt,0
+Potato,بطاطس,Solanum tuberosum,خضروات,tuber,annual,2,7,30,3,3,0.75,35,70,10|11|12|1,110,رملية|طمييه|رملية صحراوية,egypt,0
+Sweet Potato,بطاطا حلوة,Ipomoea batatas,خضروات,tuber,perennial,2,15,42,3,2,0.70,40,90,3|4|5,120,رملية|رملية ساحلية|طمييه,egypt,0
+Cassava,كاسافا,Manihot esculenta,خضروات,tuber,perennial,3,18,42,2,3,0.75,90,120,4|5,270,رملية|رملية صحراوية,egypt,0
+Taro,تارو,Colocasia esculenta,خضروات,tuber,perennial,3,18,42,3,3,0.75,60,100,4|5,200,طينية|طينية ساحلية,egypt,1
+Yam,اليام,Dioscorea alata,خضروات,tuber,perennial,2,18,42,3,3,0.75,60,100,4|5,200,رملية|طينية ساحلية,egypt,1
+Jerusalem Artichoke,خرفوف ميداني,Helianthus tuberosus,خضروات,tuber,perennial,2,6,35,3,2,0.70,50,90,9|10,150,طمييه|رملية,egypt,0
+Globe Artichoke,خرفوف,Cynara cardunculus var. scolymus,خضروات,leafy,perennial,2,8,32,4,2,0.70,80,120,8|9|10,150,طمييه|رملية|طينية,egypt,0
+Cardoon,كردوون,Cynara cardunculus,خضروات,leafy,perennial,2,8,35,3,2,0.70,80,120,9|10,0,طمييه|رملية,egypt,0
+Tomato,طماطم,Solanum lycopersicum,خضروات,fruiting,annual,3,12,42,4,3,1.00,50,100,2|3|4,90,طمييه|طمييه نيلية|طينية,egypt,0
+Cherry Tomato,طماطم كرزي,Solanum lycopersicum var. cerasiforme,خضروات,fruiting,annual,3,12,42,4,3,1.00,50,100,2|3|4,80,طمييه|طينية,egypt,0
+Eggplant,باذنجان,Solanum melongena,خضروات,fruiting,annual,3,18,45,3,3,0.95,50,90,3|4,100,طمييه|طينية|رملية,egypt,0
+Sweet Pepper,فلفل حلو,Capsicum annuum,خضروات,fruiting,annual,3,18,40,4,3,0.95,40,75,2|3|4,110,طمييه|طمييه نيلية|طينية,egypt,0
+Chili Pepper,فلفل حار,Capsicum frutescens,خضروات,fruiting,annual,3,18,42,3,3,0.90,35,60,2|3|4,110,طمييه|طينية|رملية,egypt,0
+Habanero Pepper,فلفل هابانيرو,Capsicum chinense,خضروات,fruiting,annual,3,18,42,3,3,0.90,35,60,2|3|4,120,طمييه|طينية,egypt,0
+Okra,بامية,Abelmoschus esculentus,خضروات,fruiting,annual,2,20,45,3,2,0.80,40,70,3|4|5,70,طمييه|رملية|طمييه نهرية,egypt,0
+Pepino,بيبينو,Solanum muricatum,خضروات,fruiting,annual,2,12,35,3,2,0.85,40,70,3|4,110,طمييه|رملية,egypt,0
+Physalis,فيساليس,Physalis philadelphica,خضروات,fruiting,annual,2,8,35,2,2,0.75,60,90,3|4,110,طمييه|رملية,egypt,0
+Tobacco,تبغ,Nicotiana tabacum,خضروات,fruiting,annual,2,15,40,2,2,0.85,45,80,3|4,120,رملية|طمييه,egypt,0
+Cucumber,خيار,Cucumis sativus,خضروات,cucurbit,annual,3,15,40,3,3,0.95,40,80,2|3|4,65,طمييه|طمييه نهرية|طينية,egypt,0
+Gherkin,خيار صغير,Cucumis anguria,خضروات,cucurbit,annual,3,18,40,3,3,0.90,40,80,3|4,70,طمييه|طينية,egypt,0
+Melon,بطيخ,Cucumis melo,خضروات,cucurbit,annual,3,20,45,4,3,0.90,60,100,3|4,90,رملية|طمييه|رملية ساحلية,egypt,0
+Watermelon,شمام,Citrullus lanatus,خضروات,cucurbit,annual,3,20,45,4,3,0.85,80,120,3|4,90,رملية|رملية صحراوية|طمييه,egypt,0
+Zucchini,كوسة,Cucurbita pepo,خضروات,cucurbit,annual,3,15,40,3,3,0.85,80,120,3|4,60,طمييه|طينية,egypt,0
+Hubbard Squash,قرع مجوف,Cucurbita maxima,خضروات,cucurbit,annual,3,18,40,3,3,0.85,100,150,4|5,110,طمييه|طينية,egypt,0
+Pumpkin,قرع عسلي,Cucurbita moschata,خضروات,cucurbit,annual,3,18,42,3,3,0.85,100,150,4|5,110,طمييه|طينية,egypt,0
+Bottle Gourd,قرع زجاجة,Lagenaria siceraria,خضروات,cucurbit,annual,3,18,42,3,3,0.85,80,120,3|4,100,طمييه|طينية ساحلية,egypt,0
+Bitter Gourd,قرع مر,Momordica charantia,خضروات,cucurbit,annual,3,20,45,3,3,0.85,60,100,3|4,90,طمييه|رملية,egypt,0
+Luffa,لوفا,Luffa aegyptiaca,خضروات,cucurbit,annual,3,18,42,3,3,0.90,60,100,3|4,90,طمييه|طينية,egypt,0
+Ridge Gourd,لوفا مسننة,Luffa acutangula,خضروات,cucurbit,annual,3,18,42,3,3,0.90,60,100,3|4,90,طمييه|طينية,egypt,0
+Snake Gourd,قرع الأفعى,Trichosanthes dioica,خضروات,cucurbit,annual,3,18,42,3,3,0.90,60,100,3|4,90,طمييه|طينية,egypt,0
+Chayote,شايوت,Sechium edule,خضروات,cucurbit,perennial,3,15,38,3,3,0.85,100,150,3|4,120,طمييه|طينية,egypt,0
+Green Bean,فاصوليا خضراء,Phaseolus vulgaris,خضروات,legume,annual,2,12,35,3,2,0.80,15,40,2|3|9,70,طمييه|رملية|طمييه نهرية,egypt,0
+Lima Bean,فاصوليا فاخية,Phaseolus lunatus,خضروات,legume,annual,2,14,35,2,2,0.75,20,50,3|9,90,طمييه|رملية,egypt,0
+Broad Bean,فول,Vicia faba,خضروات,legume,annual,3,5,28,2,2,0.70,20,45,9|10|11,100,طمييه|طينية|ملحية,egypt,0
+Cowpea,لوبيا,Vigna unguiculata,خضروات,legume,annual,2,15,42,2,2,0.75,20,45,3|4|7,80,رملية|طمييه|طمييه نهرية,egypt,0
+Yardlong Bean,لوبيا طويلة,Vigna unguiculata subsp. sesquipedalis,خضروات,legume,annual,2,18,40,3,2,0.75,20,45,3|4,85,رملية|طمييه,egypt,0
+Pigeon Pea,حمص هندي,Cajanus cajan,خضروات,legume,perennial,2,18,42,3,2,0.75,50,100,4|5,150,رملية|طمييه,egypt,0
+Chickpea,حمص,Cicer arietinum,خضروات,legume,annual,2,8,35,2,2,0.70,15,40,10|11,110,رملية|طمييه|طينية,egypt,0
+Lentil,عدس,Lens culinaris,خضروات,legume,annual,2,5,32,2,2,0.65,8,25,10|11|12,100,رملية|طمييه|طينية,egypt,0
+Pea,بسلة,Pisum sativum,خضروات,legume,annual,2,5,28,3,2,0.70,15,40,9|10|11,80,طمييه|رملية|طينية,egypt,0
+Winged Bean,فاصوليا مطيار,Psophocarpus tetragonolobus,خضروات,legume,annual,2,18,38,3,2,0.75,30,60,4|5,120,طمييه|رملية,egypt,0
+Lablab,لبلة,Lablab purpureus,خضروات,legume,annual,2,15,40,3,2,0.75,30,60,4|5,120,طمييه|طينية,egypt,0
+Mung Bean,ماش,Vigna radiata,خضروات,legume,annual,2,18,40,2,2,0.70,10,30,3|4|7,75,رملية|طمييه,egypt,0
+Velvet Bean,فاصوليا مخملية,Mucuna pruriens,خضروات,legume,annual,2,18,40,2,2,0.75,30,60,4|5,120,طمييه|رملية,egypt,0
+Soybean,صويا,Glycine max,خضروات,legume,annual,3,15,40,2,3,0.80,15,40,4|5,110,رملية|طمييه,egypt,0
+Peanut,فول سوداني,Arachis hypogaea,خضروات,legume,annual,2,18,42,3,2,0.75,25,60,4|5,120,رملية|رملية صحراوية,egypt,0
+Celery,كرفس,Apium graveolens,خضروات,leafy,biennial,3,10,30,3,3,0.70,25,40,8|9|10,120,طمييه|طمييه نيلية|طينية,egypt,0
+Parsley,بقدونس,Petroselinum crispum,خضروات,herb,perennial,1,5,32,3,2,0.50,20,35,8|9|10|11,70,طمييه|طمييه نيلية,egypt,0
+Dill,شبت,Anethum graveolens,خضروات,herb,annual,1,5,32,3,2,0.50,20,35,9|10,60,طمييه|رملية,egypt,0
+Coriander,كزبرة,Coriandrum sativum,خضروات,herb,annual,1,8,35,3,2,0.50,15,30,8|9|10|11|3|4,55,طمييه|رملية|طمييه نيلية,egypt,0
+Thyme,زعتر,Thymus vulgaris,خضروات,herb,perennial,2,10,35,3,3,0.55,25,40,9|10,90,رملية|صخرية جيرية|طمييه,egypt,0
+Marjoram,مردقوش,Origanum majorana,خضروات,herb,perennial,2,8,35,3,3,0.55,25,40,9|10,90,رملية|طمييه,egypt,0
+Summer Savory,فصوص,Satureja hortensis,خضروات,herb,annual,2,8,35,3,3,0.55,25,40,9|10,80,رملية|طمييه,egypt,0
+Lemon Balm,ميليسا,Melissa officinalis,خضروات,herb,perennial,2,10,32,3,2,0.55,30,45,9|10,70,طمييه|طينية,egypt,0
+Tarragon,طرنار,Artemisia dracunculus,خضروات,herb,perennial,1,8,35,3,2,0.50,40,60,9|10,0,رملية|طمييه,egypt,0
+Borage,بوراجو,Borago officinalis,خضروات,herb,annual,1,3,30,3,2,0.50,40,60,9|10,60,رملية|طمييه,egypt,0
+Stevia,ستيفيا,Stevia rebaudiana,خضروات,herb,perennial,1,10,40,3,2,0.50,30,45,3|4,90,طمييه|رملية,egypt,0
+Lemon Verbena,لويزة ليمونية,Aloysia citrodora,خضروات,herb,perennial,2,10,40,4,2,0.55,60,90,3|4,120,رملية|طمييه,egypt,0
+Lemongrass,عشب الليمون,Cymbopogon citratus,خضروات,herb,perennial,2,12,40,4,2,0.55,60,90,3|4,0,طمييه|رملية ساحلية,egypt,0
+Epazote,أفسنتين,Dysphania ambrosioides,خضروات,herb,annual,1,12,42,2,2,0.50,30,45,3|4,60,رملية|طمييه,egypt,0
+Ginger,زنجبيل,Zingiber officinale,خضروات,spice,perennial,3,18,40,3,3,0.80,30,60,3|4,240,طمييه|رملية ساحلية,egypt,0
+Turmeric,كركم,Curcuma longa,خضروات,spice,perennial,3,18,42,3,3,0.80,40,70,3|4,280,طمييه|طينية ساحلية,egypt,0
+Cardamom,هيل,Elettaria cardamomum,خضروات,spice,perennial,3,15,38,4,3,0.85,40,75,4|5,300,طمييه|رملية ساحلية,egypt,0
+Cinnamon,قرفة,Cinnamomum verum,خضروات,spice,perennial,2,12,38,4,2,0.75,200,300,4|5,0,طمييه|رملية ساحلية,egypt,0
+Black Pepper,فلفل أسود,Piper nigrum,خضروات,spice,perennial,3,15,35,3,3,0.85,40,60,4|5,0,طمييه|رملية ساحلية,egypt,0
+Fennel,شمر,Foeniculum vulgare,خضروات,herb,perennial,2,5,35,3,2,0.55,25,45,9|10,90,طمييه|رملية|طينية,egypt,0
+Caraway,كراوية,Carum carvi,خضروات,spice,annual,2,5,32,3,2,0.55,20,35,9|10,120,طمييه|رملية,egypt,0
+Cumin,كمون,Cuminum cyminum,خضروات,spice,annual,2,8,35,3,2,0.55,15,30,3|4,120,رملية|طمييه,egypt,0
+Fenugreek,حلبة,Trigonella foenum-graecum,خضروات,spice,annual,2,8,35,2,2,0.55,15,30,9|10,90,طمييه|رملية,egypt,0
+Anise,يانسون,Pimpinella anisum,خضروات,spice,annual,2,8,32,2,2,0.55,20,35,10|11,120,طمييه|رملية,egypt,0
+Ajwain,أذريون,Trachyspermum ammi,خضروات,spice,annual,2,10,35,2,2,0.55,20,35,10|11,120,طمييه|رملية,egypt,0
+Nigella,حبة البركة,Nigella sativa,خضروات,spice,annual,2,10,35,2,2,0.55,20,35,10|11,110,طمييه|رملية,egypt,0
+Saffron,زعفران,Crocus sativus,خضروات,spice,perennial,2,0,30,5,1,0.60,10,20,10|11,0,رملية|طمييه,egypt,0
+Caper,كبار,Capparis spinosa,خضروات,spice,perennial,2,8,38,3,2,0.60,80,120,0,0,رملية|صخرية جيرية,egypt,0
+Water Spinach,سبانخ الماء,Ipomoea aquatica,خضروات,leafy,annual,3,18,40,3,3,0.75,20,35,3|4,60,طينية|طينية ساحلية|طمييه نيلية,egypt,0
+Edible Hibiscus,كركديه,Hibiscus sabdariffa,خضروات,herb,annual,2,15,42,4,2,0.70,60,90,4|5,150,رملية|طمييه,egypt,0
+Water Chestnut,لوز الماء,Eleocharis dulcis,خضروات,root,perennial,2,15,35,3,3,0.75,25,40,3|4|5,120,طينية|طينية ساحلية,egypt,1
+Oca,أوكا,Oxalis tuberosa,خضروات,root,annual,2,8,30,3,2,0.60,25,40,9|10,120,طمييه|رملية,egypt,0
+Asparagus,هليون,Asparagus officinalis,خضروات,leafy,perennial,2,5,35,3,2,0.65,30,60,9|10,0,رملية|طمييه,egypt,0
+Rhubarb,روبار,Rheum rhabarbarum,خضروات,leafy,perennial,2,10,30,3,2,0.70,60,100,9|10,0,طمييه,egypt,0
+Sugarcane,قصب سكر,Saccharum officinarum,خضروات,cereal,perennial,3,18,42,3,3,1.00,100,150,3|4,0,طينية|طمييه نيلية,egypt,0
+Bamboo Shoot,خيزران,Phyllostachys edulis,خضروات,leafy,perennial,2,5,35,3,2,0.65,40,80,0,0,طمييه|رملية,egypt,0
+Button Mushroom,عيش الغراب,Agaricus bisporus,خضروات,mushroom,annual,3,10,25,3,3,0.60,10,15,0,90,طمييه,egypt,0
+Oyster Mushroom,فطر المحار,Pleurotus ostreatus,خضروات,mushroom,annual,2,5,28,3,2,0.55,10,15,0,80,طمييه,egypt,0
+Orange,برتقال,Citrus sinensis,فواكه,citrus,perennial,2,10,42,4,3,0.75,400,500,3|4|9,0,طمييه|رملية|جيرية,egypt,0
+Mandarin,يوسفي,Citrus reticulata,فواكه,citrus,perennial,2,10,40,4,2,0.75,350,450,3|4|9,0,طمييه|رملية,egypt,0
+Grapefruit,جريب فروت,Citrus paradisi,فواكه,citrus,perennial,2,12,42,3,2,0.75,450,550,3|4|9,0,طمييه|رملية,egypt,0
+Lime,جير,Citrus aurantiifolia,فواكه,citrus,perennial,1,12,40,3,2,0.70,350,450,3|4|9,0,طمييه|رملية,egypt,0
+Kaffir Lime,جير كافير,Citrus × microcarpa,فواكه,citrus,perennial,1,12,40,3,2,0.70,300,400,3|4|9,0,طمييه|رملية,egypt,0
+Pummelo,جريب فروت كبير,Citrus maxima,فواكه,citrus,perennial,3,14,42,3,3,0.80,500,600,3|4|9,0,طمييه|رملية,egypt,0
+Citron,أترج,Citrus medica,فواكه,citrus,perennial,2,10,40,3,2,0.70,350,450,9|10,0,طمييه|رملية,egypt,0
+Bergamot,برغموت,Citrus bergamia,فواكه,citrus,perennial,2,10,38,3,2,0.70,350,450,9|10,0,طمييه|رملية,egypt,0
+Grape,عنب,Vitis vinifera,فواكه,vine_fruit,perennial,2,8,40,4,2,0.70,150,250,1|2|3|10|11,0,طمييه|رملية|جيرية,egypt,0
+Peach,خوخ,Prunus persica,فواكه,tree_fruit,perennial,2,5,40,4,2,0.70,400,500,1|2|3|10|11,0,طمييه|رملية,egypt,0
+Nectarine,نكتارين,Prunus persica var. nucipersea,فواكه,tree_fruit,perennial,2,5,40,4,2,0.70,400,500,1|2|3|10|11,0,طمييه|رملية,egypt,0
+Plum,برقوق,Prunus domestica,فواكه,tree_fruit,perennial,2,5,38,3,2,0.70,400,500,1|2|3|10|11,0,طمييه|رملية,egypt,0
+Japanese Plum,برقوق ياباني,Prunus salicina,فواكه,tree_fruit,perennial,2,5,40,3,2,0.70,400,500,1|2|3|10|11,0,طمييه|رملية,egypt,0
+Apricot,مشمش,Prunus armeniaca,فواكه,tree_fruit,perennial,2,4,38,4,2,0.70,400,500,1|2|3|10|11,0,طمييه|رملية,egypt,0
+Cherry,كرز,Prunus avium,فواكه,tree_fruit,perennial,2,4,35,4,2,0.70,500,600,1|2|3|10|11,0,طمييه|رملية,egypt,0
+Sour Cherry,كرز حامض,Prunus cerasus,فواكه,tree_fruit,perennial,2,2,35,3,2,0.70,400,500,1|2|3|10|11,0,طمييه|رملية,egypt,0
+Almond,لوز,Prunus dulcis,فواكه,tree_fruit,perennial,1,6,38,4,1,0.60,400,500,10|11,0,رملية|جيرية|صخرية جيرية,egypt,0
+Loquat,كتف,Eriobotrya japonica,فواكه,tree_fruit,perennial,2,5,40,4,2,0.70,400,500,9|10|11,0,طمييه|رملية,egypt,0
+Apple,تفاح,Malus domestica,فواكه,tree_fruit,perennial,2,2,35,4,2,0.70,400,500,10|11|1|2,0,طمييه|رملية,egypt,0
+Pear,كمثرى,Pyrus communis,فواكه,tree_fruit,perennial,2,2,35,4,2,0.70,400,500,10|11|1|2,0,طمييه|رملية,egypt,0
+Quince,سفرجل,Cydonia oblonga,فواكه,tree_fruit,perennial,2,4,35,3,2,0.70,400,500,10|11,0,طمييه|طينية,egypt,0
+Mulberry,توت,Morus alba,فواكه,tree_fruit,perennial,2,4,40,3,3,0.70,300,400,1|2|3|10|11,0,طمييه|طينية|طمييه نهرية,egypt,0
+Black Mulberry,توت أسود,Morus nigra,فواكه,tree_fruit,perennial,2,4,40,3,3,0.70,300,400,1|2|3|10|11,0,طمييه|طينية,egypt,0
+Red Mulberry,توت أحمر,Morus rubra,فواكه,tree_fruit,perennial,2,4,40,3,3,0.70,300,400,1|2|3|10|11,0,طمييه|طينية,egypt,0
+Strawberry,فراولة,Fragaria × ananassa,فواكه,berry,perennial,2,5,32,5,2,0.65,30,60,9|10,0,طمييه|رملية|طمييه نهرية,egypt,0
+Wild Strawberry,فراولة برية,Fragaria vesca,فواكه,berry,perennial,1,5,30,3,2,0.60,25,50,9|10,0,طمييه|رملية,egypt,0
+Raspberry,توت العليق,Rubus idaeus,فواكه,berry,perennial,2,5,32,4,2,0.60,40,80,9|10,0,طمييه|رملية,egypt,0
+Blackberry,عليق أسود,Rubus fruticosus,فواكه,berry,perennial,2,5,32,4,2,0.65,50,100,9|10,0,طمييه|رملية,egypt,0
+Cloudberry,توت السحاب,Rubus chamaemorus,فواكه,berry,perennial,1,2,28,3,2,0.55,30,60,9|10,0,طمييه|رملية,egypt,0
+Red Currant,كشمش أحمر,Ribes rubrum,فواكه,berry,perennial,2,4,32,3,2,0.60,150,250,10|11,0,طمييه|رملية,egypt,0
+Black Currant,كشمش أسود,Ribes nigrum,فواكه,berry,perennial,2,4,30,3,2,0.60,150,250,10|11,0,طمييه|رملية,egypt,0
+Gooseberry,غوس بيري,Ribes uva-crispa,فواكه,berry,perennial,2,4,30,3,2,0.60,150,250,10|11,0,طمييه|رملية,egypt,0
+Blueberry,توت أزرق,Vaccinium corymbosum,فواكه,berry,perennial,2,4,32,4,2,0.60,120,200,10|11,0,طمييه|,egypt,0
+Cranberry,كرانبيري,Vaccinium macrocarpon,فواكه,berry,perennial,2,4,30,3,2,0.60,100,180,10|11,0,رملية,egypt,0
+Kiwifruit,كيوي,Actinidia deliciosa,فواكه,vine_fruit,perennial,2,5,38,4,2,0.70,250,350,3|4|9|10,0,طمييه|رملية,egypt,0
+Passion Fruit,جوازة,Passiflora edulis,فواكه,vine_fruit,perennial,2,12,38,4,2,0.70,150,250,3|4|9,0,طمييه|رملية,egypt,0
+Banana,موز,Musa acuminata,فواكه,tropical,perennial,3,16,42,4,3,0.90,250,300,3|4,0,طمييه|طينية|طمييه نهرية,egypt,0
+Plantain,موزة هندية,Musa × paradisiaca,فواكه,tropical,perennial,3,16,42,3,3,0.90,250,300,3|4,0,طمييه|طينية,egypt,0
+Mango,مانجو,Mangifera indica,فواكه,tropical,perennial,3,12,45,5,3,0.80,500,600,3|4,0,رملية|رملية ساحلية|طمييه,egypt,0
+Papaya,بابايا,Carica papaya,فواكه,tropical,perennial,3,18,42,4,3,0.85,300,400,3|4|5,0,رملية|رملية ساحلية|طمييه,egypt,0
+Guava,جوافة,Psidium guajava,فواكه,tropical,perennial,2,12,42,4,2,0.75,300,400,3|4|9,0,رملية|طمييه|طينية,egypt,0
+Cherry Guava,جوافة كرزية,Psidium cattleianum,فواكه,tropical,perennial,2,12,40,3,2,0.70,250,350,3|4|9,0,رملية|طمييه,egypt,0
+Avocado,أفوكادو,Persea americana,فواكه,tropical,perennial,2,12,40,4,3,0.80,500,600,3|4,0,رملية|طمييه|صخرية جيرية,egypt,0
+Lychee,ليتشي,Litchi chinensis,فواكه,tropical,perennial,2,14,40,4,2,0.75,400,500,3|4|9,0,طمييه|رملية ساحلية,egypt,0
+Longan,لونغان,Dimocarpus longan,فواكه,tropical,perennial,2,14,40,3,2,0.75,400,500,3|4|9,0,طمييه|رملية,egypt,0
+Rambutan,رامبوتان,Nephelium lappaceum,فواكه,tropical,perennial,3,16,40,4,2,0.80,400,500,3|4,0,طمييه|رملية ساحلية,egypt,0
+Mangosteen,مانجوستين,Garcinia mangostana,فواكه,tropical,perennial,3,18,40,4,2,0.80,400,500,4|5,0,طمييه|رملية ساحلية,egypt,0
+Jackfruit,جاك فروت,Artocarpus heterophyllus,فواكه,tropical,perennial,3,18,42,4,3,0.85,500,600,4|5,0,طمييه|رملية ساحلية,egypt,0
+Breadfruit,شجرة الخبز,Artocarpus altilis,فواكه,tropical,perennial,3,18,42,4,3,0.85,500,600,4|5,0,طمييه|رملية ساحلية,egypt,0
+Cashew,كاجو,Anacardium occidentale,فواكه,tropical,perennial,2,16,42,4,2,0.75,500,600,3|4,0,رملية|طمييه|صخرية,egypt,0
+Custard Apple,قشطة,Annona squamosa,فواكه,tropical,perennial,2,15,40,4,2,0.75,350,450,3|4|9,0,طمييه|رملية,egypt,0
+Sugar Apple,قشطة حلوة,Annona reticulata,فواكه,tropical,perennial,2,15,40,4,2,0.75,350,450,3|4|9,0,طمييه|رملية,egypt,0
+Cherimoya,شيريمولا,Annona cherimola,فواكه,tropical,perennial,2,15,40,4,2,0.75,350,450,3|4|9,0,طمييه|رملية,egypt,0
+Soursop,سورسوب,Annona muricata,فواكه,tropical,perennial,3,18,40,4,3,0.80,350,450,3|4|9,0,طمييه|رملية ساحلية,egypt,0
+Starfruit,كاري,Averrhoa carambola,فواكه,tropical,perennial,2,16,40,4,2,0.70,300,400,3|4|9,0,طمييه|رملية,egypt,0
+Wax Apple,جوافة شمعية,Syzygium samarangense,فواكه,tropical,perennial,3,16,40,4,2,0.80,350,450,3|4|9,0,طمييه|رملية ساحلية,egypt,0
+Water Apple,جوافة مائية,Syzygium aqueum,فواكه,tropical,perennial,2,16,40,3,2,0.75,350,450,3|4|9,0,طمييه|رملية,egypt,0
+Rose Apple,جوافة وردية,Syzygium jambos,فواكه,tropical,perennial,2,16,40,4,2,0.75,350,450,3|4|9,0,طمييه|رملية ساحلية,egypt,0
+Jaboticaba,يابوتيكابا,Myrciaria floribunda,فواكه,tropical,perennial,2,16,40,4,2,0.75,400,500,3|4|9,0,طمييه|رملية ساحلية,egypt,0
+Feijoa,فيجوآ,Acca sellowiana,فواكه,tropical,perennial,2,6,35,4,2,0.70,350,450,9|10|11,0,طمييه|رملية,egypt,0
+Dragon Fruit,دراجون فروت,Selenicereus undatus,فواكه,tropical,perennial,2,15,42,5,2,0.60,250,300,3|4,0,رملية|صخرية جيرية|طمييه,egypt,0
+Noni,نوني,Morinda citrifolia,فواكه,tropical,perennial,2,18,38,3,2,0.75,350,450,3|4,0,طمييه|رملية ساحلية,egypt,0
+Karonda,كرونة,Carissa carandas,فواكه,tropical,perennial,1,15,40,3,2,0.65,250,350,3|4|9,0,رملية|طمييه,egypt,0
+Amla,أملا,Phyllanthus emblica,فواكه,tropical,perennial,2,14,40,3,2,0.70,400,500,3|4|9,0,طمييه|رملية,egypt,0
+Jamun,جامون,Syzygium cumini,فواكه,tropical,perennial,2,16,42,4,2,0.75,400,500,3|4|9,0,طمييه|رملية ساحلية,egypt,0
+Mamey Sapote,مامي سابوتي,Pouteria sapota,فواكه,tropical,perennial,3,18,40,4,2,0.80,400,500,3|4,0,طمييه|رملية,egypt,0
+Sapodilla,سابوتيلا,Manilkara zapota,فواكه,tropical,perennial,2,16,40,4,2,0.75,350,450,3|4|9,0,طمييه|رملية,egypt,0
+Macadamia,مكاداميا,Macadamia integrifolia,فواكه,tropical,perennial,2,12,35,4,2,0.75,400,500,3|4|9,0,رملية|طمييه,egypt,0
+Brazil Nut,الجوز البرازيلي,Bertholletia excelsa,فواكه,tropical,perennial,3,18,38,4,3,0.80,500,600,4|5,0,طمييه|رملية ساحلية,egypt,0
+Cacao,كاكاو,Theobroma cacao,فواكه,tropical,perennial,3,18,35,4,3,0.85,300,400,0,0,طمييه|رملية ساحلية,egypt,0
+Coffee,بن,Coffea arabica,فواكه,tropical,perennial,3,15,32,4,3,0.85,250,300,3|4|5,0,طمييه|رملية ساحلية,egypt,0
+Pineapple,أناناس,Ananas comosus,فواكه,tropical,perennial,2,18,40,5,2,0.70,40,60,3|4,0,رملية|رملية ساحلية,egypt,0
+Pistachio,فستق,Pistacia vera,فواكه,tree_fruit,perennial,1,6,40,4,1,0.60,400,500,10|11,0,رملية|جيرية|صخرية جيرية,egypt,0
+Walnut,جوز,Juglans regia,فواكه,tree_fruit,perennial,2,4,38,4,2,0.70,500,600,10|11,0,رملية|طمييه,egypt,0
+Pecan,بيكان,Carya illinoinensis,فواكه,tree_fruit,perennial,2,4,38,4,2,0.70,600,700,10|11,0,رملية|طمييه,egypt,0
+Hazelnut,بندق,Corylus avellana,فواكه,tree_fruit,perennial,2,4,35,4,2,0.70,400,500,10|11,0,رملية|طمييه,egypt,0
+Chestnut,كستناء,Castanea sativa,فواكه,tree_fruit,perennial,2,4,35,4,2,0.70,500,600,10|11,0,رملية|طمييه|جيرية,egypt,0
+Jujube,الجوجب,Ziziphus jujuba,فواكه,tree_fruit,perennial,1,10,42,3,2,0.65,400,500,3|4|9|10,0,رملية|صخرية جيرية|طمييه,egypt,0
+Bael,بيو,Aegle marmelos,فواكه,tree_fruit,perennial,2,12,42,3,2,0.70,400,500,3|4|9,0,طمييه|رملية,egypt,0
+Wood Apple,فاكهة الخشب,Feronia limonia,فواكه,tree_fruit,perennial,2,14,40,3,2,0.70,400,500,3|4|9,0,طمييه|رملية,egypt,0
+Coconut,جوز الهند,Cocos nucifera,فواكه,palm,perennial,3,18,40,5,3,0.90,800,900,3|4,0,رملية ساحلية|رملية|طمييه نهرية,gulf,0
+Oil Palm,نخيل الزيت,Elaeis guineensis,فواكه,palm,perennial,3,18,40,4,3,0.90,800,900,4|5,0,رملية ساحلية|طمييه,egypt,0

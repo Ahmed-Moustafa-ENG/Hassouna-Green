@@ -10,3 +10,8 @@ llm_cache.json
 hassouna_feedback.json
 isef_feedback.json
 *.tmp
+
+# Re-downloadable caches of the machine-learning build
+ml/data/occurrence_cache/
+ml/data/worldclim/
+ml/data/build_log.txt

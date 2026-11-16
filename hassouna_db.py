@@ -10,8 +10,13 @@ English (``*_en``):
 * soil types, their short trait descriptions, location soil options and
   each region's default soil
 * soil-compatibility rules used by the recommendation engine
+* each soil's physical character (family, salinity, drainage) and the
+  planning rules that follow from it
 * the plant catalog and each plant's suitable soils
-* plant-use categories with provisional landscape Kc planning values
+* plant-use categories with provisional landscape Kc planning values, and the
+  group (ornamental, vegetable, fruit) each of them belongs to
+* the farming details of the edible crops: crop type, life cycle, planting
+  spacing, sowing months, days to harvest and the crop's own Kc
 * each plant's scientific name and taxon id (``plant_taxa``) and each
   location's WorldClim climate normals (``location_climate``), used by the
   machine-learning judge in ``ml_judge.py``
@@ -134,7 +139,11 @@ CREATE TABLE IF NOT EXISTS plant_use_categories (
     name_en     TEXT NOT NULL UNIQUE CHECK (length(trim(name_en)) > 0),
     planning_kc REAL NOT NULL CHECK (planning_kc > 0 AND planning_kc <= 1.5),
     kc_note_ar  TEXT NOT NULL DEFAULT '',
-    kc_note_en  TEXT NOT NULL DEFAULT ''
+    kc_note_en  TEXT NOT NULL DEFAULT '',
+    -- What the use category belongs to in the plant filter: ornamental,
+    -- vegetable or fruit.
+    group_ar    TEXT NOT NULL DEFAULT 'ornamental'
+        CHECK (group_ar IN ('ornamental', 'vegetable', 'fruit'))
 );
 
 -- water_class is the app's ordinal catalog filter (1 = low, 3 = high); it is
@@ -192,10 +201,79 @@ CREATE TABLE IF NOT EXISTS location_climate (
     source      TEXT NOT NULL
 );
 
+-- Physical character of each soil and the planning rules that follow from it.
+-- This table is optional: a database written before it existed still loads,
+-- and unknown soils then get the neutral default rules.
+CREATE TABLE IF NOT EXISTS soil_properties (
+    soil_name_ar  TEXT PRIMARY KEY REFERENCES soil_types(name_ar) ON UPDATE CASCADE ON DELETE CASCADE,
+    family        TEXT NOT NULL CHECK (family IN
+                    ('sandy','clay','rocky','gravel','calcareous','saline','alluvial','mixed')),
+    salinity      TEXT NOT NULL CHECK (salinity IN ('none','low','medium','high')),
+    drainage      TEXT NOT NULL CHECK (drainage IN ('fast','moderate','slow')),
+    image_penalty INTEGER NOT NULL DEFAULT 6 CHECK (image_penalty BETWEEN 0 AND 60),
+    needs_organic INTEGER NOT NULL DEFAULT 0 CHECK (needs_organic IN (0, 1)),
+    clay_like     INTEGER NOT NULL DEFAULT 0 CHECK (clay_like IN (0, 1))
+);
+
+-- Farming details of the edible plants: what kind of crop it is, how it is
+-- spaced, when it is sown and how long it takes to harvest. The crop
+-- coefficient here overrides the value of the plant's use category.
+CREATE TABLE IF NOT EXISTS crop_details (
+    plant_id       INTEGER PRIMARY KEY REFERENCES plants(id) ON DELETE CASCADE,
+    crop_type      TEXT NOT NULL CHECK (crop_type IN
+                    ('leafy','root','brassica','fruiting','cucurbit','legume','bulb','tuber',
+                     'herb','cereal','spice','citrus','tree_fruit','tropical','vine_fruit',
+                     'berry','palm','mushroom')),
+    lifecycle      TEXT NOT NULL CHECK (lifecycle IN ('annual','biennial','perennial')),
+    spacing_cm     REAL NOT NULL CHECK (spacing_cm > 0),
+    row_spacing_cm REAL NOT NULL CHECK (row_spacing_cm > 0),
+    sowing_months  TEXT NOT NULL DEFAULT '',   -- pipe-separated month numbers; empty = not sown
+    harvest_days   INTEGER NOT NULL DEFAULT 0,  -- days to first harvest; 0 = perennial
+    kc             REAL NOT NULL CHECK (kc > 0 AND kc <= 1.5),
+    -- 1 = the crop only grows in the soils it lists; 0 = it is grown in a bed
+    -- prepared for it and tolerates the other soils of the site.
+    soil_strict    INTEGER NOT NULL DEFAULT 0 CHECK (soil_strict IN (0, 1))
+);
+
 CREATE INDEX IF NOT EXISTS idx_locations_country ON locations(country_id, sort_order);
 CREATE INDEX IF NOT EXISTS idx_regions_location ON regions(location_id, sort_order);
 CREATE INDEX IF NOT EXISTS idx_plants_order ON plants(sort_order);
 """
+
+# Physical character of every soil, and the planning rules that follow from it.
+# These live in the database so the app never has to repeat a soil name:
+#   image_penalty - points subtracted in the image-based suitability proxy
+#                   (sandy and saline soils hold little water, so they need
+#                   more irrigation than the proxy assumes)
+#   needs_organic - 1 = the soil advice tells the user to add organic matter
+#   clay_like     - 1 = slow-draining clay-like soil, which raises the
+#                   sodium hazard when the irrigation water is saline
+SOIL_PROPERTIES_SEED = {
+    #  soil name (Arabic internal key): (family, salinity, drainage, image_penalty, needs_organic, clay_like)
+    "طمييه نهرية":        ("alluvial",    "none",    "moderate",  6, 0, 0),
+    "طمييه نيلية":       ("alluvial",    "low",     "moderate",  6, 0, 0),
+    "طمييه":             ("alluvial",    "low",     "moderate",  6, 0, 0),
+    "طينية":             ("clay",        "low",     "slow",      6, 1, 1),
+    "طينية نيلية":      ("clay",        "low",     "slow",      6, 1, 1),
+    "طينية ساحلية":     ("clay",        "medium",  "slow",     12, 1, 1),
+    "رملية":             ("sandy",       "none",    "fast",     18, 1, 0),
+    "رملية صحراوية":     ("sandy",       "low",     "fast",     18, 1, 0),
+    "رملية ساحلية":      ("sandy",       "medium",  "fast",     18, 1, 0),
+    "صخرية":             ("rocky",       "none",    "fast",     12, 1, 0),
+    "صخرية جيرية":       ("rocky",       "none",    "moderate", 12, 1, 0),
+    "صخرية جرانيتية":   ("rocky",       "none",    "fast",     12, 1, 0),
+    "حصوية":             ("gravel",      "none",    "fast",     12, 1, 0),
+    "حصوية جبلية":       ("gravel",      "none",    "fast",     12, 1, 0),
+    "جيرية":             ("calcareous",  "none",    "moderate", 12, 0, 0),
+    "كلسية":             ("calcareous",  "none",    "moderate", 12, 0, 0),
+    "ملحية":             ("saline",      "high",    "moderate", 18, 0, 0),
+    "ملحية ساحلية":      ("saline",      "high",    "moderate", 18, 0, 0),
+    "سبخية ملحية":       ("saline",      "high",    "fast",     18, 0, 0),
+    "شعابية مرجانية":    ("mixed",       "medium",  "fast",     12, 0, 0),
+    "رملية كلسية":       ("sandy",       "low",     "fast",     18, 1, 0),
+    "طينية واحات":       ("clay",        "medium",  "slow",     12, 1, 1),
+    "تربة عمرانية محسنة": ("alluvial",    "none",    "moderate",  6, 0, 0),
+}
 
 
 class DatabaseError(RuntimeError):
@@ -225,6 +303,31 @@ def create_schema(conn: sqlite3.Connection) -> None:
         "INSERT OR REPLACE INTO meta(key, value) VALUES ('schema_version', ?)",
         (str(SCHEMA_VERSION),),
     )
+    seed_soil_properties(conn)
+
+
+def seed_soil_properties(conn: sqlite3.Connection) -> int:
+    """Write the soil character rules, skipping soils the database does not have.
+
+    Safe to run on any database: rows for unknown soils are left out, and the
+    rules of the soils that do exist are refreshed.
+    """
+    known = {row["name_ar"] for row in conn.execute("SELECT name_ar FROM soil_types")}
+    written = 0
+    for soil, (family, salinity, drainage, penalty, organic, clay) in SOIL_PROPERTIES_SEED.items():
+        if soil not in known:
+            continue
+        conn.execute(
+            "INSERT INTO soil_properties(soil_name_ar, family, salinity, drainage, "
+            "image_penalty, needs_organic, clay_like) VALUES (?, ?, ?, ?, ?, ?, ?) "
+            "ON CONFLICT(soil_name_ar) DO UPDATE SET family = excluded.family, "
+            "salinity = excluded.salinity, drainage = excluded.drainage, "
+            "image_penalty = excluded.image_penalty, needs_organic = excluded.needs_organic, "
+            "clay_like = excluded.clay_like",
+            (soil, family, salinity, drainage, penalty, organic, clay),
+        )
+        written += 1
+    return written
 
 
 def connect(path: str | Path | None = None) -> sqlite3.Connection:
@@ -263,6 +366,75 @@ def _grouped(rows, key: str, value: str) -> dict:
     for row in rows:
         grouped.setdefault(row[key], []).append(row[value])
     return grouped
+
+
+def _table_columns(conn: sqlite3.Connection, table: str) -> set:
+    """Column names of a table, or an empty set when the table does not exist."""
+    try:
+        return {row["name"] for row in conn.execute(f"PRAGMA table_info({table})")}
+    except sqlite3.Error:
+        return set()
+
+
+def _load_soil_properties(conn: sqlite3.Connection) -> dict:
+    """Read the soil character rules from the optional ``soil_properties`` table.
+
+    A database written before that table existed has no rows, so every soil
+    then falls back to the neutral default rules in the app.
+    """
+    present = {
+        row["name"]
+        for row in conn.execute("SELECT name FROM sqlite_master WHERE type = 'table'")
+    }
+    if "soil_properties" not in present:
+        return {}
+    return {
+        row["soil_name_ar"]: {
+            "family": row["family"],
+            "salinity": row["salinity"],
+            "drainage": row["drainage"],
+            "image_penalty": int(row["image_penalty"]),
+            "needs_organic": bool(row["needs_organic"]),
+            "clay_like": bool(row["clay_like"]),
+        }
+        for row in conn.execute("SELECT * FROM soil_properties")
+    }
+
+
+def _load_crop_details(conn: sqlite3.Connection) -> dict:
+    """Read the farming details of the edible plants, keyed by plant id.
+
+    The ``crop_details`` table is optional, so a database written before the
+    edible catalog existed still loads and simply has no crop details.
+    """
+    present = {
+        row["name"]
+        for row in conn.execute("SELECT name FROM sqlite_master WHERE type = 'table'")
+    }
+    if "crop_details" not in present:
+        return {}
+    details = {}
+    for row in conn.execute("SELECT * FROM crop_details"):
+        months = [int(m) for m in (row["sowing_months"] or "").split("|") if m.strip()]
+        details[row["plant_id"]] = {
+            "crop_type": row["crop_type"],
+            "lifecycle": row["lifecycle"],
+            "spacing_cm": float(row["spacing_cm"]),
+            "row_spacing_cm": float(row["row_spacing_cm"]),
+            "sowing_months": sorted(m for m in months if 1 <= m <= 12),
+            "harvest_days": int(row["harvest_days"]),
+            "kc": float(row["kc"]),
+            "soil_strict": bool(row["soil_strict"]),
+        }
+    return details
+
+
+# Groups of the plant filter, used when an older database has no group_ar column.
+DEFAULT_USE_GROUPS = {
+    "خضروات": "vegetable",
+    "فواكه": "fruit",
+    "شجرة مثمرة": "fruit",
+}
 
 
 def load_reference_data(path: str | Path | None = None) -> dict:
@@ -370,9 +542,17 @@ def load_reference_data(path: str | Path | None = None) -> dict:
             }
             country_location_keys[country].append(row["name_ar"])
 
-        use_rows = conn.execute(
-            "SELECT name_ar, name_en, planning_kc FROM plant_use_categories ORDER BY name_ar"
-        ).fetchall()
+        use_columns = _table_columns(conn, "plant_use_categories")
+        use_query = "SELECT name_ar, name_en, planning_kc FROM plant_use_categories ORDER BY name_ar"
+        if "group_ar" in use_columns:
+            use_query = ("SELECT name_ar, name_en, planning_kc, group_ar "
+                         "FROM plant_use_categories ORDER BY name_ar")
+        use_rows = conn.execute(use_query).fetchall()
+        use_groups = {
+            row["name_ar"]: row["group_ar"] if "group_ar" in use_columns
+            else DEFAULT_USE_GROUPS.get(row["name_ar"], "ornamental")
+            for row in use_rows
+        }
 
         plant_soils = _grouped(
             conn.execute(
@@ -394,12 +574,14 @@ def load_reference_data(path: str | Path | None = None) -> dict:
         ).fetchall()
         if not plant_rows:
             raise DatabaseError("The plants table is empty.")
+        crop_details = _load_crop_details(conn)
         plants = []
         for row in plant_rows:
             soils = plant_soils.get(row["id"], [])
             if not soils:
                 raise DatabaseError(f"Plant '{row['name_en']}' has no soil entries.")
             taxon = taxa.get(row["id"])
+            crop = crop_details.get(row["id"], {})
             plants.append(
                 {
                     "name": row["name_ar"],
@@ -409,14 +591,25 @@ def load_reference_data(path: str | Path | None = None) -> dict:
                     "temp_min": row["temp_min_c"],
                     "temp_max": row["temp_max_c"],
                     "use": row["use_category_ar"],
+                    "group": use_groups.get(row["use_category_ar"], "ornamental"),
                     "beauty": row["beauty"],
                     "co2": row["co2_kg_year"],
                     "catalog": row["catalog"],
                     "scientific_name": taxon["scientific_name"] if taxon else "",
                     "taxon_source": taxon["taxon_source"] if taxon else "",
                     "taxon_key": taxon["taxon_key"] if taxon else None,
+                    "crop_type": crop.get("crop_type", ""),
+                    "lifecycle": crop.get("lifecycle", ""),
+                    "spacing_cm": crop.get("spacing_cm"),
+                    "row_spacing_cm": crop.get("row_spacing_cm"),
+                    "sowing_months": crop.get("sowing_months", []),
+                    "harvest_days": crop.get("harvest_days", 0),
+                    "crop_kc": crop.get("kc"),
+                    "soil_strict": crop.get("soil_strict", False),
                 }
             )
+
+        soil_properties = _load_soil_properties(conn)
 
     return {
         "locations": locations,
@@ -427,7 +620,9 @@ def load_reference_data(path: str | Path | None = None) -> dict:
         "soil_labels_en": {row["name_ar"]: row["name_en"] for row in soil_rows},
         "soil_traits": soil_traits,
         "soil_compatibility": soil_compatibility,
+        "soil_properties": soil_properties,
         "use_kc": {row["name_ar"]: float(row["planning_kc"]) for row in use_rows},
         "use_labels_en": {row["name_ar"]: row["name_en"] for row in use_rows},
+        "use_groups": use_groups,
         "plants": pd.DataFrame(plants),
     }

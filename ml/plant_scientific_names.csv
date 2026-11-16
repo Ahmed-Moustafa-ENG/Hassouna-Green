@@ -201,3 +201,228 @@ plant_id,name_en,scientific_name,note
 200,Blue Agave,Agave tequilana,
 201,Heat-Tolerant Zoysia Grass,Zoysia matrella,
 202,Desert Grass (native mix),,generic entry - no single taxon
+203,Lettuce,Lactuca sativa,edible catalog - خضروات
+204,Spinach,Spinacia oleracea,edible catalog - خضروات
+205,Arugula,Eruca vesicaria,edible catalog - خضروات
+206,Watercress,Nasturtium officinale,edible catalog - خضروات
+207,Tatsoi,Brassica rapa var. narinosa,edible catalog - خضروات
+208,Mustard Greens,Brassica juncea,edible catalog - خضروات
+209,Swiss Chard,Beta vulgaris var. cicla,edible catalog - خضروات
+210,Garden Cress,Lepidium sativum,edible catalog - خضروات
+211,Lamb's Lettuce,Valerianella locusta,edible catalog - خضروات
+212,Chicory,Cichorium intybus,edible catalog - خضروات
+213,Endive,Cichorium endivia,edible catalog - خضروات
+214,Sorrel,Rumex acetosa,edible catalog - خضروات
+215,Purslane,Portulaca oleracea,edible catalog - خضروات
+216,Mallow,Malva parviflora,edible catalog - خضروات
+217,Dandelion,Taraxacum officinale,edible catalog - خضروات
+218,Plantain Leaf,Plantago major,edible catalog - خضروات
+219,Nettle,Urtica dioica,edible catalog - خضروات
+220,Buckwheat,Fagopyrum esculentum,edible catalog - خضروات
+221,Barley,Hordeum vulgare,edible catalog - خضروات
+222,Wheat,Triticum aestivum,edible catalog - خضروات
+223,Maize,Zea mays,edible catalog - خضروات
+224,Sorghum,Sorghum bicolor,edible catalog - خضروات
+225,Rice,Oryza sativa,edible catalog - خضروات
+226,Cotton,Gossypium hirsutum,edible catalog - خضروات
+227,Sesame,Sesamum indicum,edible catalog - خضروات
+228,Safflower,Carthamus tinctorius,edible catalog - خضروات
+229,Quinoa,Chenopodium quinoa,edible catalog - خضروات
+230,Amaranth Grain,Amaranthus cruentus,edible catalog - خضروات
+231,Berseem,Trifolium alexandrinum,edible catalog - خضروات
+232,Alfalfa,Medicago sativa,edible catalog - خضروات
+233,Clover,Trifolium repens,edible catalog - خضروات
+234,Cabbage,Brassica oleracea var. capitata,edible catalog - خضروات
+235,Cauliflower,Brassica oleracea var. botrytis,edible catalog - خضروات
+236,Broccoli,Brassica oleracea var. italica,edible catalog - خضروات
+237,Kale,Brassica oleracea var. acephala,edible catalog - خضروات
+238,Collard Greens,Brassica oleracea var. viridis,edible catalog - خضروات
+239,Chinese Broccoli,Brassica oleracea var. alboglabra,edible catalog - خضروات
+240,Kohlrabi,Brassica oleracea var. gongylodes,edible catalog - خضروات
+241,Brussels Sprouts,Brassica oleracea var. gemmifera,edible catalog - خضروات
+242,Chinese Cabbage,Brassica rapa var. pekinensis,edible catalog - خضروات
+243,Pak Choi,Brassica rapa subsp. chinensis,edible catalog - خضروات
+244,Broccoli Rabe,Brassica rapa var. perviridis,edible catalog - خضروات
+245,Wasabi,Eutrema japonicum,edible catalog - خضروات
+246,Turnip,Brassica rapa,edible catalog - خضروات
+247,Rutabaga,Brassica napus subsp. rapifera,edible catalog - خضروات
+248,Radish,Raphanus sativus,edible catalog - خضروات
+249,Horseradish,Armoracia rusticana,edible catalog - خضروات
+250,Carrot,Daucus carota,edible catalog - خضروات
+251,Parsnip,Pastinaca sativa,edible catalog - خضروات
+252,Beetroot,Beta vulgaris,edible catalog - خضروات
+253,Sugar Beet,Beta vulgaris subsp. vulgaris,edible catalog - خضروات
+254,Celeriac,Apium graveolens var. rapaceum,edible catalog - خضروات
+255,Salsify,Tragopogon porrifolius,edible catalog - خضروات
+256,Onion,Allium cepa,edible catalog - خضروات
+257,Shallot,Allium cepa var. aggregatum,edible catalog - خضروات
+258,Garlic,Allium sativum,edible catalog - خضروات
+259,Leek,Allium ampeloprasum var. porrum,edible catalog - خضروات
+260,Spring Onion,Allium fistulosum,edible catalog - خضروات
+261,Chives,Allium schoenoprasum,edible catalog - خضروات
+262,Potato,Solanum tuberosum,edible catalog - خضروات
+263,Sweet Potato,Ipomoea batatas,edible catalog - خضروات
+264,Cassava,Manihot esculenta,edible catalog - خضروات
+265,Taro,Colocasia esculenta,edible catalog - خضروات
+266,Yam,Dioscorea alata,edible catalog - خضروات
+267,Jerusalem Artichoke,Helianthus tuberosus,edible catalog - خضروات
+268,Globe Artichoke,Cynara cardunculus var. scolymus,edible catalog - خضروات
+269,Cardoon,Cynara cardunculus,edible catalog - خضروات
+270,Tomato,Solanum lycopersicum,edible catalog - خضروات
+271,Cherry Tomato,Solanum lycopersicum var. cerasiforme,edible catalog - خضروات
+272,Eggplant,Solanum melongena,edible catalog - خضروات
+273,Sweet Pepper,Capsicum annuum,edible catalog - خضروات
+274,Chili Pepper,Capsicum frutescens,edible catalog - خضروات
+275,Habanero Pepper,Capsicum chinense,edible catalog - خضروات
+276,Okra,Abelmoschus esculentus,edible catalog - خضروات
+277,Pepino,Solanum muricatum,edible catalog - خضروات
+278,Physalis,Physalis philadelphica,edible catalog - خضروات
+279,Tobacco,Nicotiana tabacum,edible catalog - خضروات
+280,Cucumber,Cucumis sativus,edible catalog - خضروات
+281,Gherkin,Cucumis anguria,edible catalog - خضروات
+282,Melon,Cucumis melo,edible catalog - خضروات
+283,Watermelon,Citrullus lanatus,edible catalog - خضروات
+284,Zucchini,Cucurbita pepo,edible catalog - خضروات
+285,Hubbard Squash,Cucurbita maxima,edible catalog - خضروات
+286,Pumpkin,Cucurbita moschata,edible catalog - خضروات
+287,Bottle Gourd,Lagenaria siceraria,edible catalog - خضروات
+288,Bitter Gourd,Momordica charantia,edible catalog - خضروات
+289,Luffa,Luffa aegyptiaca,edible catalog - خضروات
+290,Ridge Gourd,Luffa acutangula,edible catalog - خضروات
+291,Snake Gourd,Trichosanthes dioica,edible catalog - خضروات
+292,Chayote,Sechium edule,edible catalog - خضروات
+293,Green Bean,Phaseolus vulgaris,edible catalog - خضروات
+294,Lima Bean,Phaseolus lunatus,edible catalog - خضروات
+295,Broad Bean,Vicia faba,edible catalog - خضروات
+296,Cowpea,Vigna unguiculata,edible catalog - خضروات
+297,Yardlong Bean,Vigna unguiculata subsp. sesquipedalis,edible catalog - خضروات
+298,Pigeon Pea,Cajanus cajan,edible catalog - خضروات
+299,Chickpea,Cicer arietinum,edible catalog - خضروات
+300,Lentil,Lens culinaris,edible catalog - خضروات
+301,Pea,Pisum sativum,edible catalog - خضروات
+302,Winged Bean,Psophocarpus tetragonolobus,edible catalog - خضروات
+303,Lablab,Lablab purpureus,edible catalog - خضروات
+304,Mung Bean,Vigna radiata,edible catalog - خضروات
+305,Velvet Bean,Mucuna pruriens,edible catalog - خضروات
+306,Soybean,Glycine max,edible catalog - خضروات
+307,Peanut,Arachis hypogaea,edible catalog - خضروات
+308,Celery,Apium graveolens,edible catalog - خضروات
+309,Parsley,Petroselinum crispum,edible catalog - خضروات
+310,Dill,Anethum graveolens,edible catalog - خضروات
+311,Coriander,Coriandrum sativum,edible catalog - خضروات
+312,Thyme,Thymus vulgaris,edible catalog - خضروات
+313,Marjoram,Origanum majorana,edible catalog - خضروات
+314,Summer Savory,Satureja hortensis,edible catalog - خضروات
+315,Lemon Balm,Melissa officinalis,edible catalog - خضروات
+316,Tarragon,Artemisia dracunculus,edible catalog - خضروات
+317,Borage,Borago officinalis,edible catalog - خضروات
+318,Stevia,Stevia rebaudiana,edible catalog - خضروات
+319,Lemon Verbena,Aloysia citrodora,edible catalog - خضروات
+320,Lemongrass,Cymbopogon citratus,edible catalog - خضروات
+321,Epazote,Dysphania ambrosioides,edible catalog - خضروات
+322,Ginger,Zingiber officinale,edible catalog - خضروات
+323,Turmeric,Curcuma longa,edible catalog - خضروات
+324,Cardamom,Elettaria cardamomum,edible catalog - خضروات
+325,Cinnamon,Cinnamomum verum,edible catalog - خضروات
+326,Black Pepper,Piper nigrum,edible catalog - خضروات
+327,Fennel,Foeniculum vulgare,edible catalog - خضروات
+328,Caraway,Carum carvi,edible catalog - خضروات
+329,Cumin,Cuminum cyminum,edible catalog - خضروات
+330,Fenugreek,Trigonella foenum-graecum,edible catalog - خضروات
+331,Anise,Pimpinella anisum,edible catalog - خضروات
+332,Ajwain,Trachyspermum ammi,edible catalog - خضروات
+333,Nigella,Nigella sativa,edible catalog - خضروات
+334,Saffron,Crocus sativus,edible catalog - خضروات
+335,Caper,Capparis spinosa,edible catalog - خضروات
+336,Water Spinach,Ipomoea aquatica,edible catalog - خضروات
+337,Edible Hibiscus,Hibiscus sabdariffa,edible catalog - خضروات
+338,Water Chestnut,Eleocharis dulcis,edible catalog - خضروات
+339,Oca,Oxalis tuberosa,edible catalog - خضروات
+340,Asparagus,Asparagus officinalis,edible catalog - خضروات
+341,Rhubarb,Rheum rhabarbarum,edible catalog - خضروات
+342,Sugarcane,Saccharum officinarum,edible catalog - خضروات
+343,Bamboo Shoot,Phyllostachys edulis,edible catalog - خضروات
+344,Button Mushroom,Agaricus bisporus,edible catalog - خضروات
+345,Oyster Mushroom,Pleurotus ostreatus,edible catalog - خضروات
+346,Orange,Citrus sinensis,edible catalog - فواكه
+347,Mandarin,Citrus reticulata,edible catalog - فواكه
+348,Grapefruit,Citrus paradisi,edible catalog - فواكه
+349,Lime,Citrus aurantiifolia,edible catalog - فواكه
+350,Kaffir Lime,Citrus × microcarpa,edible catalog - فواكه
+351,Pummelo,Citrus maxima,edible catalog - فواكه
+352,Citron,Citrus medica,edible catalog - فواكه
+353,Bergamot,Citrus bergamia,edible catalog - فواكه
+354,Grape,Vitis vinifera,edible catalog - فواكه
+355,Peach,Prunus persica,edible catalog - فواكه
+356,Nectarine,Prunus persica var. nucipersea,edible catalog - فواكه
+357,Plum,Prunus domestica,edible catalog - فواكه
+358,Japanese Plum,Prunus salicina,edible catalog - فواكه
+359,Apricot,Prunus armeniaca,edible catalog - فواكه
+360,Cherry,Prunus avium,edible catalog - فواكه
+361,Sour Cherry,Prunus cerasus,edible catalog - فواكه
+362,Almond,Prunus dulcis,edible catalog - فواكه
+363,Loquat,Eriobotrya japonica,edible catalog - فواكه
+364,Apple,Malus domestica,edible catalog - فواكه
+365,Pear,Pyrus communis,edible catalog - فواكه
+366,Quince,Cydonia oblonga,edible catalog - فواكه
+367,Mulberry,Morus alba,edible catalog - فواكه
+368,Black Mulberry,Morus nigra,edible catalog - فواكه
+369,Red Mulberry,Morus rubra,edible catalog - فواكه
+370,Strawberry,Fragaria × ananassa,edible catalog - فواكه
+371,Wild Strawberry,Fragaria vesca,edible catalog - فواكه
+372,Raspberry,Rubus idaeus,edible catalog - فواكه
+373,Blackberry,Rubus fruticosus,edible catalog - فواكه
+374,Cloudberry,Rubus chamaemorus,edible catalog - فواكه
+375,Red Currant,Ribes rubrum,edible catalog - فواكه
+376,Black Currant,Ribes nigrum,edible catalog - فواكه
+377,Gooseberry,Ribes uva-crispa,edible catalog - فواكه
+378,Blueberry,Vaccinium corymbosum,edible catalog - فواكه
+379,Cranberry,Vaccinium macrocarpon,edible catalog - فواكه
+380,Kiwifruit,Actinidia deliciosa,edible catalog - فواكه
+381,Passion Fruit,Passiflora edulis,edible catalog - فواكه
+382,Banana,Musa acuminata,edible catalog - فواكه
+383,Plantain,Musa × paradisiaca,edible catalog - فواكه
+384,Mango,Mangifera indica,edible catalog - فواكه
+385,Papaya,Carica papaya,edible catalog - فواكه
+386,Guava,Psidium guajava,edible catalog - فواكه
+387,Cherry Guava,Psidium cattleianum,edible catalog - فواكه
+388,Avocado,Persea americana,edible catalog - فواكه
+389,Lychee,Litchi chinensis,edible catalog - فواكه
+390,Longan,Dimocarpus longan,edible catalog - فواكه
+391,Rambutan,Nephelium lappaceum,edible catalog - فواكه
+392,Mangosteen,Garcinia mangostana,edible catalog - فواكه
+393,Jackfruit,Artocarpus heterophyllus,edible catalog - فواكه
+394,Breadfruit,Artocarpus altilis,edible catalog - فواكه
+395,Cashew,Anacardium occidentale,edible catalog - فواكه
+396,Custard Apple,Annona squamosa,edible catalog - فواكه
+397,Sugar Apple,Annona reticulata,edible catalog - فواكه
+398,Cherimoya,Annona cherimola,edible catalog - فواكه
+399,Soursop,Annona muricata,edible catalog - فواكه
+400,Starfruit,Averrhoa carambola,edible catalog - فواكه
+401,Wax Apple,Syzygium samarangense,edible catalog - فواكه
+402,Water Apple,Syzygium aqueum,edible catalog - فواكه
+403,Rose Apple,Syzygium jambos,edible catalog - فواكه
+404,Jaboticaba,Myrciaria floribunda,edible catalog - فواكه
+405,Feijoa,Acca sellowiana,edible catalog - فواكه
+406,Dragon Fruit,Selenicereus undatus,edible catalog - فواكه
+407,Noni,Morinda citrifolia,edible catalog - فواكه
+408,Karonda,Carissa carandas,edible catalog - فواكه
+409,Amla,Phyllanthus emblica,edible catalog - فواكه
+410,Jamun,Syzygium cumini,edible catalog - فواكه
+411,Mamey Sapote,Pouteria sapota,edible catalog - فواكه
+412,Sapodilla,Manilkara zapota,edible catalog - فواكه
+413,Macadamia,Macadamia integrifolia,edible catalog - فواكه
+414,Brazil Nut,Bertholletia excelsa,edible catalog - فواكه
+415,Cacao,Theobroma cacao,edible catalog - فواكه
+416,Coffee,Coffea arabica,edible catalog - فواكه
+417,Pineapple,Ananas comosus,edible catalog - فواكه
+418,Pistachio,Pistacia vera,edible catalog - فواكه
+419,Walnut,Juglans regia,edible catalog - فواكه
+420,Pecan,Carya illinoinensis,edible catalog - فواكه
+421,Hazelnut,Corylus avellana,edible catalog - فواكه
+422,Chestnut,Castanea sativa,edible catalog - فواكه
+423,Jujube,Ziziphus jujuba,edible catalog - فواكه
+424,Bael,Aegle marmelos,edible catalog - فواكه
+425,Wood Apple,Feronia limonia,edible catalog - فواكه
+426,Coconut,Cocos nucifera,edible catalog - فواكه
+427,Oil Palm,Elaeis guineensis,edible catalog - فواكه

@@ -42,6 +42,7 @@ def main():
 
     with conn:
         conn.executescript(hassouna_db.SCHEMA_SQL)          # adds the v3 tables; existing tables untouched
+        hassouna_db.seed_soil_properties(conn)              # soil character rules for the planning rules
         conn.execute("DELETE FROM plant_taxa")
         conn.execute("DELETE FROM location_climate")
         n_taxa = 0
