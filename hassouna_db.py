@@ -312,7 +312,7 @@ def seed_soil_properties(conn: sqlite3.Connection) -> int:
     Safe to run on any database: rows for unknown soils are left out, and the
     rules of the soils that do exist are refreshed.
     """
-    known = {row["name_ar"] for row in conn.execute("SELECT name_ar FROM soil_types")}
+    known = {r[0] for r in conn.execute("SELECT name_ar FROM soil_types")}
     written = 0
     for soil, (family, salinity, drainage, penalty, organic, clay) in SOIL_PROPERTIES_SEED.items():
         if soil not in known:

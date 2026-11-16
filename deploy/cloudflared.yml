@@ -1,0 +1,25 @@
+# Cloudflare tunnel configuration.
+#
+# Copy this file to the cloudflared configuration folder and put your tunnel
+# id in place of TUNNEL_ID:
+#
+#   Windows  %USERPROFILE%\.cloudflared\config.yml
+#   Linux    ~/.cloudflared/config.yml
+#
+# The tunnel id comes from:
+#
+#   cloudflared tunnel create hassouna-green
+#
+# Cloudflare issues the certificate for the hostname itself, so no other
+# web server and no certificate renewal are needed.
+
+tunnel: TUNNEL_ID
+credentials-file: CREDENTIALS_FILE
+
+ingress:
+  - hostname: hassounagreen-eg.com
+    service: http://127.0.0.1:8501
+  - hostname: www.hassounagreen-eg.com
+    service: http://127.0.0.1:8501
+  # Anything that is not the domain above is refused.
+  - service: http_status:404

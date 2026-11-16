@@ -1,8 +1,8 @@
 {
   "model_version": "1.0",
-  "trained_at_utc": "2026-11-02T18:57:00+00:00",
+  "trained_at_utc": "2026-11-16T11:47:23+00:00",
   "data": {
-    "built_at_utc": "2026-11-02T18:47:40+00:00",
+    "built_at_utc": "2026-11-16T11:28:39+00:00",
     "source": "inat",
     "source_label": "iNaturalist observations: wild (research grade) and cultivated with agreed identification (api.inaturalist.org)",
     "record_kinds": [
@@ -10,19 +10,19 @@
       "cultivated"
     ],
     "records_by_kind": {
-      "wild": 150054,
-      "cultivated": 134437
+      "wild": 297299,
+      "cultivated": 231567
     },
     "min_year": 1950,
     "worldclim": "WorldClim 2.1, 10 arc-minute bioclimatic variables (1970-2000); Fick & Hijmans 2017",
-    "names_in_catalog": 173,
-    "names_matched": 173,
-    "taxa_matched": 173,
-    "taxa_modeled": 173,
+    "names_in_catalog": 398,
+    "names_matched": 397,
+    "taxa_matched": 376,
+    "taxa_modeled": 372,
     "min_cells": 20,
-    "grid_cells": 36258,
-    "records_used": 284491,
-    "points_dropped_no_climate": 188
+    "grid_cells": 53991,
+    "records_used": 528839,
+    "points_dropped_no_climate": 295
   },
   "features": [
     "bio1",
@@ -32,7 +32,7 @@
   ],
   "models": {
     "logistic_regression": "One L2-regularised logistic regression per taxon on 4 standardised temperature variables and their squares (classic species-distribution GLM), class-balanced.",
-    "deep_neural_network": "Multi-label MLP 4 -> 256 -> 256 -> 128 -> 173 (ReLU, dropout 0.2), PyTorch, Adam, class-weighted BCE, 43 epochs (median early-stopping epoch from cross-validation).",
+    "deep_neural_network": "Multi-label MLP 4 -> 256 -> 256 -> 128 -> 372 (ReLU, dropout 0.2), PyTorch, Adam, class-weighted BCE, 21 epochs (median early-stopping epoch from cross-validation).",
     "ensemble": "Average of the two models' probabilities.",
     "climate_match": "Percentile of the site's score among the taxon's own known-presence cells; below the 10th percentile = outside its known climate range (standard SDM threshold).",
     "plant_score": "0-10th percentile -> 0-60, 10th-50th -> 60-100, 50th+ -> 100: 60 marks the edge of the known range, 100 = as typical as the plant's median known location. Design score = average over the judged plants."
@@ -45,1600 +45,3391 @@
       256,
       128
     ],
-    "dnn_outputs": 173,
-    "dnn_epochs": 43,
-    "dnn_parameters": 122285
+    "dnn_outputs": 372,
+    "dnn_epochs": 21,
+    "dnn_parameters": 147956
   },
   "evaluation": {
     "method": "5-fold spatial block cross-validation (5x5 degree blocks); every cell is scored by models trained without its block",
     "metric": "ROC AUC: presence cells vs target-group background cells (0.5 = random, 1.0 = perfect)",
     "logistic_regression": {
-      "mean_auc": 0.79,
-      "median_auc": 0.791,
-      "share_above_0_7": 0.855,
-      "n_taxa": 173
+      "mean_auc": 0.799,
+      "median_auc": 0.812,
+      "share_above_0_7": 0.841,
+      "n_taxa": 372
     },
     "deep_neural_network": {
-      "mean_auc": 0.804,
-      "median_auc": 0.808,
-      "share_above_0_7": 0.913,
-      "n_taxa": 173
+      "mean_auc": 0.809,
+      "median_auc": 0.821,
+      "share_above_0_7": 0.887,
+      "n_taxa": 372
     },
     "ensemble": {
-      "mean_auc": 0.803,
-      "median_auc": 0.809,
-      "share_above_0_7": 0.908,
-      "n_taxa": 173
+      "mean_auc": 0.809,
+      "median_auc": 0.822,
+      "share_above_0_7": 0.882,
+      "n_taxa": 372
     },
     "catalog_temperature_rule": {
-      "mean_auc": 0.608,
-      "median_auc": 0.63,
-      "share_above_0_7": 0.306,
-      "n_taxa": 173
+      "mean_auc": 0.612,
+      "median_auc": 0.629,
+      "share_above_0_7": 0.347,
+      "n_taxa": 372
     },
     "same_taxa_comparison": {
-      "n_taxa": 173,
-      "ensemble_mean_auc": 0.803,
-      "catalog_rule_mean_auc": 0.608
+      "n_taxa": 372,
+      "ensemble_mean_auc": 0.809,
+      "catalog_rule_mean_auc": 0.612
     }
   },
   "per_taxon": [
     {
       "taxon_key": 47447,
       "name": "Leucaena leucocephala",
-      "cells": 1024,
-      "auc_logistic_regression": 0.81,
-      "auc_deep_neural_network": 0.82,
-      "auc_ensemble": 0.819,
-      "auc_catalog_rule": 0.756
+      "cells": 1016,
+      "auc_logistic_regression": 0.831,
+      "auc_deep_neural_network": 0.838,
+      "auc_ensemble": 0.838,
+      "auc_catalog_rule": 0.767
     },
     {
       "taxon_key": 47563,
       "name": "Nerium oleander",
-      "cells": 1407,
-      "auc_logistic_regression": 0.69,
-      "auc_deep_neural_network": 0.707,
-      "auc_ensemble": 0.705,
-      "auc_catalog_rule": 0.631
+      "cells": 1416,
+      "auc_logistic_regression": 0.74,
+      "auc_deep_neural_network": 0.75,
+      "auc_ensemble": 0.749,
+      "auc_catalog_rule": 0.667
+    },
+    {
+      "taxon_key": 47602,
+      "name": "Taraxacum officinale",
+      "cells": 950,
+      "auc_logistic_regression": 0.692,
+      "auc_deep_neural_network": 0.717,
+      "auc_ensemble": 0.714,
+      "auc_catalog_rule": 0.42
     },
     {
       "taxon_key": 47787,
       "name": "Yucca",
-      "cells": 1411,
-      "auc_logistic_regression": 0.699,
-      "auc_deep_neural_network": 0.702,
-      "auc_ensemble": 0.706,
-      "auc_catalog_rule": 0.523
+      "cells": 1393,
+      "auc_logistic_regression": 0.732,
+      "auc_deep_neural_network": 0.733,
+      "auc_ensemble": 0.737,
+      "auc_catalog_rule": 0.569
     },
     {
       "taxon_key": 47902,
       "name": "Opuntia",
-      "cells": 1615,
-      "auc_logistic_regression": 0.659,
-      "auc_deep_neural_network": 0.691,
-      "auc_ensemble": 0.683,
-      "auc_catalog_rule": 0.568
+      "cells": 1701,
+      "auc_logistic_regression": 0.703,
+      "auc_deep_neural_network": 0.72,
+      "auc_ensemble": 0.718,
+      "auc_catalog_rule": 0.607
     },
     {
       "taxon_key": 48363,
       "name": "Tecoma stans",
-      "cells": 1095,
-      "auc_logistic_regression": 0.739,
-      "auc_deep_neural_network": 0.778,
-      "auc_ensemble": 0.762,
-      "auc_catalog_rule": 0.714
+      "cells": 1105,
+      "auc_logistic_regression": 0.771,
+      "auc_deep_neural_network": 0.808,
+      "auc_ensemble": 0.793,
+      "auc_catalog_rule": 0.735
     },
     {
       "taxon_key": 48380,
       "name": "Antigonon leptopus",
-      "cells": 879,
-      "auc_logistic_regression": 0.828,
-      "auc_deep_neural_network": 0.831,
-      "auc_ensemble": 0.831,
-      "auc_catalog_rule": 0.798
+      "cells": 883,
+      "auc_logistic_regression": 0.839,
+      "auc_deep_neural_network": 0.846,
+      "auc_ensemble": 0.844,
+      "auc_catalog_rule": 0.806
+    },
+    {
+      "taxon_key": 48448,
+      "name": "Zea mays",
+      "cells": 1664,
+      "auc_logistic_regression": 0.606,
+      "auc_deep_neural_network": 0.648,
+      "auc_ensemble": 0.641,
+      "auc_catalog_rule": 0.499
+    },
+    {
+      "taxon_key": 48494,
+      "name": "Pleurotus ostreatus",
+      "cells": 788,
+      "auc_logistic_regression": 0.73,
+      "auc_deep_neural_network": 0.747,
+      "auc_ensemble": 0.743,
+      "auc_catalog_rule": 0.463
+    },
+    {
+      "taxon_key": 48514,
+      "name": "Capsicum annuum",
+      "cells": 1311,
+      "auc_logistic_regression": 0.639,
+      "auc_deep_neural_network": 0.657,
+      "auc_ensemble": 0.653,
+      "auc_catalog_rule": 0.624
+    },
+    {
+      "taxon_key": 48592,
+      "name": "Allium cepa",
+      "cells": 982,
+      "auc_logistic_regression": 0.54,
+      "auc_deep_neural_network": 0.562,
+      "auc_ensemble": 0.557,
+      "auc_catalog_rule": 0.487
+    },
+    {
+      "taxon_key": 48865,
+      "name": "Cocos nucifera",
+      "cells": 1277,
+      "auc_logistic_regression": 0.897,
+      "auc_deep_neural_network": 0.901,
+      "auc_ensemble": 0.901,
+      "auc_catalog_rule": 0.881
+    },
+    {
+      "taxon_key": 48872,
+      "name": "Mangifera indica",
+      "cells": 1350,
+      "auc_logistic_regression": 0.85,
+      "auc_deep_neural_network": 0.857,
+      "auc_ensemble": 0.856,
+      "auc_catalog_rule": 0.825
     },
     {
       "taxon_key": 49048,
       "name": "Cereus",
-      "cells": 998,
-      "auc_logistic_regression": 0.743,
-      "auc_deep_neural_network": 0.766,
-      "auc_ensemble": 0.76,
-      "auc_catalog_rule": 0.684
+      "cells": 1006,
+      "auc_logistic_regression": 0.768,
+      "auc_deep_neural_network": 0.776,
+      "auc_ensemble": 0.777,
+      "auc_catalog_rule": 0.707
     },
     {
       "taxon_key": 49143,
       "name": "Strelitzia reginae",
-      "cells": 871,
-      "auc_logistic_regression": 0.814,
-      "auc_deep_neural_network": 0.816,
-      "auc_ensemble": 0.819,
-      "auc_catalog_rule": 0.642
+      "cells": 879,
+      "auc_logistic_regression": 0.842,
+      "auc_deep_neural_network": 0.844,
+      "auc_ensemble": 0.847,
+      "auc_catalog_rule": 0.67
     },
     {
       "taxon_key": 49877,
       "name": "Clematis",
-      "cells": 1428,
-      "auc_logistic_regression": 0.707,
-      "auc_deep_neural_network": 0.709,
-      "auc_ensemble": 0.717,
-      "auc_catalog_rule": 0.398
+      "cells": 1411,
+      "auc_logistic_regression": 0.698,
+      "auc_deep_neural_network": 0.701,
+      "auc_ensemble": 0.71,
+      "auc_catalog_rule": 0.441
+    },
+    {
+      "taxon_key": 50298,
+      "name": "Fragaria vesca",
+      "cells": 856,
+      "auc_logistic_regression": 0.792,
+      "auc_deep_neural_network": 0.793,
+      "auc_ensemble": 0.795,
+      "auc_catalog_rule": 0.422
     },
     {
       "taxon_key": 50333,
       "name": "Lantana camara",
-      "cells": 1347,
-      "auc_logistic_regression": 0.723,
-      "auc_deep_neural_network": 0.735,
-      "auc_ensemble": 0.737,
-      "auc_catalog_rule": 0.657
+      "cells": 1336,
+      "auc_logistic_regression": 0.758,
+      "auc_deep_neural_network": 0.772,
+      "auc_ensemble": 0.772,
+      "auc_catalog_rule": 0.68
     },
     {
       "taxon_key": 50996,
       "name": "Ficus benjamina",
-      "cells": 1053,
-      "auc_logistic_regression": 0.701,
-      "auc_deep_neural_network": 0.738,
-      "auc_ensemble": 0.729,
-      "auc_catalog_rule": 0.713
+      "cells": 1055,
+      "auc_logistic_regression": 0.719,
+      "auc_deep_neural_network": 0.765,
+      "auc_ensemble": 0.755,
+      "auc_catalog_rule": 0.731
     },
     {
       "taxon_key": 51122,
       "name": "Nymphaea",
-      "cells": 1448,
-      "auc_logistic_regression": 0.65,
-      "auc_deep_neural_network": 0.663,
-      "auc_ensemble": 0.665,
-      "auc_catalog_rule": 0.581
+      "cells": 1450,
+      "auc_logistic_regression": 0.652,
+      "auc_deep_neural_network": 0.669,
+      "auc_ensemble": 0.67,
+      "auc_catalog_rule": 0.611
+    },
+    {
+      "taxon_key": 51251,
+      "name": "Rheum rhabarbarum",
+      "cells": 1051,
+      "auc_logistic_regression": 0.849,
+      "auc_deep_neural_network": 0.844,
+      "auc_ensemble": 0.851,
+      "auc_catalog_rule": 0.226
+    },
+    {
+      "taxon_key": 51446,
+      "name": "Passiflora edulis",
+      "cells": 1475,
+      "auc_logistic_regression": 0.824,
+      "auc_deep_neural_network": 0.83,
+      "auc_ensemble": 0.83,
+      "auc_catalog_rule": 0.769
     },
     {
       "taxon_key": 51454,
       "name": "Passiflora caerulea",
       "cells": 1180,
-      "auc_logistic_regression": 0.821,
-      "auc_deep_neural_network": 0.823,
-      "auc_ensemble": 0.826,
-      "auc_catalog_rule": 0.464
+      "auc_logistic_regression": 0.843,
+      "auc_deep_neural_network": 0.843,
+      "auc_ensemble": 0.846,
+      "auc_catalog_rule": 0.517
+    },
+    {
+      "taxon_key": 51734,
+      "name": "Physalis philadelphica",
+      "cells": 649,
+      "auc_logistic_regression": 0.726,
+      "auc_deep_neural_network": 0.748,
+      "auc_ensemble": 0.746,
+      "auc_catalog_rule": 0.34
+    },
+    {
+      "taxon_key": 51737,
+      "name": "Solanum lycopersicum",
+      "cells": 1492,
+      "auc_logistic_regression": 0.633,
+      "auc_deep_neural_network": 0.653,
+      "auc_ensemble": 0.653,
+      "auc_catalog_rule": 0.521
     },
     {
       "taxon_key": 51738,
       "name": "Salvia officinalis",
       "cells": 908,
-      "auc_logistic_regression": 0.76,
-      "auc_deep_neural_network": 0.759,
-      "auc_ensemble": 0.764,
-      "auc_catalog_rule": 0.367
+      "auc_logistic_regression": 0.767,
+      "auc_deep_neural_network": 0.767,
+      "auc_ensemble": 0.769,
+      "auc_catalog_rule": 0.425
     },
     {
       "taxon_key": 51779,
       "name": "Sempervivum tectorum",
-      "cells": 673,
-      "auc_logistic_regression": 0.849,
-      "auc_deep_neural_network": 0.85,
-      "auc_ensemble": 0.853,
-      "auc_catalog_rule": 0.423
+      "cells": 671,
+      "auc_logistic_regression": 0.821,
+      "auc_deep_neural_network": 0.821,
+      "auc_ensemble": 0.823,
+      "auc_catalog_rule": 0.46
     },
     {
       "taxon_key": 51833,
       "name": "Hippeastrum",
-      "cells": 1335,
-      "auc_logistic_regression": 0.718,
-      "auc_deep_neural_network": 0.728,
-      "auc_ensemble": 0.727,
-      "auc_catalog_rule": 0.688
+      "cells": 1341,
+      "auc_logistic_regression": 0.742,
+      "auc_deep_neural_network": 0.751,
+      "auc_ensemble": 0.751,
+      "auc_catalog_rule": 0.714
+    },
+    {
+      "taxon_key": 51884,
+      "name": "Urtica dioica",
+      "cells": 552,
+      "auc_logistic_regression": 0.828,
+      "auc_deep_neural_network": 0.83,
+      "auc_ensemble": 0.832,
+      "auc_catalog_rule": 0.404
+    },
+    {
+      "taxon_key": 52287,
+      "name": "Borago officinalis",
+      "cells": 1125,
+      "auc_logistic_regression": 0.769,
+      "auc_deep_neural_network": 0.782,
+      "auc_ensemble": 0.78,
+      "auc_catalog_rule": 0.577
+    },
+    {
+      "taxon_key": 52328,
+      "name": "Amaranthus cruentus",
+      "cells": 726,
+      "auc_logistic_regression": 0.695,
+      "auc_deep_neural_network": 0.702,
+      "auc_ensemble": 0.708,
+      "auc_catalog_rule": 0.381
     },
     {
       "taxon_key": 52344,
       "name": "Ipomoea purpurea",
-      "cells": 1137,
+      "cells": 1157,
       "auc_logistic_regression": 0.768,
-      "auc_deep_neural_network": 0.767,
-      "auc_ensemble": 0.773,
-      "auc_catalog_rule": 0.308
+      "auc_deep_neural_network": 0.761,
+      "auc_ensemble": 0.77,
+      "auc_catalog_rule": 0.374
     },
     {
       "taxon_key": 52348,
       "name": "Senna",
-      "cells": 1367,
-      "auc_logistic_regression": 0.689,
-      "auc_deep_neural_network": 0.7,
-      "auc_ensemble": 0.701,
-      "auc_catalog_rule": 0.612
+      "cells": 1359,
+      "auc_logistic_regression": 0.737,
+      "auc_deep_neural_network": 0.756,
+      "auc_ensemble": 0.754,
+      "auc_catalog_rule": 0.65
+    },
+    {
+      "taxon_key": 52740,
+      "name": "Vaccinium corymbosum",
+      "cells": 674,
+      "auc_logistic_regression": 0.789,
+      "auc_deep_neural_network": 0.82,
+      "auc_ensemble": 0.814,
+      "auc_catalog_rule": 0.357
+    },
+    {
+      "taxon_key": 52913,
+      "name": "Cichorium intybus",
+      "cells": 1079,
+      "auc_logistic_regression": 0.716,
+      "auc_deep_neural_network": 0.764,
+      "auc_ensemble": 0.753,
+      "auc_catalog_rule": 0.473
+    },
+    {
+      "taxon_key": 53052,
+      "name": "Foeniculum vulgare",
+      "cells": 1060,
+      "auc_logistic_regression": 0.793,
+      "auc_deep_neural_network": 0.792,
+      "auc_ensemble": 0.795,
+      "auc_catalog_rule": 0.587
+    },
+    {
+      "taxon_key": 53271,
+      "name": "Brassica rapa",
+      "cells": 815,
+      "auc_logistic_regression": 0.671,
+      "auc_deep_neural_network": 0.733,
+      "auc_ensemble": 0.717,
+      "auc_catalog_rule": 0.576
     },
     {
       "taxon_key": 53317,
       "name": "Verbena",
-      "cells": 1346,
-      "auc_logistic_regression": 0.719,
-      "auc_deep_neural_network": 0.715,
-      "auc_ensemble": 0.723,
-      "auc_catalog_rule": 0.358
+      "cells": 1392,
+      "auc_logistic_regression": 0.718,
+      "auc_deep_neural_network": 0.713,
+      "auc_ensemble": 0.719,
+      "auc_catalog_rule": 0.42
     },
     {
       "taxon_key": 53720,
       "name": "Melia azedarach",
-      "cells": 1345,
-      "auc_logistic_regression": 0.796,
-      "auc_deep_neural_network": 0.791,
-      "auc_ensemble": 0.796,
-      "auc_catalog_rule": 0.548
+      "cells": 1328,
+      "auc_logistic_regression": 0.826,
+      "auc_deep_neural_network": 0.828,
+      "auc_ensemble": 0.829,
+      "auc_catalog_rule": 0.593
     },
     {
       "taxon_key": 53804,
       "name": "Bougainvillea",
-      "cells": 1235,
-      "auc_logistic_regression": 0.721,
-      "auc_deep_neural_network": 0.736,
-      "auc_ensemble": 0.734,
-      "auc_catalog_rule": 0.722
+      "cells": 1226,
+      "auc_logistic_regression": 0.748,
+      "auc_deep_neural_network": 0.763,
+      "auc_ensemble": 0.761,
+      "auc_catalog_rule": 0.74
+    },
+    {
+      "taxon_key": 53858,
+      "name": "Solanum tuberosum",
+      "cells": 1549,
+      "auc_logistic_regression": 0.7,
+      "auc_deep_neural_network": 0.705,
+      "auc_ensemble": 0.709,
+      "auc_catalog_rule": 0.458
+    },
+    {
+      "taxon_key": 54141,
+      "name": "Tragopogon porrifolius",
+      "cells": 474,
+      "auc_logistic_regression": 0.878,
+      "auc_deep_neural_network": 0.866,
+      "auc_ensemble": 0.874,
+      "auc_catalog_rule": 0.643
+    },
+    {
+      "taxon_key": 54299,
+      "name": "Citrus maxima",
+      "cells": 739,
+      "auc_logistic_regression": 0.778,
+      "auc_deep_neural_network": 0.782,
+      "auc_ensemble": 0.786,
+      "auc_catalog_rule": 0.742
+    },
+    {
+      "taxon_key": 54429,
+      "name": "Ribes uva-crispa",
+      "cells": 689,
+      "auc_logistic_regression": 0.881,
+      "auc_deep_neural_network": 0.885,
+      "auc_ensemble": 0.886,
+      "auc_catalog_rule": 0.33
+    },
+    {
+      "taxon_key": 54430,
+      "name": "Ribes nigrum",
+      "cells": 644,
+      "auc_logistic_regression": 0.89,
+      "auc_deep_neural_network": 0.894,
+      "auc_ensemble": 0.894,
+      "auc_catalog_rule": 0.241
+    },
+    {
+      "taxon_key": 54431,
+      "name": "Ribes rubrum",
+      "cells": 743,
+      "auc_logistic_regression": 0.855,
+      "auc_deep_neural_network": 0.852,
+      "auc_ensemble": 0.856,
+      "auc_catalog_rule": 0.262
+    },
+    {
+      "taxon_key": 54436,
+      "name": "Rubus idaeus",
+      "cells": 1038,
+      "auc_logistic_regression": 0.821,
+      "auc_deep_neural_network": 0.825,
+      "auc_ensemble": 0.826,
+      "auc_catalog_rule": 0.227
     },
     {
       "taxon_key": 54454,
       "name": "Ferocactus",
-      "cells": 564,
-      "auc_logistic_regression": 0.653,
-      "auc_deep_neural_network": 0.7,
-      "auc_ensemble": 0.689,
-      "auc_catalog_rule": 0.523
+      "cells": 548,
+      "auc_logistic_regression": 0.704,
+      "auc_deep_neural_network": 0.727,
+      "auc_ensemble": 0.724,
+      "auc_catalog_rule": 0.567
+    },
+    {
+      "taxon_key": 54491,
+      "name": "Corylus avellana",
+      "cells": 567,
+      "auc_logistic_regression": 0.87,
+      "auc_deep_neural_network": 0.875,
+      "auc_ensemble": 0.875,
+      "auc_catalog_rule": 0.39
+    },
+    {
+      "taxon_key": 54498,
+      "name": "Beta vulgaris",
+      "cells": 1012,
+      "auc_logistic_regression": 0.724,
+      "auc_deep_neural_network": 0.743,
+      "auc_ensemble": 0.743,
+      "auc_catalog_rule": 0.571
+    },
+    {
+      "taxon_key": 54516,
+      "name": "Brassica oleracea",
+      "cells": 1243,
+      "auc_logistic_regression": 0.656,
+      "auc_deep_neural_network": 0.656,
+      "auc_ensemble": 0.662,
+      "auc_catalog_rule": 0.597
+    },
+    {
+      "taxon_key": 54522,
+      "name": "Pisum sativum",
+      "cells": 1154,
+      "auc_logistic_regression": 0.665,
+      "auc_deep_neural_network": 0.688,
+      "auc_ensemble": 0.679,
+      "auc_catalog_rule": 0.474
+    },
+    {
+      "taxon_key": 54801,
+      "name": "Morus rubra",
+      "cells": 347,
+      "auc_logistic_regression": 0.878,
+      "auc_deep_neural_network": 0.901,
+      "auc_ensemble": 0.897,
+      "auc_catalog_rule": 0.378
+    },
+    {
+      "taxon_key": 54919,
+      "name": "Cucumis sativus",
+      "cells": 1117,
+      "auc_logistic_regression": 0.575,
+      "auc_deep_neural_network": 0.597,
+      "auc_ensemble": 0.595,
+      "auc_catalog_rule": 0.516
     },
     {
       "taxon_key": 54982,
       "name": "Ficus microcarpa",
-      "cells": 768,
-      "auc_logistic_regression": 0.775,
-      "auc_deep_neural_network": 0.776,
-      "auc_ensemble": 0.78,
-      "auc_catalog_rule": 0.745
+      "cells": 765,
+      "auc_logistic_regression": 0.798,
+      "auc_deep_neural_network": 0.809,
+      "auc_ensemble": 0.808,
+      "auc_catalog_rule": 0.761
     },
     {
       "taxon_key": 54991,
       "name": "Stapelia",
-      "cells": 778,
-      "auc_logistic_regression": 0.759,
-      "auc_deep_neural_network": 0.768,
-      "auc_ensemble": 0.767,
-      "auc_catalog_rule": 0.665
+      "cells": 776,
+      "auc_logistic_regression": 0.784,
+      "auc_deep_neural_network": 0.791,
+      "auc_ensemble": 0.792,
+      "auc_catalog_rule": 0.69
+    },
+    {
+      "taxon_key": 55149,
+      "name": "Actinidia chinensis",
+      "cells": 571,
+      "auc_logistic_regression": 0.824,
+      "auc_deep_neural_network": 0.841,
+      "auc_ensemble": 0.839,
+      "auc_catalog_rule": 0.455
+    },
+    {
+      "taxon_key": 55366,
+      "name": "Fragaria × ananassa",
+      "cells": 1041,
+      "auc_logistic_regression": 0.67,
+      "auc_deep_neural_network": 0.682,
+      "auc_ensemble": 0.683,
+      "auc_catalog_rule": 0.414
     },
     {
       "taxon_key": 55406,
       "name": "Petunia",
-      "cells": 1323,
-      "auc_logistic_regression": 0.659,
-      "auc_deep_neural_network": 0.692,
-      "auc_ensemble": 0.688,
-      "auc_catalog_rule": 0.379
+      "cells": 1330,
+      "auc_logistic_regression": 0.657,
+      "auc_deep_neural_network": 0.678,
+      "auc_ensemble": 0.678,
+      "auc_catalog_rule": 0.426
     },
     {
       "taxon_key": 55735,
       "name": "Sedum",
-      "cells": 1483,
-      "auc_logistic_regression": 0.701,
-      "auc_deep_neural_network": 0.724,
-      "auc_ensemble": 0.718,
-      "auc_catalog_rule": 0.507
+      "cells": 1496,
+      "auc_logistic_regression": 0.71,
+      "auc_deep_neural_network": 0.729,
+      "auc_ensemble": 0.725,
+      "auc_catalog_rule": 0.533
+    },
+    {
+      "taxon_key": 55745,
+      "name": "Trifolium repens",
+      "cells": 1003,
+      "auc_logistic_regression": 0.698,
+      "auc_deep_neural_network": 0.722,
+      "auc_ensemble": 0.722,
+      "auc_catalog_rule": 0.443
+    },
+    {
+      "taxon_key": 55752,
+      "name": "Valerianella locusta",
+      "cells": 510,
+      "auc_logistic_regression": 0.881,
+      "auc_deep_neural_network": 0.883,
+      "auc_ensemble": 0.884,
+      "auc_catalog_rule": 0.662
     },
     {
       "taxon_key": 55800,
       "name": "Tulipa",
-      "cells": 955,
-      "auc_logistic_regression": 0.775,
-      "auc_deep_neural_network": 0.784,
-      "auc_ensemble": 0.786,
-      "auc_catalog_rule": 0.429
+      "cells": 947,
+      "auc_logistic_regression": 0.737,
+      "auc_deep_neural_network": 0.747,
+      "auc_ensemble": 0.748,
+      "auc_catalog_rule": 0.457
+    },
+    {
+      "taxon_key": 55821,
+      "name": "Rumex acetosa",
+      "cells": 518,
+      "auc_logistic_regression": 0.861,
+      "auc_deep_neural_network": 0.873,
+      "auc_ensemble": 0.872,
+      "auc_catalog_rule": 0.496
     },
     {
       "taxon_key": 55882,
       "name": "Hedera helix",
-      "cells": 1037,
-      "auc_logistic_regression": 0.747,
-      "auc_deep_neural_network": 0.749,
-      "auc_ensemble": 0.753,
-      "auc_catalog_rule": 0.482
+      "cells": 1027,
+      "auc_logistic_regression": 0.754,
+      "auc_deep_neural_network": 0.754,
+      "auc_ensemble": 0.758,
+      "auc_catalog_rule": 0.532
     },
     {
       "taxon_key": 56006,
       "name": "Zantedeschia aethiopica",
-      "cells": 1248,
-      "auc_logistic_regression": 0.862,
-      "auc_deep_neural_network": 0.868,
-      "auc_ensemble": 0.868,
-      "auc_catalog_rule": 0.623
+      "cells": 1245,
+      "auc_logistic_regression": 0.88,
+      "auc_deep_neural_network": 0.882,
+      "auc_ensemble": 0.885,
+      "auc_catalog_rule": 0.661
     },
     {
       "taxon_key": 56017,
       "name": "Tamarix aphylla",
-      "cells": 366,
-      "auc_logistic_regression": 0.898,
-      "auc_deep_neural_network": 0.913,
-      "auc_ensemble": 0.912,
-      "auc_catalog_rule": 0.643
+      "cells": 368,
+      "auc_logistic_regression": 0.911,
+      "auc_deep_neural_network": 0.92,
+      "auc_ensemble": 0.92,
+      "auc_catalog_rule": 0.677
     },
     {
       "taxon_key": 56027,
       "name": "Narcissus tazetta",
       "cells": 901,
-      "auc_logistic_regression": 0.841,
-      "auc_deep_neural_network": 0.862,
-      "auc_ensemble": 0.857,
-      "auc_catalog_rule": 0.674
+      "auc_logistic_regression": 0.859,
+      "auc_deep_neural_network": 0.877,
+      "auc_ensemble": 0.874,
+      "auc_catalog_rule": 0.708
+    },
+    {
+      "taxon_key": 56090,
+      "name": "Morus alba",
+      "cells": 1120,
+      "auc_logistic_regression": 0.738,
+      "auc_deep_neural_network": 0.752,
+      "auc_ensemble": 0.749,
+      "auc_catalog_rule": 0.427
     },
     {
       "taxon_key": 56165,
       "name": "Verbascum",
-      "cells": 1386,
-      "auc_logistic_regression": 0.753,
-      "auc_deep_neural_network": 0.77,
-      "auc_ensemble": 0.767,
-      "auc_catalog_rule": 0.298
+      "cells": 1382,
+      "auc_logistic_regression": 0.725,
+      "auc_deep_neural_network": 0.74,
+      "auc_ensemble": 0.739,
+      "auc_catalog_rule": 0.359
+    },
+    {
+      "taxon_key": 57057,
+      "name": "Medicago sativa",
+      "cells": 987,
+      "auc_logistic_regression": 0.723,
+      "auc_deep_neural_network": 0.744,
+      "auc_ensemble": 0.741,
+      "auc_catalog_rule": 0.36
     },
     {
       "taxon_key": 57140,
       "name": "Olea europaea",
-      "cells": 969,
-      "auc_logistic_regression": 0.858,
-      "auc_deep_neural_network": 0.867,
-      "auc_ensemble": 0.867,
-      "auc_catalog_rule": 0.638
+      "cells": 973,
+      "auc_logistic_regression": 0.88,
+      "auc_deep_neural_network": 0.879,
+      "auc_ensemble": 0.883,
+      "auc_catalog_rule": 0.674
+    },
+    {
+      "taxon_key": 57182,
+      "name": "Hordeum vulgare",
+      "cells": 869,
+      "auc_logistic_regression": 0.776,
+      "auc_deep_neural_network": 0.794,
+      "auc_ensemble": 0.789,
+      "auc_catalog_rule": 0.368
+    },
+    {
+      "taxon_key": 57309,
+      "name": "Vicia faba",
+      "cells": 1072,
+      "auc_logistic_regression": 0.784,
+      "auc_deep_neural_network": 0.815,
+      "auc_ensemble": 0.81,
+      "auc_catalog_rule": 0.646
     },
     {
       "taxon_key": 57359,
       "name": "Suaeda",
-      "cells": 604,
-      "auc_logistic_regression": 0.626,
-      "auc_deep_neural_network": 0.732,
-      "auc_ensemble": 0.711,
-      "auc_catalog_rule": 0.495
+      "cells": 601,
+      "auc_logistic_regression": 0.658,
+      "auc_deep_neural_network": 0.744,
+      "auc_ensemble": 0.733,
+      "auc_catalog_rule": 0.542
+    },
+    {
+      "taxon_key": 57563,
+      "name": "Cynara cardunculus",
+      "cells": 886,
+      "auc_logistic_regression": 0.857,
+      "auc_deep_neural_network": 0.854,
+      "auc_ensemble": 0.859,
+      "auc_catalog_rule": 0.564
+    },
+    {
+      "taxon_key": 57912,
+      "name": "Artemisia dracunculus",
+      "cells": 411,
+      "auc_logistic_regression": 0.885,
+      "auc_deep_neural_network": 0.88,
+      "auc_ensemble": 0.885,
+      "auc_catalog_rule": 0.138
     },
     {
       "taxon_key": 57983,
       "name": "Helianthus annuus",
-      "cells": 1532,
-      "auc_logistic_regression": 0.613,
-      "auc_deep_neural_network": 0.623,
-      "auc_ensemble": 0.626,
-      "auc_catalog_rule": 0.411
+      "cells": 1534,
+      "auc_logistic_regression": 0.6,
+      "auc_deep_neural_network": 0.608,
+      "auc_ensemble": 0.612,
+      "auc_catalog_rule": 0.455
+    },
+    {
+      "taxon_key": 58202,
+      "name": "Malva parviflora",
+      "cells": 700,
+      "auc_logistic_regression": 0.822,
+      "auc_deep_neural_network": 0.859,
+      "auc_ensemble": 0.855,
+      "auc_catalog_rule": 0.632
     },
     {
       "taxon_key": 58300,
       "name": "Punica granatum",
-      "cells": 1523,
-      "auc_logistic_regression": 0.673,
-      "auc_deep_neural_network": 0.695,
-      "auc_ensemble": 0.692,
-      "auc_catalog_rule": 0.571
+      "cells": 1519,
+      "auc_logistic_regression": 0.715,
+      "auc_deep_neural_network": 0.733,
+      "auc_ensemble": 0.73,
+      "auc_catalog_rule": 0.608
     },
     {
       "taxon_key": 58316,
       "name": "Salix babylonica",
-      "cells": 1359,
-      "auc_logistic_regression": 0.733,
-      "auc_deep_neural_network": 0.762,
-      "auc_ensemble": 0.759,
-      "auc_catalog_rule": 0.357
+      "cells": 1361,
+      "auc_logistic_regression": 0.737,
+      "auc_deep_neural_network": 0.756,
+      "auc_ensemble": 0.756,
+      "auc_catalog_rule": 0.414
     },
     {
       "taxon_key": 58371,
       "name": "Cynodon dactylon",
-      "cells": 1004,
-      "auc_logistic_regression": 0.725,
-      "auc_deep_neural_network": 0.737,
-      "auc_ensemble": 0.738,
-      "auc_catalog_rule": 0.51
+      "cells": 1007,
+      "auc_logistic_regression": 0.764,
+      "auc_deep_neural_network": 0.762,
+      "auc_ensemble": 0.765,
+      "auc_catalog_rule": 0.556
     },
     {
       "taxon_key": 58372,
       "name": "Distichlis spicata",
-      "cells": 320,
-      "auc_logistic_regression": 0.657,
-      "auc_deep_neural_network": 0.705,
-      "auc_ensemble": 0.695,
-      "auc_catalog_rule": 0.462
+      "cells": 317,
+      "auc_logistic_regression": 0.673,
+      "auc_deep_neural_network": 0.651,
+      "auc_ensemble": 0.681,
+      "auc_catalog_rule": 0.509
+    },
+    {
+      "taxon_key": 58389,
+      "name": "Sorghum bicolor",
+      "cells": 1006,
+      "auc_logistic_regression": 0.669,
+      "auc_deep_neural_network": 0.69,
+      "auc_ensemble": 0.688,
+      "auc_catalog_rule": 0.466
     },
     {
       "taxon_key": 58392,
       "name": "Typha domingensis",
-      "cells": 732,
-      "auc_logistic_regression": 0.716,
-      "auc_deep_neural_network": 0.722,
-      "auc_ensemble": 0.729,
-      "auc_catalog_rule": 0.612
+      "cells": 734,
+      "auc_logistic_regression": 0.759,
+      "auc_deep_neural_network": 0.761,
+      "auc_ensemble": 0.765,
+      "auc_catalog_rule": 0.645
+    },
+    {
+      "taxon_key": 58460,
+      "name": "Satureja hortensis",
+      "cells": 108,
+      "auc_logistic_regression": 0.881,
+      "auc_deep_neural_network": 0.894,
+      "auc_ensemble": 0.893,
+      "auc_catalog_rule": 0.236
     },
     {
       "taxon_key": 58465,
       "name": "Dahlia",
-      "cells": 1310,
-      "auc_logistic_regression": 0.72,
-      "auc_deep_neural_network": 0.738,
+      "cells": 1313,
+      "auc_logistic_regression": 0.722,
+      "auc_deep_neural_network": 0.734,
       "auc_ensemble": 0.736,
-      "auc_catalog_rule": 0.541
+      "auc_catalog_rule": 0.582
+    },
+    {
+      "taxon_key": 58788,
+      "name": "Apium graveolens",
+      "cells": 579,
+      "auc_logistic_regression": 0.736,
+      "auc_deep_neural_network": 0.737,
+      "auc_ensemble": 0.743,
+      "auc_catalog_rule": 0.698
+    },
+    {
+      "taxon_key": 58961,
+      "name": "Plantago major",
+      "cells": 843,
+      "auc_logistic_regression": 0.727,
+      "auc_deep_neural_network": 0.731,
+      "auc_ensemble": 0.736,
+      "auc_catalog_rule": 0.427
+    },
+    {
+      "taxon_key": 58991,
+      "name": "Portulaca oleracea",
+      "cells": 1078,
+      "auc_logistic_regression": 0.626,
+      "auc_deep_neural_network": 0.656,
+      "auc_ensemble": 0.653,
+      "auc_catalog_rule": 0.559
+    },
+    {
+      "taxon_key": 59254,
+      "name": "Allium schoenoprasum",
+      "cells": 1050,
+      "auc_logistic_regression": 0.804,
+      "auc_deep_neural_network": 0.807,
+      "auc_ensemble": 0.808,
+      "auc_catalog_rule": 0.252
+    },
+    {
+      "taxon_key": 59778,
+      "name": "Pastinaca sativa",
+      "cells": 628,
+      "auc_logistic_regression": 0.853,
+      "auc_deep_neural_network": 0.869,
+      "auc_ensemble": 0.868,
+      "auc_catalog_rule": 0.275
+    },
+    {
+      "taxon_key": 59901,
+      "name": "Melissa officinalis",
+      "cells": 929,
+      "auc_logistic_regression": 0.769,
+      "auc_deep_neural_network": 0.788,
+      "auc_ensemble": 0.786,
+      "auc_catalog_rule": 0.396
     },
     {
       "taxon_key": 59945,
       "name": "Gladiolus",
-      "cells": 1348,
-      "auc_logistic_regression": 0.677,
-      "auc_deep_neural_network": 0.707,
-      "auc_ensemble": 0.701,
-      "auc_catalog_rule": 0.454
+      "cells": 1340,
+      "auc_logistic_regression": 0.703,
+      "auc_deep_neural_network": 0.719,
+      "auc_ensemble": 0.719,
+      "auc_catalog_rule": 0.498
     },
     {
       "taxon_key": 60001,
       "name": "Dianthus",
-      "cells": 1619,
-      "auc_logistic_regression": 0.698,
-      "auc_deep_neural_network": 0.716,
-      "auc_ensemble": 0.714,
-      "auc_catalog_rule": 0.384
+      "cells": 1611,
+      "auc_logistic_regression": 0.661,
+      "auc_deep_neural_network": 0.683,
+      "auc_ensemble": 0.681,
+      "auc_catalog_rule": 0.429
     },
     {
       "taxon_key": 60218,
       "name": "Ficus carica",
-      "cells": 1477,
-      "auc_logistic_regression": 0.722,
-      "auc_deep_neural_network": 0.735,
-      "auc_ensemble": 0.734,
-      "auc_catalog_rule": 0.504
+      "cells": 1479,
+      "auc_logistic_regression": 0.755,
+      "auc_deep_neural_network": 0.767,
+      "auc_ensemble": 0.766,
+      "auc_catalog_rule": 0.552
+    },
+    {
+      "taxon_key": 60265,
+      "name": "Asparagus officinalis",
+      "cells": 1019,
+      "auc_logistic_regression": 0.766,
+      "auc_deep_neural_network": 0.785,
+      "auc_ensemble": 0.782,
+      "auc_catalog_rule": 0.283
     },
     {
       "taxon_key": 60879,
       "name": "Ipomoea pes-caprae",
-      "cells": 889,
-      "auc_logistic_regression": 0.914,
-      "auc_deep_neural_network": 0.916,
-      "auc_ensemble": 0.917,
-      "auc_catalog_rule": 0.844
+      "cells": 905,
+      "auc_logistic_regression": 0.923,
+      "auc_deep_neural_network": 0.927,
+      "auc_ensemble": 0.926,
+      "auc_catalog_rule": 0.85
+    },
+    {
+      "taxon_key": 61369,
+      "name": "Momordica charantia",
+      "cells": 1170,
+      "auc_logistic_regression": 0.789,
+      "auc_deep_neural_network": 0.805,
+      "auc_ensemble": 0.803,
+      "auc_catalog_rule": 0.758
+    },
+    {
+      "taxon_key": 61381,
+      "name": "Oryza sativa",
+      "cells": 646,
+      "auc_logistic_regression": 0.769,
+      "auc_deep_neural_network": 0.77,
+      "auc_ensemble": 0.774,
+      "auc_catalog_rule": 0.712
     },
     {
       "taxon_key": 61393,
       "name": "Vanilla planifolia",
-      "cells": 386,
-      "auc_logistic_regression": 0.862,
-      "auc_deep_neural_network": 0.86,
-      "auc_ensemble": 0.863,
-      "auc_catalog_rule": 0.85
+      "cells": 388,
+      "auc_logistic_regression": 0.86,
+      "auc_deep_neural_network": 0.867,
+      "auc_ensemble": 0.864,
+      "auc_catalog_rule": 0.855
+    },
+    {
+      "taxon_key": 61395,
+      "name": "Agaricus bisporus",
+      "cells": 227,
+      "auc_logistic_regression": 0.649,
+      "auc_deep_neural_network": 0.644,
+      "auc_ensemble": 0.65,
+      "auc_catalog_rule": 0.414
     },
     {
       "taxon_key": 61396,
       "name": "Origanum vulgare",
-      "cells": 1015,
-      "auc_logistic_regression": 0.807,
-      "auc_deep_neural_network": 0.808,
-      "auc_ensemble": 0.81,
-      "auc_catalog_rule": 0.271
+      "cells": 1014,
+      "auc_logistic_regression": 0.777,
+      "auc_deep_neural_network": 0.779,
+      "auc_ensemble": 0.781,
+      "auc_catalog_rule": 0.331
     },
     {
       "taxon_key": 61398,
       "name": "Ocimum basilicum",
-      "cells": 1259,
-      "auc_logistic_regression": 0.603,
-      "auc_deep_neural_network": 0.621,
-      "auc_ensemble": 0.621,
-      "auc_catalog_rule": 0.566
+      "cells": 1263,
+      "auc_logistic_regression": 0.628,
+      "auc_deep_neural_network": 0.655,
+      "auc_ensemble": 0.649,
+      "auc_catalog_rule": 0.598
     },
     {
       "taxon_key": 61432,
       "name": "Prunus laurocerasus",
-      "cells": 706,
-      "auc_logistic_regression": 0.896,
-      "auc_deep_neural_network": 0.906,
-      "auc_ensemble": 0.905,
-      "auc_catalog_rule": 0.356
+      "cells": 700,
+      "auc_logistic_regression": 0.898,
+      "auc_deep_neural_network": 0.911,
+      "auc_ensemble": 0.907,
+      "auc_catalog_rule": 0.425
+    },
+    {
+      "taxon_key": 61964,
+      "name": "Prunus avium",
+      "cells": 741,
+      "auc_logistic_regression": 0.853,
+      "auc_deep_neural_network": 0.855,
+      "auc_ensemble": 0.856,
+      "auc_catalog_rule": 0.37
     },
     {
       "taxon_key": 62652,
       "name": "Mentha spicata",
-      "cells": 1236,
-      "auc_logistic_regression": 0.625,
-      "auc_deep_neural_network": 0.634,
+      "cells": 1237,
+      "auc_logistic_regression": 0.638,
+      "auc_deep_neural_network": 0.633,
       "auc_ensemble": 0.639,
-      "auc_catalog_rule": 0.434
+      "auc_catalog_rule": 0.485
+    },
+    {
+      "taxon_key": 62811,
+      "name": "Carica papaya",
+      "cells": 1439,
+      "auc_logistic_regression": 0.826,
+      "auc_deep_neural_network": 0.827,
+      "auc_ensemble": 0.829,
+      "auc_catalog_rule": 0.808
+    },
+    {
+      "taxon_key": 62831,
+      "name": "Persea americana",
+      "cells": 1579,
+      "auc_logistic_regression": 0.76,
+      "auc_deep_neural_network": 0.768,
+      "auc_ensemble": 0.768,
+      "auc_catalog_rule": 0.696
     },
     {
       "taxon_key": 62839,
       "name": "Delonix regia",
-      "cells": 1290,
-      "auc_logistic_regression": 0.851,
-      "auc_deep_neural_network": 0.863,
-      "auc_ensemble": 0.86,
-      "auc_catalog_rule": 0.812
+      "cells": 1292,
+      "auc_logistic_regression": 0.862,
+      "auc_deep_neural_network": 0.869,
+      "auc_ensemble": 0.869,
+      "auc_catalog_rule": 0.817
     },
     {
       "taxon_key": 62844,
       "name": "Tamarindus indica",
-      "cells": 1168,
-      "auc_logistic_regression": 0.865,
-      "auc_deep_neural_network": 0.873,
-      "auc_ensemble": 0.871,
-      "auc_catalog_rule": 0.85
+      "cells": 1164,
+      "auc_logistic_regression": 0.87,
+      "auc_deep_neural_network": 0.878,
+      "auc_ensemble": 0.876,
+      "auc_catalog_rule": 0.852
+    },
+    {
+      "taxon_key": 62859,
+      "name": "Psidium guajava",
+      "cells": 1390,
+      "auc_logistic_regression": 0.825,
+      "auc_deep_neural_network": 0.827,
+      "auc_ensemble": 0.829,
+      "auc_catalog_rule": 0.79
     },
     {
       "taxon_key": 62888,
       "name": "Casuarina equisetifolia",
-      "cells": 927,
-      "auc_logistic_regression": 0.841,
-      "auc_deep_neural_network": 0.858,
-      "auc_ensemble": 0.856,
-      "auc_catalog_rule": 0.805
+      "cells": 917,
+      "auc_logistic_regression": 0.857,
+      "auc_deep_neural_network": 0.886,
+      "auc_ensemble": 0.877,
+      "auc_catalog_rule": 0.815
     },
     {
       "taxon_key": 62891,
       "name": "Casuarina",
-      "cells": 1119,
-      "auc_logistic_regression": 0.799,
-      "auc_deep_neural_network": 0.825,
-      "auc_ensemble": 0.82,
-      "auc_catalog_rule": 0.738
+      "cells": 1114,
+      "auc_logistic_regression": 0.828,
+      "auc_deep_neural_network": 0.857,
+      "auc_ensemble": 0.851,
+      "auc_catalog_rule": 0.757
+    },
+    {
+      "taxon_key": 62941,
+      "name": "Ipomoea batatas",
+      "cells": 1384,
+      "auc_logistic_regression": 0.666,
+      "auc_deep_neural_network": 0.705,
+      "auc_ensemble": 0.696,
+      "auc_catalog_rule": 0.631
+    },
+    {
+      "taxon_key": 63190,
+      "name": "Solanum melongena",
+      "cells": 1073,
+      "auc_logistic_regression": 0.692,
+      "auc_deep_neural_network": 0.707,
+      "auc_ensemble": 0.705,
+      "auc_catalog_rule": 0.656
+    },
+    {
+      "taxon_key": 63205,
+      "name": "Arachis hypogaea",
+      "cells": 351,
+      "auc_logistic_regression": 0.663,
+      "auc_deep_neural_network": 0.711,
+      "auc_ensemble": 0.699,
+      "auc_catalog_rule": 0.606
+    },
+    {
+      "taxon_key": 63735,
+      "name": "Prunus domestica",
+      "cells": 1015,
+      "auc_logistic_regression": 0.8,
+      "auc_deep_neural_network": 0.796,
+      "auc_ensemble": 0.802,
+      "auc_catalog_rule": 0.398
+    },
+    {
+      "taxon_key": 63749,
+      "name": "Vaccinium macrocarpon",
+      "cells": 278,
+      "auc_logistic_regression": 0.899,
+      "auc_deep_neural_network": 0.824,
+      "auc_ensemble": 0.876,
+      "auc_catalog_rule": 0.222
     },
     {
       "taxon_key": 63916,
       "name": "Adiantum capillus-veneris",
-      "cells": 843,
+      "cells": 859,
+      "auc_logistic_regression": 0.769,
+      "auc_deep_neural_network": 0.77,
+      "auc_ensemble": 0.773,
+      "auc_catalog_rule": 0.585
+    },
+    {
+      "taxon_key": 63935,
+      "name": "Juglans regia",
+      "cells": 915,
+      "auc_logistic_regression": 0.82,
+      "auc_deep_neural_network": 0.836,
+      "auc_ensemble": 0.832,
+      "auc_catalog_rule": 0.406
+    },
+    {
+      "taxon_key": 63951,
+      "name": "Pyrus communis",
+      "cells": 1036,
       "auc_logistic_regression": 0.731,
-      "auc_deep_neural_network": 0.734,
-      "auc_ensemble": 0.738,
-      "auc_catalog_rule": 0.542
+      "auc_deep_neural_network": 0.739,
+      "auc_ensemble": 0.745,
+      "auc_catalog_rule": 0.418
     },
     {
       "taxon_key": 64103,
       "name": "Agave americana",
-      "cells": 1224,
-      "auc_logistic_regression": 0.791,
-      "auc_deep_neural_network": 0.812,
-      "auc_ensemble": 0.81,
-      "auc_catalog_rule": 0.584
+      "cells": 1214,
+      "auc_logistic_regression": 0.821,
+      "auc_deep_neural_network": 0.841,
+      "auc_ensemble": 0.838,
+      "auc_catalog_rule": 0.624
     },
     {
       "taxon_key": 64119,
       "name": "Opuntia ficus-indica",
-      "cells": 1061,
-      "auc_logistic_regression": 0.818,
-      "auc_deep_neural_network": 0.849,
-      "auc_ensemble": 0.843,
-      "auc_catalog_rule": 0.6
+      "cells": 1071,
+      "auc_logistic_regression": 0.843,
+      "auc_deep_neural_network": 0.871,
+      "auc_ensemble": 0.865,
+      "auc_catalog_rule": 0.636
     },
     {
       "taxon_key": 64128,
       "name": "Eucalyptus camaldulensis",
-      "cells": 917,
-      "auc_logistic_regression": 0.82,
-      "auc_deep_neural_network": 0.851,
-      "auc_ensemble": 0.844,
-      "auc_catalog_rule": 0.607
+      "cells": 920,
+      "auc_logistic_regression": 0.855,
+      "auc_deep_neural_network": 0.873,
+      "auc_ensemble": 0.871,
+      "auc_catalog_rule": 0.647
+    },
+    {
+      "taxon_key": 64161,
+      "name": "Triticum aestivum",
+      "cells": 1310,
+      "auc_logistic_regression": 0.682,
+      "auc_deep_neural_network": 0.718,
+      "auc_ensemble": 0.708,
+      "auc_catalog_rule": 0.381
     },
     {
       "taxon_key": 64237,
       "name": "Phragmites australis",
-      "cells": 806,
-      "auc_logistic_regression": 0.716,
-      "auc_deep_neural_network": 0.75,
-      "auc_ensemble": 0.742,
-      "auc_catalog_rule": 0.319
+      "cells": 812,
+      "auc_logistic_regression": 0.692,
+      "auc_deep_neural_network": 0.721,
+      "auc_ensemble": 0.715,
+      "auc_catalog_rule": 0.368
+    },
+    {
+      "taxon_key": 64241,
+      "name": "Brassica juncea",
+      "cells": 396,
+      "auc_logistic_regression": 0.674,
+      "auc_deep_neural_network": 0.692,
+      "auc_ensemble": 0.691,
+      "auc_catalog_rule": 0.417
     },
     {
       "taxon_key": 64261,
       "name": "Cupressus sempervirens",
       "cells": 716,
-      "auc_logistic_regression": 0.805,
-      "auc_deep_neural_network": 0.817,
-      "auc_ensemble": 0.817,
-      "auc_catalog_rule": 0.616
+      "auc_logistic_regression": 0.838,
+      "auc_deep_neural_network": 0.853,
+      "auc_ensemble": 0.851,
+      "auc_catalog_rule": 0.656
+    },
+    {
+      "taxon_key": 64340,
+      "name": "Theobroma cacao",
+      "cells": 996,
+      "auc_logistic_regression": 0.89,
+      "auc_deep_neural_network": 0.895,
+      "auc_ensemble": 0.893,
+      "auc_catalog_rule": 0.884
+    },
+    {
+      "taxon_key": 64342,
+      "name": "Coffea arabica",
+      "cells": 1110,
+      "auc_logistic_regression": 0.851,
+      "auc_deep_neural_network": 0.871,
+      "auc_ensemble": 0.865,
+      "auc_catalog_rule": 0.811
+    },
+    {
+      "taxon_key": 67593,
+      "name": "Carya illinoinensis",
+      "cells": 618,
+      "auc_logistic_regression": 0.848,
+      "auc_deep_neural_network": 0.868,
+      "auc_ensemble": 0.866,
+      "auc_catalog_rule": 0.495
+    },
+    {
+      "taxon_key": 67715,
+      "name": "Capparis spinosa",
+      "cells": 311,
+      "auc_logistic_regression": 0.811,
+      "auc_deep_neural_network": 0.823,
+      "auc_ensemble": 0.825,
+      "auc_catalog_rule": 0.519
+    },
+    {
+      "taxon_key": 67759,
+      "name": "Coriandrum sativum",
+      "cells": 1308,
+      "auc_logistic_regression": 0.618,
+      "auc_deep_neural_network": 0.646,
+      "auc_ensemble": 0.645,
+      "auc_catalog_rule": 0.498
     },
     {
       "taxon_key": 67824,
       "name": "Bignonia",
-      "cells": 687,
-      "auc_logistic_regression": 0.784,
-      "auc_deep_neural_network": 0.817,
-      "auc_ensemble": 0.813,
-      "auc_catalog_rule": 0.491
+      "cells": 695,
+      "auc_logistic_regression": 0.801,
+      "auc_deep_neural_network": 0.825,
+      "auc_ensemble": 0.823,
+      "auc_catalog_rule": 0.532
     },
     {
       "taxon_key": 68562,
       "name": "Cosmos bipinnatus",
-      "cells": 1416,
-      "auc_logistic_regression": 0.752,
-      "auc_deep_neural_network": 0.759,
-      "auc_ensemble": 0.764,
-      "auc_catalog_rule": 0.314
+      "cells": 1420,
+      "auc_logistic_regression": 0.742,
+      "auc_deep_neural_network": 0.751,
+      "auc_ensemble": 0.756,
+      "auc_catalog_rule": 0.362
+    },
+    {
+      "taxon_key": 68666,
+      "name": "Phyllanthus emblica",
+      "cells": 262,
+      "auc_logistic_regression": 0.864,
+      "auc_deep_neural_network": 0.871,
+      "auc_ensemble": 0.871,
+      "auc_catalog_rule": 0.784
     },
     {
       "taxon_key": 68679,
       "name": "Cassia fistula",
-      "cells": 1101,
-      "auc_logistic_regression": 0.841,
-      "auc_deep_neural_network": 0.85,
-      "auc_ensemble": 0.848,
-      "auc_catalog_rule": 0.824
+      "cells": 1105,
+      "auc_logistic_regression": 0.85,
+      "auc_deep_neural_network": 0.864,
+      "auc_ensemble": 0.859,
+      "auc_catalog_rule": 0.83
     },
     {
       "taxon_key": 68685,
       "name": "Cassia",
-      "cells": 1229,
-      "auc_logistic_regression": 0.84,
-      "auc_deep_neural_network": 0.843,
-      "auc_ensemble": 0.844,
-      "auc_catalog_rule": 0.806
+      "cells": 1231,
+      "auc_logistic_regression": 0.852,
+      "auc_deep_neural_network": 0.86,
+      "auc_ensemble": 0.858,
+      "auc_catalog_rule": 0.814
+    },
+    {
+      "taxon_key": 68763,
+      "name": "Prunus cerasus",
+      "cells": 493,
+      "auc_logistic_regression": 0.851,
+      "auc_deep_neural_network": 0.841,
+      "auc_ensemble": 0.851,
+      "auc_catalog_rule": 0.225
+    },
+    {
+      "taxon_key": 69135,
+      "name": "Capsicum chinense",
+      "cells": 269,
+      "auc_logistic_regression": 0.772,
+      "auc_deep_neural_network": 0.767,
+      "auc_ensemble": 0.772,
+      "auc_catalog_rule": 0.757
     },
     {
       "taxon_key": 69235,
       "name": "Anthurium andraeanum",
-      "cells": 1088,
-      "auc_logistic_regression": 0.733,
-      "auc_deep_neural_network": 0.734,
-      "auc_ensemble": 0.737,
-      "auc_catalog_rule": 0.674
+      "cells": 1083,
+      "auc_logistic_regression": 0.75,
+      "auc_deep_neural_network": 0.752,
+      "auc_ensemble": 0.756,
+      "auc_catalog_rule": 0.697
     },
     {
       "taxon_key": 69807,
       "name": "Philodendron",
-      "cells": 1129,
-      "auc_logistic_regression": 0.762,
-      "auc_deep_neural_network": 0.776,
-      "auc_ensemble": 0.772,
-      "auc_catalog_rule": 0.749
+      "cells": 1137,
+      "auc_logistic_regression": 0.777,
+      "auc_deep_neural_network": 0.792,
+      "auc_ensemble": 0.786,
+      "auc_catalog_rule": 0.762
+    },
+    {
+      "taxon_key": 69936,
+      "name": "Prunus amygdalus",
+      "cells": 588,
+      "auc_logistic_regression": 0.891,
+      "auc_deep_neural_network": 0.893,
+      "auc_ensemble": 0.895,
+      "auc_catalog_rule": 0.524
+    },
+    {
+      "taxon_key": 69973,
+      "name": "Annona squamosa",
+      "cells": 1078,
+      "auc_logistic_regression": 0.871,
+      "auc_deep_neural_network": 0.878,
+      "auc_ensemble": 0.875,
+      "auc_catalog_rule": 0.864
+    },
+    {
+      "taxon_key": 70027,
+      "name": "Artocarpus altilis",
+      "cells": 917,
+      "auc_logistic_regression": 0.926,
+      "auc_deep_neural_network": 0.93,
+      "auc_ensemble": 0.929,
+      "auc_catalog_rule": 0.907
+    },
+    {
+      "taxon_key": 70054,
+      "name": "Citrullus lanatus",
+      "cells": 1445,
+      "auc_logistic_regression": 0.627,
+      "auc_deep_neural_network": 0.634,
+      "auc_ensemble": 0.634,
+      "auc_catalog_rule": 0.541
     },
     {
       "taxon_key": 71134,
       "name": "Lavandula dentata",
-      "cells": 721,
-      "auc_logistic_regression": 0.849,
-      "auc_deep_neural_network": 0.849,
-      "auc_ensemble": 0.854,
-      "auc_catalog_rule": 0.674
+      "cells": 723,
+      "auc_logistic_regression": 0.869,
+      "auc_deep_neural_network": 0.877,
+      "auc_ensemble": 0.877,
+      "auc_catalog_rule": 0.707
     },
     {
       "taxon_key": 72056,
       "name": "Cissus",
-      "cells": 789,
-      "auc_logistic_regression": 0.737,
-      "auc_deep_neural_network": 0.758,
-      "auc_ensemble": 0.751,
-      "auc_catalog_rule": 0.739
+      "cells": 793,
+      "auc_logistic_regression": 0.768,
+      "auc_deep_neural_network": 0.779,
+      "auc_ensemble": 0.778,
+      "auc_catalog_rule": 0.752
     },
     {
       "taxon_key": 72232,
       "name": "Melaleuca",
-      "cells": 1140,
-      "auc_logistic_regression": 0.735,
-      "auc_deep_neural_network": 0.739,
-      "auc_ensemble": 0.743,
-      "auc_catalog_rule": 0.652
+      "cells": 1132,
+      "auc_logistic_regression": 0.774,
+      "auc_deep_neural_network": 0.781,
+      "auc_ensemble": 0.783,
+      "auc_catalog_rule": 0.684
     },
     {
       "taxon_key": 72281,
       "name": "Pelargonium",
-      "cells": 1145,
-      "auc_logistic_regression": 0.735,
-      "auc_deep_neural_network": 0.78,
-      "auc_ensemble": 0.769,
-      "auc_catalog_rule": 0.62
+      "cells": 1108,
+      "auc_logistic_regression": 0.773,
+      "auc_deep_neural_network": 0.798,
+      "auc_ensemble": 0.799,
+      "auc_catalog_rule": 0.659
+    },
+    {
+      "taxon_key": 75363,
+      "name": "Allium sativum",
+      "cells": 650,
+      "auc_logistic_regression": 0.733,
+      "auc_deep_neural_network": 0.747,
+      "auc_ensemble": 0.752,
+      "auc_catalog_rule": 0.312
+    },
+    {
+      "taxon_key": 75445,
+      "name": "Anethum graveolens",
+      "cells": 871,
+      "auc_logistic_regression": 0.749,
+      "auc_deep_neural_network": 0.763,
+      "auc_ensemble": 0.764,
+      "auc_catalog_rule": 0.296
     },
     {
       "taxon_key": 75499,
       "name": "Araujia sericifera",
-      "cells": 432,
-      "auc_logistic_regression": 0.917,
-      "auc_deep_neural_network": 0.915,
-      "auc_ensemble": 0.919,
-      "auc_catalog_rule": 0.549
+      "cells": 442,
+      "auc_logistic_regression": 0.934,
+      "auc_deep_neural_network": 0.929,
+      "auc_ensemble": 0.934,
+      "auc_catalog_rule": 0.591
+    },
+    {
+      "taxon_key": 75566,
+      "name": "Armoracia rusticana",
+      "cells": 585,
+      "auc_logistic_regression": 0.851,
+      "auc_deep_neural_network": 0.855,
+      "auc_ensemble": 0.855,
+      "auc_catalog_rule": 0.223
     },
     {
       "taxon_key": 75721,
       "name": "Aubrieta deltoidea",
-      "cells": 457,
-      "auc_logistic_regression": 0.926,
-      "auc_deep_neural_network": 0.916,
-      "auc_ensemble": 0.922,
-      "auc_catalog_rule": 0.61
+      "cells": 456,
+      "auc_logistic_regression": 0.921,
+      "auc_deep_neural_network": 0.918,
+      "auc_ensemble": 0.921,
+      "auc_catalog_rule": 0.648
     },
     {
       "taxon_key": 75723,
       "name": "Avicennia marina",
       "cells": 262,
-      "auc_logistic_regression": 0.882,
-      "auc_deep_neural_network": 0.912,
-      "auc_ensemble": 0.908,
-      "auc_catalog_rule": 0.791
+      "auc_logistic_regression": 0.897,
+      "auc_deep_neural_network": 0.916,
+      "auc_ensemble": 0.915,
+      "auc_catalog_rule": 0.801
+    },
+    {
+      "taxon_key": 75869,
+      "name": "Brassica napus",
+      "cells": 933,
+      "auc_logistic_regression": 0.767,
+      "auc_deep_neural_network": 0.784,
+      "auc_ensemble": 0.781,
+      "auc_catalog_rule": 0.457
     },
     {
       "taxon_key": 75931,
       "name": "Calendula officinalis",
-      "cells": 1142,
-      "auc_logistic_regression": 0.773,
-      "auc_deep_neural_network": 0.789,
-      "auc_ensemble": 0.787,
-      "auc_catalog_rule": 0.463
+      "cells": 1135,
+      "auc_logistic_regression": 0.753,
+      "auc_deep_neural_network": 0.767,
+      "auc_ensemble": 0.767,
+      "auc_catalog_rule": 0.509
     },
     {
       "taxon_key": 75995,
       "name": "Campsis radicans",
-      "cells": 1022,
-      "auc_logistic_regression": 0.798,
-      "auc_deep_neural_network": 0.813,
-      "auc_ensemble": 0.811,
-      "auc_catalog_rule": 0.305
+      "cells": 1021,
+      "auc_logistic_regression": 0.802,
+      "auc_deep_neural_network": 0.803,
+      "auc_ensemble": 0.805,
+      "auc_catalog_rule": 0.366
+    },
+    {
+      "taxon_key": 76135,
+      "name": "Carthamus tinctorius",
+      "cells": 536,
+      "auc_logistic_regression": 0.738,
+      "auc_deep_neural_network": 0.746,
+      "auc_ensemble": 0.749,
+      "auc_catalog_rule": 0.325
     },
     {
       "taxon_key": 76225,
       "name": "Cestrum nocturnum",
-      "cells": 780,
-      "auc_logistic_regression": 0.788,
-      "auc_deep_neural_network": 0.798,
-      "auc_ensemble": 0.798,
-      "auc_catalog_rule": 0.721
+      "cells": 778,
+      "auc_logistic_regression": 0.807,
+      "auc_deep_neural_network": 0.818,
+      "auc_ensemble": 0.818,
+      "auc_catalog_rule": 0.738
     },
     {
       "taxon_key": 76465,
       "name": "Crassula ovata",
-      "cells": 955,
-      "auc_logistic_regression": 0.728,
-      "auc_deep_neural_network": 0.759,
-      "auc_ensemble": 0.755,
-      "auc_catalog_rule": 0.573
+      "cells": 956,
+      "auc_logistic_regression": 0.75,
+      "auc_deep_neural_network": 0.77,
+      "auc_ensemble": 0.77,
+      "auc_catalog_rule": 0.608
+    },
+    {
+      "taxon_key": 76538,
+      "name": "Cucumis melo",
+      "cells": 1016,
+      "auc_logistic_regression": 0.692,
+      "auc_deep_neural_network": 0.702,
+      "auc_ensemble": 0.701,
+      "auc_catalog_rule": 0.565
+    },
+    {
+      "taxon_key": 76541,
+      "name": "Cucurbita pepo",
+      "cells": 1105,
+      "auc_logistic_regression": 0.666,
+      "auc_deep_neural_network": 0.685,
+      "auc_ensemble": 0.681,
+      "auc_catalog_rule": 0.374
+    },
+    {
+      "taxon_key": 76610,
+      "name": "Daucus carota",
+      "cells": 1259,
+      "auc_logistic_regression": 0.708,
+      "auc_deep_neural_network": 0.736,
+      "auc_ensemble": 0.735,
+      "auc_catalog_rule": 0.484
     },
     {
       "taxon_key": 76660,
       "name": "Dimorphotheca ecklonis",
-      "cells": 579,
-      "auc_logistic_regression": 0.838,
-      "auc_deep_neural_network": 0.859,
-      "auc_ensemble": 0.857,
-      "auc_catalog_rule": 0.66
+      "cells": 580,
+      "auc_logistic_regression": 0.861,
+      "auc_deep_neural_network": 0.883,
+      "auc_ensemble": 0.881,
+      "auc_catalog_rule": 0.693
+    },
+    {
+      "taxon_key": 76746,
+      "name": "Dysphania ambrosioides",
+      "cells": 739,
+      "auc_logistic_regression": 0.753,
+      "auc_deep_neural_network": 0.759,
+      "auc_ensemble": 0.762,
+      "auc_catalog_rule": 0.579
+    },
+    {
+      "taxon_key": 76949,
+      "name": "Eriobotrya japonica",
+      "cells": 1326,
+      "auc_logistic_regression": 0.832,
+      "auc_deep_neural_network": 0.83,
+      "auc_ensemble": 0.833,
+      "auc_catalog_rule": 0.633
+    },
+    {
+      "taxon_key": 77058,
+      "name": "Eruca vesicaria",
+      "cells": 652,
+      "auc_logistic_regression": 0.776,
+      "auc_deep_neural_network": 0.791,
+      "auc_ensemble": 0.79,
+      "auc_catalog_rule": 0.543
+    },
+    {
+      "taxon_key": 77299,
+      "name": "Gossypium hirsutum",
+      "cells": 564,
+      "auc_logistic_regression": 0.789,
+      "auc_deep_neural_network": 0.784,
+      "auc_ensemble": 0.79,
+      "auc_catalog_rule": 0.664
     },
     {
       "taxon_key": 77541,
       "name": "Jacaranda mimosifolia",
-      "cells": 1126,
-      "auc_logistic_regression": 0.788,
-      "auc_deep_neural_network": 0.808,
-      "auc_ensemble": 0.807,
-      "auc_catalog_rule": 0.652
+      "cells": 1124,
+      "auc_logistic_regression": 0.818,
+      "auc_deep_neural_network": 0.837,
+      "auc_ensemble": 0.834,
+      "auc_catalog_rule": 0.68
     },
     {
       "taxon_key": 77976,
       "name": "Melaleuca citrina",
-      "cells": 792,
-      "auc_logistic_regression": 0.772,
-      "auc_deep_neural_network": 0.784,
-      "auc_ensemble": 0.784,
-      "auc_catalog_rule": 0.568
+      "cells": 794,
+      "auc_logistic_regression": 0.808,
+      "auc_deep_neural_network": 0.82,
+      "auc_ensemble": 0.821,
+      "auc_catalog_rule": 0.608
+    },
+    {
+      "taxon_key": 78174,
+      "name": "Nasturtium officinale",
+      "cells": 859,
+      "auc_logistic_regression": 0.762,
+      "auc_deep_neural_network": 0.762,
+      "auc_ensemble": 0.767,
+      "auc_catalog_rule": 0.673
+    },
+    {
+      "taxon_key": 78465,
+      "name": "Petroselinum crispum",
+      "cells": 987,
+      "auc_logistic_regression": 0.693,
+      "auc_deep_neural_network": 0.706,
+      "auc_ensemble": 0.708,
+      "auc_catalog_rule": 0.507
     },
     {
       "taxon_key": 78555,
       "name": "Phoenix dactylifera",
-      "cells": 773,
-      "auc_logistic_regression": 0.818,
-      "auc_deep_neural_network": 0.834,
-      "auc_ensemble": 0.831,
-      "auc_catalog_rule": 0.649
+      "cells": 775,
+      "auc_logistic_regression": 0.842,
+      "auc_deep_neural_network": 0.852,
+      "auc_ensemble": 0.85,
+      "auc_catalog_rule": 0.677
     },
     {
       "taxon_key": 78631,
       "name": "Plumbago auriculata",
-      "cells": 1170,
-      "auc_logistic_regression": 0.745,
-      "auc_deep_neural_network": 0.755,
-      "auc_ensemble": 0.756,
-      "auc_catalog_rule": 0.65
+      "cells": 1162,
+      "auc_logistic_regression": 0.784,
+      "auc_deep_neural_network": 0.792,
+      "auc_ensemble": 0.793,
+      "auc_catalog_rule": 0.678
+    },
+    {
+      "taxon_key": 78755,
+      "name": "Prunus persica",
+      "cells": 1605,
+      "auc_logistic_regression": 0.776,
+      "auc_deep_neural_network": 0.783,
+      "auc_ensemble": 0.787,
+      "auc_catalog_rule": 0.468
     },
     {
       "taxon_key": 78960,
       "name": "Salsola soda",
-      "cells": 162,
-      "auc_logistic_regression": 0.906,
-      "auc_deep_neural_network": 0.879,
-      "auc_ensemble": 0.898,
-      "auc_catalog_rule": 0.459
+      "cells": 163,
+      "auc_logistic_regression": 0.91,
+      "auc_deep_neural_network": 0.903,
+      "auc_ensemble": 0.912,
+      "auc_catalog_rule": 0.51
     },
     {
       "taxon_key": 79058,
       "name": "Senna artemisioides",
-      "cells": 287,
-      "auc_logistic_regression": 0.92,
-      "auc_deep_neural_network": 0.919,
-      "auc_ensemble": 0.924,
-      "auc_catalog_rule": 0.516
+      "cells": 283,
+      "auc_logistic_regression": 0.941,
+      "auc_deep_neural_network": 0.936,
+      "auc_ensemble": 0.942,
+      "auc_catalog_rule": 0.562
     },
     {
       "taxon_key": 79210,
       "name": "Stenotaphrum secundatum",
-      "cells": 672,
-      "auc_logistic_regression": 0.842,
-      "auc_deep_neural_network": 0.881,
-      "auc_ensemble": 0.874,
-      "auc_catalog_rule": 0.64
+      "cells": 674,
+      "auc_logistic_regression": 0.866,
+      "auc_deep_neural_network": 0.889,
+      "auc_ensemble": 0.885,
+      "auc_catalog_rule": 0.668
     },
     {
       "taxon_key": 79312,
       "name": "Tagetes erecta",
-      "cells": 1270,
-      "auc_logistic_regression": 0.612,
-      "auc_deep_neural_network": 0.633,
-      "auc_ensemble": 0.628,
-      "auc_catalog_rule": 0.575
+      "cells": 1266,
+      "auc_logistic_regression": 0.631,
+      "auc_deep_neural_network": 0.654,
+      "auc_ensemble": 0.65,
+      "auc_catalog_rule": 0.608
+    },
+    {
+      "taxon_key": 79406,
+      "name": "Trifolium alexandrinum",
+      "cells": 188,
+      "auc_logistic_regression": 0.857,
+      "auc_deep_neural_network": 0.877,
+      "auc_ensemble": 0.88,
+      "auc_catalog_rule": 0.443
+    },
+    {
+      "taxon_key": 79519,
+      "name": "Vitis vinifera",
+      "cells": 1174,
+      "auc_logistic_regression": 0.77,
+      "auc_deep_neural_network": 0.768,
+      "auc_ensemble": 0.773,
+      "auc_catalog_rule": 0.502
     },
     {
       "taxon_key": 81500,
       "name": "Adansonia digitata",
-      "cells": 479,
-      "auc_logistic_regression": 0.874,
-      "auc_deep_neural_network": 0.882,
-      "auc_ensemble": 0.882,
-      "auc_catalog_rule": 0.793
+      "cells": 489,
+      "auc_logistic_regression": 0.875,
+      "auc_deep_neural_network": 0.88,
+      "auc_ensemble": 0.879,
+      "auc_catalog_rule": 0.802
     },
     {
       "taxon_key": 81605,
       "name": "Yucca filamentosa",
-      "cells": 684,
-      "auc_logistic_regression": 0.813,
-      "auc_deep_neural_network": 0.845,
-      "auc_ensemble": 0.837,
-      "auc_catalog_rule": 0.306
+      "cells": 691,
+      "auc_logistic_regression": 0.819,
+      "auc_deep_neural_network": 0.839,
+      "auc_ensemble": 0.835,
+      "auc_catalog_rule": 0.361
     },
     {
       "taxon_key": 81938,
       "name": "Alstroemeria",
-      "cells": 1086,
-      "auc_logistic_regression": 0.728,
-      "auc_deep_neural_network": 0.755,
-      "auc_ensemble": 0.755,
-      "auc_catalog_rule": 0.59
+      "cells": 1083,
+      "auc_logistic_regression": 0.749,
+      "auc_deep_neural_network": 0.767,
+      "auc_ensemble": 0.765,
+      "auc_catalog_rule": 0.625
     },
     {
       "taxon_key": 82671,
       "name": "Atriplex halimus",
-      "cells": 207,
-      "auc_logistic_regression": 0.914,
-      "auc_deep_neural_network": 0.912,
-      "auc_ensemble": 0.919,
-      "auc_catalog_rule": 0.626
+      "cells": 205,
+      "auc_logistic_regression": 0.933,
+      "auc_deep_neural_network": 0.93,
+      "auc_ensemble": 0.935,
+      "auc_catalog_rule": 0.655
     },
     {
       "taxon_key": 82742,
       "name": "Ceratonia siliqua",
-      "cells": 613,
-      "auc_logistic_regression": 0.886,
-      "auc_deep_neural_network": 0.893,
-      "auc_ensemble": 0.894,
-      "auc_catalog_rule": 0.642
+      "cells": 608,
+      "auc_logistic_regression": 0.91,
+      "auc_deep_neural_network": 0.905,
+      "auc_ensemble": 0.913,
+      "auc_catalog_rule": 0.673
+    },
+    {
+      "taxon_key": 82853,
+      "name": "Cydonia oblonga",
+      "cells": 1089,
+      "auc_logistic_regression": 0.83,
+      "auc_deep_neural_network": 0.83,
+      "auc_ensemble": 0.834,
+      "auc_catalog_rule": 0.534
     },
     {
       "taxon_key": 83063,
       "name": "Dianthus caryophyllus",
-      "cells": 367,
-      "auc_logistic_regression": 0.674,
-      "auc_deep_neural_network": 0.692,
+      "cells": 369,
+      "auc_logistic_regression": 0.678,
+      "auc_deep_neural_network": 0.689,
       "auc_ensemble": 0.69,
-      "auc_catalog_rule": 0.501
+      "auc_catalog_rule": 0.549
+    },
+    {
+      "taxon_key": 83583,
+      "name": "Piper nigrum",
+      "cells": 272,
+      "auc_logistic_regression": 0.892,
+      "auc_deep_neural_network": 0.88,
+      "auc_ensemble": 0.888,
+      "auc_catalog_rule": 0.888
+    },
+    {
+      "taxon_key": 84058,
+      "name": "Myrciaria floribunda",
+      "cells": 48,
+      "auc_logistic_regression": 0.928,
+      "auc_deep_neural_network": 0.913,
+      "auc_ensemble": 0.927,
+      "auc_catalog_rule": 0.879
+    },
+    {
+      "taxon_key": 84092,
+      "name": "Spinacia oleracea",
+      "cells": 248,
+      "auc_logistic_regression": 0.559,
+      "auc_deep_neural_network": 0.56,
+      "auc_ensemble": 0.57,
+      "auc_catalog_rule": 0.545
     },
     {
       "taxon_key": 84278,
       "name": "Helianthemum nummularium",
-      "cells": 289,
-      "auc_logistic_regression": 0.917,
-      "auc_deep_neural_network": 0.915,
-      "auc_ensemble": 0.917,
-      "auc_catalog_rule": 0.352
+      "cells": 283,
+      "auc_logistic_regression": 0.908,
+      "auc_deep_neural_network": 0.911,
+      "auc_ensemble": 0.911,
+      "auc_catalog_rule": 0.407
+    },
+    {
+      "taxon_key": 84838,
+      "name": "Syzygium jambos",
+      "cells": 567,
+      "auc_logistic_regression": 0.866,
+      "auc_deep_neural_network": 0.876,
+      "auc_ensemble": 0.875,
+      "auc_catalog_rule": 0.793
+    },
+    {
+      "taxon_key": 85469,
+      "name": "Thymus vulgaris",
+      "cells": 681,
+      "auc_logistic_regression": 0.805,
+      "auc_deep_neural_network": 0.808,
+      "auc_ensemble": 0.81,
+      "auc_catalog_rule": 0.426
+    },
+    {
+      "taxon_key": 118933,
+      "name": "Crocus sativus",
+      "cells": 286,
+      "auc_logistic_regression": 0.828,
+      "auc_deep_neural_network": 0.843,
+      "auc_ensemble": 0.841,
+      "auc_catalog_rule": 0.553
+    },
+    {
+      "taxon_key": 119386,
+      "name": "Curcuma longa",
+      "cells": 388,
+      "auc_logistic_regression": 0.831,
+      "auc_deep_neural_network": 0.842,
+      "auc_ensemble": 0.84,
+      "auc_catalog_rule": 0.811
+    },
+    {
+      "taxon_key": 119387,
+      "name": "Elettaria cardamomum",
+      "cells": 64,
+      "auc_logistic_regression": 0.843,
+      "auc_deep_neural_network": 0.871,
+      "auc_ensemble": 0.859,
+      "auc_catalog_rule": 0.82
     },
     {
       "taxon_key": 120944,
       "name": "Ageratum houstonianum",
-      "cells": 918,
-      "auc_logistic_regression": 0.678,
-      "auc_deep_neural_network": 0.718,
-      "auc_ensemble": 0.712,
-      "auc_catalog_rule": 0.508
+      "cells": 919,
+      "auc_logistic_regression": 0.669,
+      "auc_deep_neural_network": 0.708,
+      "auc_ensemble": 0.699,
+      "auc_catalog_rule": 0.543
+    },
+    {
+      "taxon_key": 121022,
+      "name": "Morinda citrifolia",
+      "cells": 989,
+      "auc_logistic_regression": 0.905,
+      "auc_deep_neural_network": 0.911,
+      "auc_ensemble": 0.909,
+      "auc_catalog_rule": 0.895
+    },
+    {
+      "taxon_key": 121763,
+      "name": "Castanea sativa",
+      "cells": 861,
+      "auc_logistic_regression": 0.891,
+      "auc_deep_neural_network": 0.892,
+      "auc_ensemble": 0.893,
+      "auc_catalog_rule": 0.495
     },
     {
       "taxon_key": 122530,
       "name": "Bambusa vulgaris",
-      "cells": 734,
-      "auc_logistic_regression": 0.792,
-      "auc_deep_neural_network": 0.806,
-      "auc_ensemble": 0.802,
-      "auc_catalog_rule": 0.749
+      "cells": 739,
+      "auc_logistic_regression": 0.806,
+      "auc_deep_neural_network": 0.818,
+      "auc_ensemble": 0.814,
+      "auc_catalog_rule": 0.772
     },
     {
       "taxon_key": 122711,
       "name": "Dodonaea viscosa",
-      "cells": 861,
+      "cells": 875,
+      "auc_logistic_regression": 0.812,
+      "auc_deep_neural_network": 0.838,
+      "auc_ensemble": 0.838,
+      "auc_catalog_rule": 0.697
+    },
+    {
+      "taxon_key": 122771,
+      "name": "Trigonella foenum-graecum",
+      "cells": 27,
+      "auc_logistic_regression": 0.636,
+      "auc_deep_neural_network": 0.619,
+      "auc_ensemble": 0.643,
+      "auc_catalog_rule": 0.551
+    },
+    {
+      "taxon_key": 122777,
+      "name": "Cinnamomum verum",
+      "cells": 160,
+      "auc_logistic_regression": 0.86,
+      "auc_deep_neural_network": 0.855,
+      "auc_ensemble": 0.859,
+      "auc_catalog_rule": 0.841
+    },
+    {
+      "taxon_key": 122796,
+      "name": "Capsicum frutescens",
+      "cells": 370,
+      "auc_logistic_regression": 0.838,
+      "auc_deep_neural_network": 0.851,
+      "auc_ensemble": 0.845,
+      "auc_catalog_rule": 0.835
+    },
+    {
+      "taxon_key": 122834,
+      "name": "Nigella sativa",
+      "cells": 29,
+      "auc_logistic_regression": 0.693,
+      "auc_deep_neural_network": 0.725,
+      "auc_ensemble": 0.708,
+      "auc_catalog_rule": 0.357
+    },
+    {
+      "taxon_key": 122835,
+      "name": "Colocasia esculenta",
+      "cells": 1144,
       "auc_logistic_regression": 0.786,
-      "auc_deep_neural_network": 0.815,
-      "auc_ensemble": 0.813,
-      "auc_catalog_rule": 0.664
+      "auc_deep_neural_network": 0.809,
+      "auc_ensemble": 0.805,
+      "auc_catalog_rule": 0.715
+    },
+    {
+      "taxon_key": 122836,
+      "name": "Oxalis tuberosa",
+      "cells": 46,
+      "auc_logistic_regression": 0.938,
+      "auc_deep_neural_network": 0.92,
+      "auc_ensemble": 0.934,
+      "auc_catalog_rule": 0.549
+    },
+    {
+      "taxon_key": 122848,
+      "name": "Chenopodium quinoa",
+      "cells": 64,
+      "auc_logistic_regression": 0.899,
+      "auc_deep_neural_network": 0.841,
+      "auc_ensemble": 0.899,
+      "auc_catalog_rule": 0.437
+    },
+    {
+      "taxon_key": 122849,
+      "name": "Phaseolus lunatus",
+      "cells": 115,
+      "auc_logistic_regression": 0.799,
+      "auc_deep_neural_network": 0.8,
+      "auc_ensemble": 0.808,
+      "auc_catalog_rule": 0.78
+    },
+    {
+      "taxon_key": 122850,
+      "name": "Phaseolus vulgaris",
+      "cells": 573,
+      "auc_logistic_regression": 0.616,
+      "auc_deep_neural_network": 0.681,
+      "auc_ensemble": 0.665,
+      "auc_catalog_rule": 0.529
+    },
+    {
+      "taxon_key": 122854,
+      "name": "Cicer arietinum",
+      "cells": 143,
+      "auc_logistic_regression": 0.71,
+      "auc_deep_neural_network": 0.705,
+      "auc_ensemble": 0.724,
+      "auc_catalog_rule": 0.449
+    },
+    {
+      "taxon_key": 122866,
+      "name": "Cucurbita maxima",
+      "cells": 509,
+      "auc_logistic_regression": 0.635,
+      "auc_deep_neural_network": 0.679,
+      "auc_ensemble": 0.668,
+      "auc_catalog_rule": 0.417
+    },
+    {
+      "taxon_key": 122869,
+      "name": "Cucurbita moschata",
+      "cells": 1194,
+      "auc_logistic_regression": 0.655,
+      "auc_deep_neural_network": 0.671,
+      "auc_ensemble": 0.668,
+      "auc_catalog_rule": 0.634
+    },
+    {
+      "taxon_key": 122885,
+      "name": "Vigna radiata",
+      "cells": 89,
+      "auc_logistic_regression": 0.755,
+      "auc_deep_neural_network": 0.798,
+      "auc_ensemble": 0.779,
+      "auc_catalog_rule": 0.713
+    },
+    {
+      "taxon_key": 122898,
+      "name": "Vigna unguiculata",
+      "cells": 245,
+      "auc_logistic_regression": 0.804,
+      "auc_deep_neural_network": 0.797,
+      "auc_ensemble": 0.808,
+      "auc_catalog_rule": 0.708
+    },
+    {
+      "taxon_key": 122902,
+      "name": "Glycine max",
+      "cells": 742,
+      "auc_logistic_regression": 0.834,
+      "auc_deep_neural_network": 0.845,
+      "auc_ensemble": 0.847,
+      "auc_catalog_rule": 0.261
+    },
+    {
+      "taxon_key": 122912,
+      "name": "Allium ampeloprasum",
+      "cells": 459,
+      "auc_logistic_regression": 0.798,
+      "auc_deep_neural_network": 0.859,
+      "auc_ensemble": 0.842,
+      "auc_catalog_rule": 0.626
+    },
+    {
+      "taxon_key": 122965,
+      "name": "Ananas comosus",
+      "cells": 1455,
+      "auc_logistic_regression": 0.839,
+      "auc_deep_neural_network": 0.842,
+      "auc_ensemble": 0.842,
+      "auc_catalog_rule": 0.829
+    },
+    {
+      "taxon_key": 122970,
+      "name": "Helianthus tuberosus",
+      "cells": 858,
+      "auc_logistic_regression": 0.799,
+      "auc_deep_neural_network": 0.81,
+      "auc_ensemble": 0.807,
+      "auc_catalog_rule": 0.263
+    },
+    {
+      "taxon_key": 122971,
+      "name": "Zingiber officinale",
+      "cells": 393,
+      "auc_logistic_regression": 0.82,
+      "auc_deep_neural_network": 0.819,
+      "auc_ensemble": 0.822,
+      "auc_catalog_rule": 0.816
+    },
+    {
+      "taxon_key": 122975,
+      "name": "Pistacia vera",
+      "cells": 232,
+      "auc_logistic_regression": 0.879,
+      "auc_deep_neural_network": 0.877,
+      "auc_ensemble": 0.883,
+      "auc_catalog_rule": 0.43
+    },
+    {
+      "taxon_key": 122976,
+      "name": "Lactuca sativa",
+      "cells": 889,
+      "auc_logistic_regression": 0.592,
+      "auc_deep_neural_network": 0.617,
+      "auc_ensemble": 0.618,
+      "auc_catalog_rule": 0.535
+    },
+    {
+      "taxon_key": 122977,
+      "name": "Eleocharis dulcis",
+      "cells": 91,
+      "auc_logistic_regression": 0.912,
+      "auc_deep_neural_network": 0.911,
+      "auc_ensemble": 0.922,
+      "auc_catalog_rule": 0.76
+    },
+    {
+      "taxon_key": 122980,
+      "name": "Phyllostachys edulis",
+      "cells": 90,
+      "auc_logistic_regression": 0.919,
+      "auc_deep_neural_network": 0.931,
+      "auc_ensemble": 0.928,
+      "auc_catalog_rule": 0.479
+    },
+    {
+      "taxon_key": 122988,
+      "name": "Anacardium occidentale",
+      "cells": 1012,
+      "auc_logistic_regression": 0.908,
+      "auc_deep_neural_network": 0.909,
+      "auc_ensemble": 0.91,
+      "auc_catalog_rule": 0.898
+    },
+    {
+      "taxon_key": 123001,
+      "name": "Garcinia mangostana",
+      "cells": 236,
+      "auc_logistic_regression": 0.898,
+      "auc_deep_neural_network": 0.89,
+      "auc_ensemble": 0.896,
+      "auc_catalog_rule": 0.875
+    },
+    {
+      "taxon_key": 123003,
+      "name": "Artocarpus heterophyllus",
+      "cells": 1042,
+      "auc_logistic_regression": 0.865,
+      "auc_deep_neural_network": 0.867,
+      "auc_ensemble": 0.866,
+      "auc_catalog_rule": 0.847
+    },
+    {
+      "taxon_key": 123047,
+      "name": "Eutrema japonicum",
+      "cells": 61,
+      "auc_logistic_regression": 0.722,
+      "auc_deep_neural_network": 0.724,
+      "auc_ensemble": 0.731,
+      "auc_catalog_rule": 0.544
+    },
+    {
+      "taxon_key": 123356,
+      "name": "Citrus medica",
+      "cells": 432,
+      "auc_logistic_regression": 0.703,
+      "auc_deep_neural_network": 0.718,
+      "auc_ensemble": 0.719,
+      "auc_catalog_rule": 0.621
+    },
+    {
+      "taxon_key": 123728,
+      "name": "Cymbopogon citratus",
+      "cells": 913,
+      "auc_logistic_regression": 0.841,
+      "auc_deep_neural_network": 0.844,
+      "auc_ensemble": 0.844,
+      "auc_catalog_rule": 0.824
     },
     {
       "taxon_key": 124826,
       "name": "Dracaena",
-      "cells": 1243,
-      "auc_logistic_regression": 0.752,
-      "auc_deep_neural_network": 0.769,
-      "auc_ensemble": 0.764,
-      "auc_catalog_rule": 0.737
+      "cells": 1242,
+      "auc_logistic_regression": 0.767,
+      "auc_deep_neural_network": 0.792,
+      "auc_ensemble": 0.785,
+      "auc_catalog_rule": 0.751
     },
     {
       "taxon_key": 124839,
       "name": "Adenium obesum",
-      "cells": 951,
-      "auc_logistic_regression": 0.822,
-      "auc_deep_neural_network": 0.829,
-      "auc_ensemble": 0.826,
-      "auc_catalog_rule": 0.818
+      "cells": 937,
+      "auc_logistic_regression": 0.83,
+      "auc_deep_neural_network": 0.834,
+      "auc_ensemble": 0.833,
+      "auc_catalog_rule": 0.824
+    },
+    {
+      "taxon_key": 126225,
+      "name": "Allium fistulosum",
+      "cells": 488,
+      "auc_logistic_regression": 0.688,
+      "auc_deep_neural_network": 0.692,
+      "auc_ensemble": 0.702,
+      "auc_catalog_rule": 0.522
+    },
+    {
+      "taxon_key": 126236,
+      "name": "Annona cherimola",
+      "cells": 340,
+      "auc_logistic_regression": 0.92,
+      "auc_deep_neural_network": 0.926,
+      "auc_ensemble": 0.927,
+      "auc_catalog_rule": 0.654
     },
     {
       "taxon_key": 126634,
       "name": "Pyrostegia venusta",
       "cells": 1135,
-      "auc_logistic_regression": 0.848,
-      "auc_deep_neural_network": 0.86,
-      "auc_ensemble": 0.858,
-      "auc_catalog_rule": 0.701
+      "auc_logistic_regression": 0.869,
+      "auc_deep_neural_network": 0.875,
+      "auc_ensemble": 0.876,
+      "auc_catalog_rule": 0.719
+    },
+    {
+      "taxon_key": 126741,
+      "name": "Morus nigra",
+      "cells": 777,
+      "auc_logistic_regression": 0.755,
+      "auc_deep_neural_network": 0.751,
+      "auc_ensemble": 0.757,
+      "auc_catalog_rule": 0.526
     },
     {
       "taxon_key": 126882,
       "name": "Aloe vera",
-      "cells": 1216,
-      "auc_logistic_regression": 0.734,
-      "auc_deep_neural_network": 0.732,
-      "auc_ensemble": 0.735,
-      "auc_catalog_rule": 0.704
+      "cells": 1222,
+      "auc_logistic_regression": 0.748,
+      "auc_deep_neural_network": 0.762,
+      "auc_ensemble": 0.757,
+      "auc_catalog_rule": 0.731
+    },
+    {
+      "taxon_key": 126925,
+      "name": "Pouteria sapota",
+      "cells": 284,
+      "auc_logistic_regression": 0.887,
+      "auc_deep_neural_network": 0.882,
+      "auc_ensemble": 0.887,
+      "auc_catalog_rule": 0.849
     },
     {
       "taxon_key": 127306,
       "name": "Wisteria sinensis",
-      "cells": 1032,
-      "auc_logistic_regression": 0.767,
-      "auc_deep_neural_network": 0.793,
-      "auc_ensemble": 0.786,
-      "auc_catalog_rule": 0.491
+      "cells": 1030,
+      "auc_logistic_regression": 0.787,
+      "auc_deep_neural_network": 0.804,
+      "auc_ensemble": 0.801,
+      "auc_catalog_rule": 0.542
     },
     {
       "taxon_key": 127387,
       "name": "Codiaeum variegatum",
-      "cells": 1265,
-      "auc_logistic_regression": 0.806,
-      "auc_deep_neural_network": 0.822,
-      "auc_ensemble": 0.817,
-      "auc_catalog_rule": 0.789
+      "cells": 1258,
+      "auc_logistic_regression": 0.813,
+      "auc_deep_neural_network": 0.831,
+      "auc_ensemble": 0.824,
+      "auc_catalog_rule": 0.799
+    },
+    {
+      "taxon_key": 128270,
+      "name": "Saccharum officinarum",
+      "cells": 959,
+      "auc_logistic_regression": 0.846,
+      "auc_deep_neural_network": 0.85,
+      "auc_ensemble": 0.849,
+      "auc_catalog_rule": 0.826
     },
     {
       "taxon_key": 129036,
       "name": "Thunbergia grandiflora",
       "cells": 950,
-      "auc_logistic_regression": 0.831,
-      "auc_deep_neural_network": 0.835,
-      "auc_ensemble": 0.836,
-      "auc_catalog_rule": 0.802
+      "auc_logistic_regression": 0.839,
+      "auc_deep_neural_network": 0.85,
+      "auc_ensemble": 0.847,
+      "auc_catalog_rule": 0.81
     },
     {
       "taxon_key": 130215,
       "name": "Carissa macrocarpa",
       "cells": 680,
-      "auc_logistic_regression": 0.795,
-      "auc_deep_neural_network": 0.812,
-      "auc_ensemble": 0.809,
-      "auc_catalog_rule": 0.703
+      "auc_logistic_regression": 0.831,
+      "auc_deep_neural_network": 0.854,
+      "auc_ensemble": 0.847,
+      "auc_catalog_rule": 0.725
     },
     {
       "taxon_key": 130743,
       "name": "Sesuvium portulacastrum",
-      "cells": 564,
-      "auc_logistic_regression": 0.913,
-      "auc_deep_neural_network": 0.911,
-      "auc_ensemble": 0.914,
-      "auc_catalog_rule": 0.825
+      "cells": 583,
+      "auc_logistic_regression": 0.921,
+      "auc_deep_neural_network": 0.921,
+      "auc_ensemble": 0.923,
+      "auc_catalog_rule": 0.835
     },
     {
       "taxon_key": 131133,
       "name": "Prosopis cineraria",
-      "cells": 101,
-      "auc_logistic_regression": 0.969,
-      "auc_deep_neural_network": 0.97,
-      "auc_ensemble": 0.971,
-      "auc_catalog_rule": 0.769
+      "cells": 103,
+      "auc_logistic_regression": 0.974,
+      "auc_deep_neural_network": 0.975,
+      "auc_ensemble": 0.975,
+      "auc_catalog_rule": 0.791
+    },
+    {
+      "taxon_key": 132576,
+      "name": "Elaeis guineensis",
+      "cells": 718,
+      "auc_logistic_regression": 0.905,
+      "auc_deep_neural_network": 0.902,
+      "auc_ensemble": 0.904,
+      "auc_catalog_rule": 0.905
     },
     {
       "taxon_key": 132759,
       "name": "Chamaerops humilis",
-      "cells": 611,
-      "auc_logistic_regression": 0.826,
-      "auc_deep_neural_network": 0.834,
-      "auc_ensemble": 0.834,
-      "auc_catalog_rule": 0.524
+      "cells": 622,
+      "auc_logistic_regression": 0.858,
+      "auc_deep_neural_network": 0.861,
+      "auc_ensemble": 0.863,
+      "auc_catalog_rule": 0.569
     },
     {
       "taxon_key": 133309,
       "name": "Ixora coccinea",
-      "cells": 997,
+      "cells": 1013,
       "auc_logistic_regression": 0.894,
-      "auc_deep_neural_network": 0.895,
-      "auc_ensemble": 0.895,
-      "auc_catalog_rule": 0.883
+      "auc_deep_neural_network": 0.899,
+      "auc_ensemble": 0.897,
+      "auc_catalog_rule": 0.884
     },
     {
       "taxon_key": 133395,
       "name": "Lavandula angustifolia",
-      "cells": 771,
-      "auc_logistic_regression": 0.809,
-      "auc_deep_neural_network": 0.803,
-      "auc_ensemble": 0.809,
-      "auc_catalog_rule": 0.337
+      "cells": 766,
+      "auc_logistic_regression": 0.801,
+      "auc_deep_neural_network": 0.793,
+      "auc_ensemble": 0.799,
+      "auc_catalog_rule": 0.395
     },
     {
       "taxon_key": 133397,
       "name": "Buxus sempervirens",
-      "cells": 754,
-      "auc_logistic_regression": 0.776,
-      "auc_deep_neural_network": 0.784,
-      "auc_ensemble": 0.788,
-      "auc_catalog_rule": 0.435
+      "cells": 735,
+      "auc_logistic_regression": 0.771,
+      "auc_deep_neural_network": 0.787,
+      "auc_ensemble": 0.785,
+      "auc_catalog_rule": 0.483
+    },
+    {
+      "taxon_key": 135331,
+      "name": "Prunus armeniaca",
+      "cells": 814,
+      "auc_logistic_regression": 0.721,
+      "auc_deep_neural_network": 0.753,
+      "auc_ensemble": 0.745,
+      "auc_catalog_rule": 0.344
     },
     {
       "taxon_key": 135425,
       "name": "Jasminum sambac",
-      "cells": 630,
-      "auc_logistic_regression": 0.836,
-      "auc_deep_neural_network": 0.843,
-      "auc_ensemble": 0.843,
-      "auc_catalog_rule": 0.784
+      "cells": 632,
+      "auc_logistic_regression": 0.845,
+      "auc_deep_neural_network": 0.858,
+      "auc_ensemble": 0.853,
+      "auc_catalog_rule": 0.796
+    },
+    {
+      "taxon_key": 139444,
+      "name": "Cajanus cajan",
+      "cells": 728,
+      "auc_logistic_regression": 0.841,
+      "auc_deep_neural_network": 0.837,
+      "auc_ensemble": 0.844,
+      "auc_catalog_rule": 0.807
+    },
+    {
+      "taxon_key": 140907,
+      "name": "Musa acuminata",
+      "cells": 1384,
+      "auc_logistic_regression": 0.801,
+      "auc_deep_neural_network": 0.822,
+      "auc_ensemble": 0.815,
+      "auc_catalog_rule": 0.785
     },
     {
       "taxon_key": 141512,
       "name": "Aglaonema",
-      "cells": 851,
-      "auc_logistic_regression": 0.775,
-      "auc_deep_neural_network": 0.783,
-      "auc_ensemble": 0.783,
-      "auc_catalog_rule": 0.767
+      "cells": 853,
+      "auc_logistic_regression": 0.788,
+      "auc_deep_neural_network": 0.796,
+      "auc_ensemble": 0.794,
+      "auc_catalog_rule": 0.779
+    },
+    {
+      "taxon_key": 145601,
+      "name": "Fagopyrum esculentum",
+      "cells": 772,
+      "auc_logistic_regression": 0.77,
+      "auc_deep_neural_network": 0.795,
+      "auc_ensemble": 0.792,
+      "auc_catalog_rule": 0.37
+    },
+    {
+      "taxon_key": 145603,
+      "name": "Bertholletia excelsa",
+      "cells": 153,
+      "auc_logistic_regression": 0.924,
+      "auc_deep_neural_network": 0.922,
+      "auc_ensemble": 0.926,
+      "auc_catalog_rule": 0.902
+    },
+    {
+      "taxon_key": 146816,
+      "name": "Lablab purpureus",
+      "cells": 782,
+      "auc_logistic_regression": 0.712,
+      "auc_deep_neural_network": 0.759,
+      "auc_ensemble": 0.749,
+      "auc_catalog_rule": 0.544
+    },
+    {
+      "taxon_key": 146977,
+      "name": "Averrhoa carambola",
+      "cells": 1083,
+      "auc_logistic_regression": 0.865,
+      "auc_deep_neural_network": 0.869,
+      "auc_ensemble": 0.868,
+      "auc_catalog_rule": 0.858
     },
     {
       "taxon_key": 147272,
       "name": "Dieffenbachia",
-      "cells": 1150,
-      "auc_logistic_regression": 0.783,
-      "auc_deep_neural_network": 0.793,
-      "auc_ensemble": 0.793,
-      "auc_catalog_rule": 0.783
+      "cells": 1153,
+      "auc_logistic_regression": 0.795,
+      "auc_deep_neural_network": 0.811,
+      "auc_ensemble": 0.806,
+      "auc_catalog_rule": 0.794
+    },
+    {
+      "taxon_key": 153003,
+      "name": "Rubus chamaemorus",
+      "cells": 429,
+      "auc_logistic_regression": 0.972,
+      "auc_deep_neural_network": 0.973,
+      "auc_ensemble": 0.973,
+      "auc_catalog_rule": 0.106
     },
     {
       "taxon_key": 153990,
       "name": "Echeveria",
-      "cells": 922,
-      "auc_logistic_regression": 0.701,
-      "auc_deep_neural_network": 0.727,
-      "auc_ensemble": 0.722,
-      "auc_catalog_rule": 0.55
+      "cells": 925,
+      "auc_logistic_regression": 0.732,
+      "auc_deep_neural_network": 0.748,
+      "auc_ensemble": 0.748,
+      "auc_catalog_rule": 0.596
     },
     {
       "taxon_key": 154842,
       "name": "Cananga odorata",
-      "cells": 490,
-      "auc_logistic_regression": 0.914,
-      "auc_deep_neural_network": 0.911,
+      "cells": 492,
+      "auc_logistic_regression": 0.913,
+      "auc_deep_neural_network": 0.915,
       "auc_ensemble": 0.914,
-      "auc_catalog_rule": 0.903
+      "auc_catalog_rule": 0.904
     },
     {
       "taxon_key": 155567,
       "name": "Abelia",
-      "cells": 858,
-      "auc_logistic_regression": 0.819,
-      "auc_deep_neural_network": 0.824,
-      "auc_ensemble": 0.827,
-      "auc_catalog_rule": 0.476
+      "cells": 863,
+      "auc_logistic_regression": 0.838,
+      "auc_deep_neural_network": 0.83,
+      "auc_ensemble": 0.837,
+      "auc_catalog_rule": 0.528
     },
     {
       "taxon_key": 155655,
       "name": "Zoysia",
-      "cells": 318,
-      "auc_logistic_regression": 0.816,
-      "auc_deep_neural_network": 0.832,
-      "auc_ensemble": 0.835,
-      "auc_catalog_rule": 0.699
+      "cells": 321,
+      "auc_logistic_regression": 0.827,
+      "auc_deep_neural_network": 0.837,
+      "auc_ensemble": 0.839,
+      "auc_catalog_rule": 0.717
+    },
+    {
+      "taxon_key": 157765,
+      "name": "Abelmoschus esculentus",
+      "cells": 1070,
+      "auc_logistic_regression": 0.736,
+      "auc_deep_neural_network": 0.767,
+      "auc_ensemble": 0.759,
+      "auc_catalog_rule": 0.629
+    },
+    {
+      "taxon_key": 160162,
+      "name": "Carum carvi",
+      "cells": 495,
+      "auc_logistic_regression": 0.951,
+      "auc_deep_neural_network": 0.95,
+      "auc_ensemble": 0.952,
+      "auc_catalog_rule": 0.075
+    },
+    {
+      "taxon_key": 160574,
+      "name": "Cichorium endivia",
+      "cells": 106,
+      "auc_logistic_regression": 0.794,
+      "auc_deep_neural_network": 0.817,
+      "auc_ensemble": 0.814,
+      "auc_catalog_rule": 0.656
+    },
+    {
+      "taxon_key": 161246,
+      "name": "Cucumis anguria",
+      "cells": 499,
+      "auc_logistic_regression": 0.872,
+      "auc_deep_neural_network": 0.872,
+      "auc_ensemble": 0.875,
+      "auc_catalog_rule": 0.747
     },
     {
       "taxon_key": 161469,
       "name": "Cyperus papyrus",
-      "cells": 851,
-      "auc_logistic_regression": 0.75,
-      "auc_deep_neural_network": 0.776,
-      "auc_ensemble": 0.772,
-      "auc_catalog_rule": 0.639
+      "cells": 852,
+      "auc_logistic_regression": 0.777,
+      "auc_deep_neural_network": 0.8,
+      "auc_ensemble": 0.795,
+      "auc_catalog_rule": 0.666
     },
     {
       "taxon_key": 161664,
       "name": "Delphinium elatum",
-      "cells": 297,
-      "auc_logistic_regression": 0.964,
-      "auc_deep_neural_network": 0.965,
-      "auc_ensemble": 0.965,
-      "auc_catalog_rule": 0.083
+      "cells": 300,
+      "auc_logistic_regression": 0.947,
+      "auc_deep_neural_network": 0.945,
+      "auc_ensemble": 0.948,
+      "auc_catalog_rule": 0.107
+    },
+    {
+      "taxon_key": 161930,
+      "name": "Dioscorea alata",
+      "cells": 239,
+      "auc_logistic_regression": 0.881,
+      "auc_deep_neural_network": 0.865,
+      "auc_ensemble": 0.875,
+      "auc_catalog_rule": 0.822
     },
     {
       "taxon_key": 162153,
       "name": "Duranta erecta",
-      "cells": 1352,
-      "auc_logistic_regression": 0.777,
-      "auc_deep_neural_network": 0.782,
-      "auc_ensemble": 0.784,
-      "auc_catalog_rule": 0.745
+      "cells": 1334,
+      "auc_logistic_regression": 0.807,
+      "auc_deep_neural_network": 0.81,
+      "auc_ensemble": 0.811,
+      "auc_catalog_rule": 0.76
     },
     {
       "taxon_key": 162707,
       "name": "Eryngium maritimum",
-      "cells": 273,
-      "auc_logistic_regression": 0.928,
-      "auc_deep_neural_network": 0.937,
-      "auc_ensemble": 0.937,
-      "auc_catalog_rule": 0.491
+      "cells": 269,
+      "auc_logistic_regression": 0.937,
+      "auc_deep_neural_network": 0.943,
+      "auc_ensemble": 0.944,
+      "auc_catalog_rule": 0.552
+    },
+    {
+      "taxon_key": 164077,
+      "name": "Ipomoea aquatica",
+      "cells": 537,
+      "auc_logistic_regression": 0.863,
+      "auc_deep_neural_network": 0.87,
+      "auc_ensemble": 0.868,
+      "auc_catalog_rule": 0.837
     },
     {
       "taxon_key": 164229,
       "name": "Jasminum mesnyi",
       "cells": 754,
-      "auc_logistic_regression": 0.818,
-      "auc_deep_neural_network": 0.821,
-      "auc_ensemble": 0.823,
-      "auc_catalog_rule": 0.588
+      "auc_logistic_regression": 0.853,
+      "auc_deep_neural_network": 0.862,
+      "auc_ensemble": 0.861,
+      "auc_catalog_rule": 0.629
     },
     {
       "taxon_key": 164233,
       "name": "Jasminum officinale",
-      "cells": 178,
-      "auc_logistic_regression": 0.658,
-      "auc_deep_neural_network": 0.687,
-      "auc_ensemble": 0.68,
-      "auc_catalog_rule": 0.55
+      "cells": 181,
+      "auc_logistic_regression": 0.677,
+      "auc_deep_neural_network": 0.658,
+      "auc_ensemble": 0.67,
+      "auc_catalog_rule": 0.592
     },
     {
       "taxon_key": 164238,
       "name": "Jatropha curcas",
-      "cells": 728,
-      "auc_logistic_regression": 0.853,
-      "auc_deep_neural_network": 0.856,
-      "auc_ensemble": 0.857,
-      "auc_catalog_rule": 0.844
+      "cells": 734,
+      "auc_logistic_regression": 0.852,
+      "auc_deep_neural_network": 0.857,
+      "auc_ensemble": 0.856,
+      "auc_catalog_rule": 0.849
+    },
+    {
+      "taxon_key": 164415,
+      "name": "Lagenaria siceraria",
+      "cells": 860,
+      "auc_logistic_regression": 0.641,
+      "auc_deep_neural_network": 0.678,
+      "auc_ensemble": 0.668,
+      "auc_catalog_rule": 0.594
+    },
+    {
+      "taxon_key": 164527,
+      "name": "Lepidium sativum",
+      "cells": 191,
+      "auc_logistic_regression": 0.837,
+      "auc_deep_neural_network": 0.855,
+      "auc_ensemble": 0.864,
+      "auc_catalog_rule": 0.633
     },
     {
       "taxon_key": 164708,
       "name": "Lolium arundinaceum",
-      "cells": 638,
-      "auc_logistic_regression": 0.703,
-      "auc_deep_neural_network": 0.811,
-      "auc_ensemble": 0.784,
-      "auc_catalog_rule": 0.512
+      "cells": 641,
+      "auc_logistic_regression": 0.69,
+      "auc_deep_neural_network": 0.774,
+      "auc_ensemble": 0.76,
+      "auc_catalog_rule": 0.548
+    },
+    {
+      "taxon_key": 164869,
+      "name": "Luffa acutangula",
+      "cells": 201,
+      "auc_logistic_regression": 0.851,
+      "auc_deep_neural_network": 0.827,
+      "auc_ensemble": 0.844,
+      "auc_catalog_rule": 0.76
+    },
+    {
+      "taxon_key": 165138,
+      "name": "Manihot esculenta",
+      "cells": 1251,
+      "auc_logistic_regression": 0.862,
+      "auc_deep_neural_network": 0.861,
+      "auc_ensemble": 0.863,
+      "auc_catalog_rule": 0.853
+    },
+    {
+      "taxon_key": 165144,
+      "name": "Manilkara zapota",
+      "cells": 833,
+      "auc_logistic_regression": 0.876,
+      "auc_deep_neural_network": 0.885,
+      "auc_ensemble": 0.881,
+      "auc_catalog_rule": 0.862
     },
     {
       "taxon_key": 165529,
       "name": "Moringa oleifera",
-      "cells": 1104,
-      "auc_logistic_regression": 0.834,
-      "auc_deep_neural_network": 0.831,
-      "auc_ensemble": 0.834,
-      "auc_catalog_rule": 0.823
+      "cells": 1103,
+      "auc_logistic_regression": 0.839,
+      "auc_deep_neural_network": 0.839,
+      "auc_ensemble": 0.84,
+      "auc_catalog_rule": 0.83
+    },
+    {
+      "taxon_key": 165536,
+      "name": "Mucuna pruriens",
+      "cells": 497,
+      "auc_logistic_regression": 0.882,
+      "auc_deep_neural_network": 0.879,
+      "auc_ensemble": 0.882,
+      "auc_catalog_rule": 0.837
     },
     {
       "taxon_key": 165755,
       "name": "Nymphaea lotus",
-      "cells": 479,
-      "auc_logistic_regression": 0.809,
-      "auc_deep_neural_network": 0.841,
-      "auc_ensemble": 0.824,
-      "auc_catalog_rule": 0.809
+      "cells": 480,
+      "auc_logistic_regression": 0.811,
+      "auc_deep_neural_network": 0.836,
+      "auc_ensemble": 0.822,
+      "auc_catalog_rule": 0.816
+    },
+    {
+      "taxon_key": 165925,
+      "name": "Origanum majorana",
+      "cells": 70,
+      "auc_logistic_regression": 0.652,
+      "auc_deep_neural_network": 0.69,
+      "auc_ensemble": 0.675,
+      "auc_catalog_rule": 0.509
     },
     {
       "taxon_key": 166188,
       "name": "Paspalum notatum",
-      "cells": 600,
-      "auc_logistic_regression": 0.882,
-      "auc_deep_neural_network": 0.881,
-      "auc_ensemble": 0.887,
-      "auc_catalog_rule": 0.543
+      "cells": 603,
+      "auc_logistic_regression": 0.895,
+      "auc_deep_neural_network": 0.892,
+      "auc_ensemble": 0.897,
+      "auc_catalog_rule": 0.584
     },
     {
       "taxon_key": 167309,
       "name": "Portulaca grandiflora",
-      "cells": 1372,
-      "auc_logistic_regression": 0.661,
-      "auc_deep_neural_network": 0.682,
-      "auc_ensemble": 0.679,
-      "auc_catalog_rule": 0.599
+      "cells": 1381,
+      "auc_logistic_regression": 0.668,
+      "auc_deep_neural_network": 0.683,
+      "auc_ensemble": 0.683,
+      "auc_catalog_rule": 0.625
+    },
+    {
+      "taxon_key": 169518,
+      "name": "Syzygium cumini",
+      "cells": 852,
+      "auc_logistic_regression": 0.851,
+      "auc_deep_neural_network": 0.856,
+      "auc_ensemble": 0.858,
+      "auc_catalog_rule": 0.815
     },
     {
       "taxon_key": 170452,
       "name": "Zoysia matrella",
-      "cells": 156,
-      "auc_logistic_regression": 0.869,
-      "auc_deep_neural_network": 0.865,
-      "auc_ensemble": 0.868,
-      "auc_catalog_rule": 0.801
+      "cells": 160,
+      "auc_logistic_regression": 0.868,
+      "auc_deep_neural_network": 0.876,
+      "auc_ensemble": 0.874,
+      "auc_catalog_rule": 0.804
+    },
+    {
+      "taxon_key": 170883,
+      "name": "Musa × paradisiaca",
+      "cells": 1468,
+      "auc_logistic_regression": 0.813,
+      "auc_deep_neural_network": 0.816,
+      "auc_ensemble": 0.817,
+      "auc_catalog_rule": 0.802
     },
     {
       "taxon_key": 171203,
       "name": "Viola × wittrockiana",
-      "cells": 1099,
-      "auc_logistic_regression": 0.719,
-      "auc_deep_neural_network": 0.724,
-      "auc_ensemble": 0.727,
-      "auc_catalog_rule": 0.538
+      "cells": 1101,
+      "auc_logistic_regression": 0.687,
+      "auc_deep_neural_network": 0.705,
+      "auc_ensemble": 0.704,
+      "auc_catalog_rule": 0.566
     },
     {
       "taxon_key": 181682,
       "name": "Platanus orientalis",
-      "cells": 372,
-      "auc_logistic_regression": 0.834,
-      "auc_deep_neural_network": 0.846,
-      "auc_ensemble": 0.846,
-      "auc_catalog_rule": 0.506
+      "cells": 369,
+      "auc_logistic_regression": 0.844,
+      "auc_deep_neural_network": 0.843,
+      "auc_ensemble": 0.849,
+      "auc_catalog_rule": 0.552
     },
     {
       "taxon_key": 181901,
       "name": "Zinnia elegans",
-      "cells": 1638,
-      "auc_logistic_regression": 0.632,
-      "auc_deep_neural_network": 0.649,
-      "auc_ensemble": 0.65,
-      "auc_catalog_rule": 0.515
+      "cells": 1636,
+      "auc_logistic_regression": 0.629,
+      "auc_deep_neural_network": 0.648,
+      "auc_ensemble": 0.646,
+      "auc_catalog_rule": 0.551
+    },
+    {
+      "taxon_key": 191503,
+      "name": "Dimocarpus longan",
+      "cells": 294,
+      "auc_logistic_regression": 0.85,
+      "auc_deep_neural_network": 0.848,
+      "auc_ensemble": 0.855,
+      "auc_catalog_rule": 0.809
     },
     {
       "taxon_key": 199324,
       "name": "Agapanthus praecox",
-      "cells": 957,
-      "auc_logistic_regression": 0.828,
-      "auc_deep_neural_network": 0.829,
-      "auc_ensemble": 0.831,
-      "auc_catalog_rule": 0.631
+      "cells": 964,
+      "auc_logistic_regression": 0.852,
+      "auc_deep_neural_network": 0.847,
+      "auc_ensemble": 0.852,
+      "auc_catalog_rule": 0.671
     },
     {
       "taxon_key": 200831,
       "name": "Hyphaene thebaica",
-      "cells": 107,
-      "auc_logistic_regression": 0.95,
-      "auc_deep_neural_network": 0.953,
-      "auc_ensemble": 0.953,
-      "auc_catalog_rule": 0.81
+      "cells": 108,
+      "auc_logistic_regression": 0.938,
+      "auc_deep_neural_network": 0.94,
+      "auc_ensemble": 0.939,
+      "auc_catalog_rule": 0.816
     },
     {
       "taxon_key": 206192,
       "name": "Beaucarnea recurvata",
-      "cells": 554,
-      "auc_logistic_regression": 0.735,
-      "auc_deep_neural_network": 0.758,
-      "auc_ensemble": 0.759,
-      "auc_catalog_rule": 0.676
+      "cells": 551,
+      "auc_logistic_regression": 0.774,
+      "auc_deep_neural_network": 0.787,
+      "auc_ensemble": 0.793,
+      "auc_catalog_rule": 0.706
     },
     {
       "taxon_key": 206271,
       "name": "Spathiphyllum",
-      "cells": 1041,
-      "auc_logistic_regression": 0.702,
-      "auc_deep_neural_network": 0.715,
-      "auc_ensemble": 0.717,
-      "auc_catalog_rule": 0.687
+      "cells": 1047,
+      "auc_logistic_regression": 0.724,
+      "auc_deep_neural_network": 0.74,
+      "auc_ensemble": 0.736,
+      "auc_catalog_rule": 0.71
     },
     {
       "taxon_key": 210990,
       "name": "Gardenia jasminoides",
-      "cells": 657,
-      "auc_logistic_regression": 0.741,
-      "auc_deep_neural_network": 0.763,
-      "auc_ensemble": 0.761,
-      "auc_catalog_rule": 0.618
+      "cells": 664,
+      "auc_logistic_regression": 0.768,
+      "auc_deep_neural_network": 0.794,
+      "auc_ensemble": 0.789,
+      "auc_catalog_rule": 0.648
+    },
+    {
+      "taxon_key": 223964,
+      "name": "Litchi chinensis",
+      "cells": 434,
+      "auc_logistic_regression": 0.859,
+      "auc_deep_neural_network": 0.88,
+      "auc_ensemble": 0.877,
+      "auc_catalog_rule": 0.756
     },
     {
       "taxon_key": 244676,
       "name": "Streptosolen jamesonii",
-      "cells": 309,
-      "auc_logistic_regression": 0.929,
-      "auc_deep_neural_network": 0.94,
-      "auc_ensemble": 0.939,
-      "auc_catalog_rule": 0.686
+      "cells": 308,
+      "auc_logistic_regression": 0.94,
+      "auc_deep_neural_network": 0.944,
+      "auc_ensemble": 0.944,
+      "auc_catalog_rule": 0.709
     },
     {
       "taxon_key": 244745,
       "name": "Anemone coronaria",
-      "cells": 625,
-      "auc_logistic_regression": 0.8,
-      "auc_deep_neural_network": 0.8,
-      "auc_ensemble": 0.805,
-      "auc_catalog_rule": 0.58
+      "cells": 624,
+      "auc_logistic_regression": 0.813,
+      "auc_deep_neural_network": 0.814,
+      "auc_ensemble": 0.817,
+      "auc_catalog_rule": 0.619
     },
     {
       "taxon_key": 272914,
       "name": "Haworthia",
-      "cells": 362,
-      "auc_logistic_regression": 0.737,
-      "auc_deep_neural_network": 0.75,
-      "auc_ensemble": 0.751,
-      "auc_catalog_rule": 0.604
+      "cells": 369,
+      "auc_logistic_regression": 0.764,
+      "auc_deep_neural_network": 0.788,
+      "auc_ensemble": 0.785,
+      "auc_catalog_rule": 0.645
     },
     {
       "taxon_key": 276548,
       "name": "Chrysalidocarpus lutescens",
-      "cells": 1142,
-      "auc_logistic_regression": 0.81,
-      "auc_deep_neural_network": 0.825,
-      "auc_ensemble": 0.82,
-      "auc_catalog_rule": 0.808
+      "cells": 1143,
+      "auc_logistic_regression": 0.819,
+      "auc_deep_neural_network": 0.84,
+      "auc_ensemble": 0.831,
+      "auc_catalog_rule": 0.815
     },
     {
       "taxon_key": 277115,
       "name": "Cascabela thevetia",
-      "cells": 1102,
-      "auc_logistic_regression": 0.81,
-      "auc_deep_neural_network": 0.81,
-      "auc_ensemble": 0.813,
-      "auc_catalog_rule": 0.777
+      "cells": 1105,
+      "auc_logistic_regression": 0.829,
+      "auc_deep_neural_network": 0.829,
+      "auc_ensemble": 0.832,
+      "auc_catalog_rule": 0.787
+    },
+    {
+      "taxon_key": 278242,
+      "name": "Psidium cattleyanum",
+      "cells": 803,
+      "auc_logistic_regression": 0.886,
+      "auc_deep_neural_network": 0.898,
+      "auc_ensemble": 0.897,
+      "auc_catalog_rule": 0.725
+    },
+    {
+      "taxon_key": 278605,
+      "name": "Nephelium lappaceum",
+      "cells": 472,
+      "auc_logistic_regression": 0.876,
+      "auc_deep_neural_network": 0.856,
+      "auc_ensemble": 0.869,
+      "auc_catalog_rule": 0.855
     },
     {
       "taxon_key": 281562,
       "name": "Acalypha wilkesiana",
-      "cells": 982,
-      "auc_logistic_regression": 0.821,
-      "auc_deep_neural_network": 0.827,
-      "auc_ensemble": 0.826,
-      "auc_catalog_rule": 0.809
+      "cells": 992,
+      "auc_logistic_regression": 0.836,
+      "auc_deep_neural_network": 0.844,
+      "auc_ensemble": 0.844,
+      "auc_catalog_rule": 0.816
+    },
+    {
+      "taxon_key": 284503,
+      "name": "Annona muricata",
+      "cells": 959,
+      "auc_logistic_regression": 0.891,
+      "auc_deep_neural_network": 0.898,
+      "auc_ensemble": 0.895,
+      "auc_catalog_rule": 0.882
+    },
+    {
+      "taxon_key": 284506,
+      "name": "Annona reticulata",
+      "cells": 341,
+      "auc_logistic_regression": 0.897,
+      "auc_deep_neural_network": 0.884,
+      "auc_ensemble": 0.892,
+      "auc_catalog_rule": 0.862
+    },
+    {
+      "taxon_key": 285850,
+      "name": "Sesamum indicum",
+      "cells": 695,
+      "auc_logistic_regression": 0.812,
+      "auc_deep_neural_network": 0.812,
+      "auc_ensemble": 0.817,
+      "auc_catalog_rule": 0.664
     },
     {
       "taxon_key": 286772,
       "name": "Tecomaria capensis",
-      "cells": 1039,
-      "auc_logistic_regression": 0.781,
-      "auc_deep_neural_network": 0.787,
-      "auc_ensemble": 0.791,
-      "auc_catalog_rule": 0.665
+      "cells": 1034,
+      "auc_logistic_regression": 0.813,
+      "auc_deep_neural_network": 0.817,
+      "auc_ensemble": 0.822,
+      "auc_catalog_rule": 0.691
+    },
+    {
+      "taxon_key": 287245,
+      "name": "Macadamia integrifolia",
+      "cells": 224,
+      "auc_logistic_regression": 0.903,
+      "auc_deep_neural_network": 0.891,
+      "auc_ensemble": 0.9,
+      "auc_catalog_rule": 0.727
     },
     {
       "taxon_key": 288038,
       "name": "Bouteloua dactyloides",
-      "cells": 168,
-      "auc_logistic_regression": 0.95,
-      "auc_deep_neural_network": 0.951,
-      "auc_ensemble": 0.956,
-      "auc_catalog_rule": 0.209
+      "cells": 167,
+      "auc_logistic_regression": 0.941,
+      "auc_deep_neural_network": 0.941,
+      "auc_ensemble": 0.944,
+      "auc_catalog_rule": 0.27
+    },
+    {
+      "taxon_key": 290744,
+      "name": "Solanum muricatum",
+      "cells": 246,
+      "auc_logistic_regression": 0.848,
+      "auc_deep_neural_network": 0.87,
+      "auc_ensemble": 0.867,
+      "auc_catalog_rule": 0.636
     },
     {
       "taxon_key": 290889,
       "name": "Agave tequilana",
-      "cells": 157,
-      "auc_logistic_regression": 0.847,
-      "auc_deep_neural_network": 0.814,
-      "auc_ensemble": 0.837,
-      "auc_catalog_rule": 0.63
+      "cells": 158,
+      "auc_logistic_regression": 0.855,
+      "auc_deep_neural_network": 0.875,
+      "auc_ensemble": 0.864,
+      "auc_catalog_rule": 0.663
     },
     {
       "taxon_key": 319122,
       "name": "Convolvulus sabatius",
-      "cells": 402,
-      "auc_logistic_regression": 0.865,
-      "auc_deep_neural_network": 0.865,
-      "auc_ensemble": 0.87,
-      "auc_catalog_rule": 0.503
+      "cells": 405,
+      "auc_logistic_regression": 0.884,
+      "auc_deep_neural_network": 0.886,
+      "auc_ensemble": 0.889,
+      "auc_catalog_rule": 0.551
+    },
+    {
+      "taxon_key": 320730,
+      "name": "Stevia rebaudiana",
+      "cells": 27,
+      "auc_logistic_regression": 0.588,
+      "auc_deep_neural_network": 0.664,
+      "auc_ensemble": 0.615,
+      "auc_catalog_rule": 0.673
     },
     {
       "taxon_key": 322051,
       "name": "Thymus serpyllum",
-      "cells": 182,
-      "auc_logistic_regression": 0.939,
-      "auc_deep_neural_network": 0.939,
-      "auc_ensemble": 0.94,
-      "auc_catalog_rule": 0.15
+      "cells": 180,
+      "auc_logistic_regression": 0.935,
+      "auc_deep_neural_network": 0.904,
+      "auc_ensemble": 0.92,
+      "auc_catalog_rule": 0.208
     },
     {
       "taxon_key": 322319,
       "name": "Ziziphus spina-christi",
       "cells": 103,
-      "auc_logistic_regression": 0.854,
-      "auc_deep_neural_network": 0.858,
-      "auc_ensemble": 0.86,
-      "auc_catalog_rule": 0.755
+      "auc_logistic_regression": 0.928,
+      "auc_deep_neural_network": 0.933,
+      "auc_ensemble": 0.934,
+      "auc_catalog_rule": 0.762
     },
     {
       "taxon_key": 322492,
       "name": "Chlorophytum comosum",
       "cells": 1053,
-      "auc_logistic_regression": 0.651,
-      "auc_deep_neural_network": 0.663,
-      "auc_ensemble": 0.668,
-      "auc_catalog_rule": 0.568
+      "auc_logistic_regression": 0.689,
+      "auc_deep_neural_network": 0.693,
+      "auc_ensemble": 0.7,
+      "auc_catalog_rule": 0.605
+    },
+    {
+      "taxon_key": 322878,
+      "name": "Syzygium samarangense",
+      "cells": 304,
+      "auc_logistic_regression": 0.885,
+      "auc_deep_neural_network": 0.893,
+      "auc_ensemble": 0.892,
+      "auc_catalog_rule": 0.848
+    },
+    {
+      "taxon_key": 325928,
+      "name": "Aegle marmelos",
+      "cells": 201,
+      "auc_logistic_regression": 0.926,
+      "auc_deep_neural_network": 0.92,
+      "auc_ensemble": 0.924,
+      "auc_catalog_rule": 0.808
+    },
+    {
+      "taxon_key": 331121,
+      "name": "Citrus × aurantiifolia",
+      "cells": 659,
+      "auc_logistic_regression": 0.791,
+      "auc_deep_neural_network": 0.81,
+      "auc_ensemble": 0.802,
+      "auc_catalog_rule": 0.782
     },
     {
       "taxon_key": 331122,
       "name": "Citrus × aurantium",
-      "cells": 1010,
-      "auc_logistic_regression": 0.719,
-      "auc_deep_neural_network": 0.716,
-      "auc_ensemble": 0.723,
-      "auc_catalog_rule": 0.668
+      "cells": 1011,
+      "auc_logistic_regression": 0.758,
+      "auc_deep_neural_network": 0.76,
+      "auc_ensemble": 0.762,
+      "auc_catalog_rule": 0.697
     },
     {
       "taxon_key": 331124,
       "name": "Citrus × limon",
       "cells": 927,
-      "auc_logistic_regression": 0.677,
-      "auc_deep_neural_network": 0.709,
-      "auc_ensemble": 0.705,
-      "auc_catalog_rule": 0.633
+      "auc_logistic_regression": 0.718,
+      "auc_deep_neural_network": 0.745,
+      "auc_ensemble": 0.74,
+      "auc_catalog_rule": 0.666
+    },
+    {
+      "taxon_key": 332455,
+      "name": "Aloysia citrodora",
+      "cells": 442,
+      "auc_logistic_regression": 0.822,
+      "auc_deep_neural_network": 0.834,
+      "auc_ensemble": 0.836,
+      "auc_catalog_rule": 0.562
     },
     {
       "taxon_key": 339914,
       "name": "Stephanotis floribunda",
-      "cells": 140,
-      "auc_logistic_regression": 0.78,
-      "auc_deep_neural_network": 0.751,
-      "auc_ensemble": 0.772,
-      "auc_catalog_rule": 0.682
+      "cells": 141,
+      "auc_logistic_regression": 0.828,
+      "auc_deep_neural_network": 0.806,
+      "auc_ensemble": 0.823,
+      "auc_catalog_rule": 0.704
     },
     {
       "taxon_key": 340164,
       "name": "Ficus sycomorus",
-      "cells": 258,
-      "auc_logistic_regression": 0.848,
-      "auc_deep_neural_network": 0.838,
-      "auc_ensemble": 0.848,
-      "auc_catalog_rule": 0.721
+      "cells": 259,
+      "auc_logistic_regression": 0.865,
+      "auc_deep_neural_network": 0.851,
+      "auc_ensemble": 0.862,
+      "auc_catalog_rule": 0.738
     },
     {
       "taxon_key": 342713,
       "name": "Balanites aegyptiaca",
-      "cells": 145,
-      "auc_logistic_regression": 0.898,
-      "auc_deep_neural_network": 0.901,
-      "auc_ensemble": 0.9,
-      "auc_catalog_rule": 0.798
+      "cells": 147,
+      "auc_logistic_regression": 0.858,
+      "auc_deep_neural_network": 0.859,
+      "auc_ensemble": 0.856,
+      "auc_catalog_rule": 0.805
+    },
+    {
+      "taxon_key": 343928,
+      "name": "Limonia acidissima",
+      "cells": 126,
+      "auc_logistic_regression": 0.905,
+      "auc_deep_neural_network": 0.911,
+      "auc_ensemble": 0.909,
+      "auc_catalog_rule": 0.85
+    },
+    {
+      "taxon_key": 345585,
+      "name": "Syzygium aqueum",
+      "cells": 162,
+      "auc_logistic_regression": 0.917,
+      "auc_deep_neural_network": 0.908,
+      "auc_ensemble": 0.913,
+      "auc_catalog_rule": 0.9
+    },
+    {
+      "taxon_key": 346168,
+      "name": "Psophocarpus tetragonolobus",
+      "cells": 153,
+      "auc_logistic_regression": 0.867,
+      "auc_deep_neural_network": 0.874,
+      "auc_ensemble": 0.876,
+      "auc_catalog_rule": 0.844
     },
     {
       "taxon_key": 346778,
       "name": "Ranunculus asiaticus",
       "cells": 263,
-      "auc_logistic_regression": 0.717,
-      "auc_deep_neural_network": 0.708,
-      "auc_ensemble": 0.718,
-      "auc_catalog_rule": 0.551
+      "auc_logistic_regression": 0.733,
+      "auc_deep_neural_network": 0.721,
+      "auc_ensemble": 0.733,
+      "auc_catalog_rule": 0.586
     },
     {
       "taxon_key": 363481,
       "name": "Scaevola taccada",
-      "cells": 623,
-      "auc_logistic_regression": 0.942,
-      "auc_deep_neural_network": 0.941,
-      "auc_ensemble": 0.943,
+      "cells": 599,
+      "auc_logistic_regression": 0.948,
+      "auc_deep_neural_network": 0.949,
+      "auc_ensemble": 0.95,
       "auc_catalog_rule": 0.883
+    },
+    {
+      "taxon_key": 428365,
+      "name": "Ziziphus jujuba",
+      "cells": 796,
+      "auc_logistic_regression": 0.815,
+      "auc_deep_neural_network": 0.827,
+      "auc_ensemble": 0.823,
+      "auc_catalog_rule": 0.433
+    },
+    {
+      "taxon_key": 430784,
+      "name": "Carissa carandas",
+      "cells": 212,
+      "auc_logistic_regression": 0.916,
+      "auc_deep_neural_network": 0.907,
+      "auc_ensemble": 0.912,
+      "auc_catalog_rule": 0.85
     },
     {
       "taxon_key": 444218,
       "name": "Tamarix nilotica",
       "cells": 43,
-      "auc_logistic_regression": 0.855,
-      "auc_deep_neural_network": 0.778,
-      "auc_ensemble": 0.856,
-      "auc_catalog_rule": 0.754
+      "auc_logistic_regression": 0.832,
+      "auc_deep_neural_network": 0.847,
+      "auc_ensemble": 0.862,
+      "auc_catalog_rule": 0.778
     },
     {
       "taxon_key": 464138,
       "name": "Haloxylon persicum",
-      "cells": 40,
-      "auc_logistic_regression": 0.964,
-      "auc_deep_neural_network": 0.973,
-      "auc_ensemble": 0.971,
-      "auc_catalog_rule": 0.398
+      "cells": 41,
+      "auc_logistic_regression": 0.962,
+      "auc_deep_neural_network": 0.963,
+      "auc_ensemble": 0.965,
+      "auc_catalog_rule": 0.431
+    },
+    {
+      "taxon_key": 464594,
+      "name": "Prunus salicina",
+      "cells": 134,
+      "auc_logistic_regression": 0.819,
+      "auc_deep_neural_network": 0.84,
+      "auc_ensemble": 0.838,
+      "auc_catalog_rule": 0.502
+    },
+    {
+      "taxon_key": 469472,
+      "name": "Malus domestica",
+      "cells": 1191,
+      "auc_logistic_regression": 0.756,
+      "auc_deep_neural_network": 0.771,
+      "auc_ensemble": 0.774,
+      "auc_catalog_rule": 0.372
     },
     {
       "taxon_key": 489563,
       "name": "Vachellia tortilis",
-      "cells": 343,
-      "auc_logistic_regression": 0.889,
-      "auc_deep_neural_network": 0.92,
-      "auc_ensemble": 0.911,
-      "auc_catalog_rule": 0.638
+      "cells": 344,
+      "auc_logistic_regression": 0.894,
+      "auc_deep_neural_network": 0.916,
+      "auc_ensemble": 0.91,
+      "auc_catalog_rule": 0.669
     },
     {
       "taxon_key": 496045,
       "name": "Calligonum comosum",
       "cells": 72,
-      "auc_logistic_regression": 0.959,
-      "auc_deep_neural_network": 0.977,
-      "auc_ensemble": 0.969,
-      "auc_catalog_rule": 0.688
+      "auc_logistic_regression": 0.976,
+      "auc_deep_neural_network": 0.981,
+      "auc_ensemble": 0.979,
+      "auc_catalog_rule": 0.719
     },
     {
       "taxon_key": 508833,
       "name": "Satureja thymbra",
-      "cells": 89,
-      "auc_logistic_regression": 0.959,
-      "auc_deep_neural_network": 0.977,
-      "auc_ensemble": 0.971,
-      "auc_catalog_rule": 0.744
+      "cells": 90,
+      "auc_logistic_regression": 0.971,
+      "auc_deep_neural_network": 0.984,
+      "auc_ensemble": 0.98,
+      "auc_catalog_rule": 0.77
     },
     {
       "taxon_key": 557826,
       "name": "Vachellia nilotica",
       "cells": 289,
-      "auc_logistic_regression": 0.878,
-      "auc_deep_neural_network": 0.887,
-      "auc_ensemble": 0.887,
-      "auc_catalog_rule": 0.729
+      "auc_logistic_regression": 0.889,
+      "auc_deep_neural_network": 0.867,
+      "auc_ensemble": 0.88,
+      "auc_catalog_rule": 0.746
     },
     {
       "taxon_key": 636795,
       "name": "Salvia rosmarinus",
-      "cells": 1379,
-      "auc_logistic_regression": 0.749,
-      "auc_deep_neural_network": 0.746,
-      "auc_ensemble": 0.751,
-      "auc_catalog_rule": 0.55
+      "cells": 1348,
+      "auc_logistic_regression": 0.782,
+      "auc_deep_neural_network": 0.785,
+      "auc_ensemble": 0.786,
+      "auc_catalog_rule": 0.6
+    },
+    {
+      "taxon_key": 708697,
+      "name": "Citrus × microcarpa",
+      "cells": 477,
+      "auc_logistic_regression": 0.645,
+      "auc_deep_neural_network": 0.679,
+      "auc_ensemble": 0.67,
+      "auc_catalog_rule": 0.635
     },
     {
       "taxon_key": 709635,
       "name": "Iris × germanica",
-      "cells": 946,
-      "auc_logistic_regression": 0.786,
-      "auc_deep_neural_network": 0.783,
-      "auc_ensemble": 0.789,
-      "auc_catalog_rule": 0.438
+      "cells": 948,
+      "auc_logistic_regression": 0.794,
+      "auc_deep_neural_network": 0.798,
+      "auc_ensemble": 0.8,
+      "auc_catalog_rule": 0.49
     },
     {
       "taxon_key": 769957,
       "name": "Heliotropium arboreum",
-      "cells": 412,
-      "auc_logistic_regression": 0.974,
-      "auc_deep_neural_network": 0.968,
-      "auc_ensemble": 0.972,
-      "auc_catalog_rule": 0.881
+      "cells": 414,
+      "auc_logistic_regression": 0.98,
+      "auc_deep_neural_network": 0.976,
+      "auc_ensemble": 0.979,
+      "auc_catalog_rule": 0.883
     },
     {
       "taxon_key": 847866,
       "name": "Lavandula subnuda",
-      "cells": 36,
-      "auc_logistic_regression": 0.601,
-      "auc_deep_neural_network": 0.817,
-      "auc_ensemble": 0.761,
-      "auc_catalog_rule": 0.809
+      "cells": 38,
+      "auc_logistic_regression": 0.921,
+      "auc_deep_neural_network": 0.976,
+      "auc_ensemble": 0.961,
+      "auc_catalog_rule": 0.823
+    },
+    {
+      "taxon_key": 866390,
+      "name": "Sicyos edulis",
+      "cells": 894,
+      "auc_logistic_regression": 0.831,
+      "auc_deep_neural_network": 0.838,
+      "auc_ensemble": 0.838,
+      "auc_catalog_rule": 0.695
+    },
+    {
+      "taxon_key": 873768,
+      "name": "Nicotiana tabacum",
+      "cells": 930,
+      "auc_logistic_regression": 0.705,
+      "auc_deep_neural_network": 0.723,
+      "auc_ensemble": 0.722,
+      "auc_catalog_rule": 0.624
     },
     {
       "taxon_key": 884843,
       "name": "Gazania rigens",
-      "cells": 508,
-      "auc_logistic_regression": 0.841,
-      "auc_deep_neural_network": 0.842,
-      "auc_ensemble": 0.845,
-      "auc_catalog_rule": 0.666
+      "cells": 512,
+      "auc_logistic_regression": 0.864,
+      "auc_deep_neural_network": 0.87,
+      "auc_ensemble": 0.873,
+      "auc_catalog_rule": 0.698
+    },
+    {
+      "taxon_key": 995125,
+      "name": "Raphanus raphanistrum sativus",
+      "cells": 759,
+      "auc_logistic_regression": 0.738,
+      "auc_deep_neural_network": 0.75,
+      "auc_ensemble": 0.753,
+      "auc_catalog_rule": 0.589
+    },
+    {
+      "taxon_key": 1004655,
+      "name": "Luffa aegyptiaca",
+      "cells": 1044,
+      "auc_logistic_regression": 0.773,
+      "auc_deep_neural_network": 0.778,
+      "auc_ensemble": 0.783,
+      "auc_catalog_rule": 0.701
+    },
+    {
+      "taxon_key": 1038928,
+      "name": "Selenicereus undatus",
+      "cells": 1200,
+      "auc_logistic_regression": 0.799,
+      "auc_deep_neural_network": 0.821,
+      "auc_ensemble": 0.818,
+      "auc_catalog_rule": 0.751
+    },
+    {
+      "taxon_key": 1090496,
+      "name": "Rubus fruticosus",
+      "cells": 242,
+      "auc_logistic_regression": 0.934,
+      "auc_deep_neural_network": 0.927,
+      "auc_ensemble": 0.933,
+      "auc_catalog_rule": 0.489
+    },
+    {
+      "taxon_key": 1341071,
+      "name": "Feijoa sellowiana",
+      "cells": 952,
+      "auc_logistic_regression": 0.84,
+      "auc_deep_neural_network": 0.851,
+      "auc_ensemble": 0.85,
+      "auc_catalog_rule": 0.644
+    },
+    {
+      "taxon_key": 1375470,
+      "name": "Vicia lens",
+      "cells": 91,
+      "auc_logistic_regression": 0.673,
+      "auc_deep_neural_network": 0.665,
+      "auc_ensemble": 0.671,
+      "auc_catalog_rule": 0.498
     },
     {
       "taxon_key": 1455863,
       "name": "Rosa × damascena",
       "cells": 25,
-      "auc_logistic_regression": 0.536,
-      "auc_deep_neural_network": 0.608,
-      "auc_ensemble": 0.551,
-      "auc_catalog_rule": 0.344
+      "auc_logistic_regression": 0.581,
+      "auc_deep_neural_network": 0.603,
+      "auc_ensemble": 0.591,
+      "auc_catalog_rule": 0.398
     },
     {
       "taxon_key": 1515671,
       "name": "× Hesperotropsis leylandii",
-      "cells": 157,
-      "auc_logistic_regression": 0.734,
-      "auc_deep_neural_network": 0.854,
-      "auc_ensemble": 0.83,
-      "auc_catalog_rule": 0.519
+      "cells": 158,
+      "auc_logistic_regression": 0.744,
+      "auc_deep_neural_network": 0.796,
+      "auc_ensemble": 0.783,
+      "auc_catalog_rule": 0.566
     },
     {
       "taxon_key": 1591063,
       "name": "Camphora officinarum",
-      "cells": 547,
-      "auc_logistic_regression": 0.868,
-      "auc_deep_neural_network": 0.88,
-      "auc_ensemble": 0.882,
-      "auc_catalog_rule": 0.665
+      "cells": 544,
+      "auc_logistic_regression": 0.887,
+      "auc_deep_neural_network": 0.892,
+      "auc_ensemble": 0.894,
+      "auc_catalog_rule": 0.699
+    },
+    {
+      "taxon_key": 1611056,
+      "name": "Citrus reticulata",
+      "cells": 24,
+      "auc_logistic_regression": 0.627,
+      "auc_deep_neural_network": 0.554,
+      "auc_ensemble": 0.617,
+      "auc_catalog_rule": 0.572
     },
     {
       "taxon_key": 1628098,
       "name": "Hibiscus × rosa-sinensis",
-      "cells": 1372,
-      "auc_logistic_regression": 0.756,
-      "auc_deep_neural_network": 0.768,
-      "auc_ensemble": 0.767,
-      "auc_catalog_rule": 0.727
+      "cells": 1362,
+      "auc_logistic_regression": 0.78,
+      "auc_deep_neural_network": 0.799,
+      "auc_ensemble": 0.795,
+      "auc_catalog_rule": 0.747
+    },
+    {
+      "taxon_key": 1687652,
+      "name": "Sabdariffa gossypiifolia",
+      "cells": 1061,
+      "auc_logistic_regression": 0.81,
+      "auc_deep_neural_network": 0.822,
+      "auc_ensemble": 0.819,
+      "auc_catalog_rule": 0.784
     }
   ],
   "limitations": [

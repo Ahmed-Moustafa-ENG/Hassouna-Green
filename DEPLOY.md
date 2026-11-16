@@ -4,15 +4,21 @@ No Streamlit Community Cloud. No Vercel. No hosting platform that runs
 somebody else's application: the app runs in a container on a machine you
 control, and Caddy gives it HTTPS on a domain you own.
 
+**This guide uses your domain: `hassounaGreen-eg.com`.**
+
 ```
-visitor ──https://hassounagreen.com──▶ Caddy (your server) ──▶ app container
-                                            │
-                                        Let's Encrypt certificate
+visitor ──https://hassounagreen-eg.com──▶ Caddy (your server) ──▶ app container
+                                                │
+                                            Let's Encrypt certificate
 ```
 
 > **Do not want to buy a domain?** Jump to
 > [The free way](#the-free-way-a-public-address-without-a-domain) - one
 > command gives you a public HTTPS address, at no cost.
+>
+> **Bought the domain but no server yet?** Jump to
+> [Your domain from your own computer](#your-own-domain-from-your-own-computer)
+> - the same permanent address, still free, still no hosting platform.
 
 ## How the deployment works
 
@@ -27,7 +33,7 @@ address = "0.0.0.0"
 port = 8501
 enableCORS = false              # the proxy passes one origin only
 enableXsrfProtection = true     # the upload routes stay protected
-allowedHosts = ["your.domain", "www.your.domain", "localhost", "127.0.0.1"]
+allowedHosts = ["hassounagreen-eg.com", "www.hassounagreen-eg.com", "localhost", "127.0.0.1"]
 ```
 
 `allowedHosts` is what stops another site from reaching your app through a
@@ -37,7 +43,62 @@ about the domain is baked into the image, it is only read at start-up.
 The visitor's feedback and the cache of the AI replies are written to the
 `app-data` volume, so they survive a rebuild.
 
-## The free way: a public address without a domain
+## Your own domain from your own computer
+
+Once you own `hassounagreen-eg.com`, you can serve it **from your own
+computer** - no server, no hosting platform, and Cloudflare issues the
+certificate for you. The address is then always the same, not a random one
+that changes on every restart.
+
+**Step 1 - buy the domain at Cloudflare**
+
+Go to <https://dash.cloudflare.com> → **Register Domains** → search for
+`hassounagreen-eg.com` → buy it. Cloudflare's DNS is free and is where the
+tunnel needs it. Set the nameservers Cloudflare gives you at the registrar.
+
+**Step 2 - start the tunnel**
+
+```powershell
+# Windows
+.\deploy\tunnel-domain.ps1
+```
+
+```bash
+# Linux or macOS
+./deploy/tunnel-domain.sh
+```
+
+The first run does the one-time setup: it signs in to Cloudflare, creates a
+named tunnel called `hassouna-green`, points `hassounagreen-eg.com` and
+`www.hassounagreen-eg.com` at it, and writes the configuration. After that
+it only starts the app and the tunnel.
+
+**Step 3 - open the door**
+
+Cloudflare asks you to pick the hostname the tunnel serves. Choose
+`hassounagreen-eg.com`.
+
+That is all. From then on the app answers at:
+
+```
+https://hassounagreen-eg.com
+```
+
+forever, with a valid certificate, over HTTPS, from your own computer.
+
+**What this needs**
+
+| | |
+|---|---|
+| The domain | about 10 USD a year, once |
+| A Cloudflare account | free |
+| Your computer | switched on and connected while the app is being served |
+
+**The one trade-off**: while the app runs on your computer, the address is
+down when the computer is off. If you want it to answer 24 hours a day, use
+the Docker setup below on a small server and point the same domain at it -
+nothing about the app changes.
+
 
 A domain is only needed for a **fixed** address. If you are happy with an
 address that changes when you restart, a tunnel gives you a public HTTPS URL
@@ -105,7 +166,7 @@ A        www      203.0.113.10
 ```
 
 The address may take a few minutes to spread. Check it with
-`nslookup yourdomain.com` until it returns your server.
+`nslookup hassounagreen-eg.com` until it returns your server.
 
 ## Step 2 - the server
 
@@ -145,7 +206,7 @@ nano .env            # put your domain in DOMAIN=... and, if you have one, your 
 That is the whole deployment. The script builds the image, starts the app and
 the proxy, and waits until the app answers.
 
-Open `https://yourdomain.com` in a browser. The first request takes a few
+Open `https://hassounagreen-eg.com` in a browser. The first request takes a few
 seconds while Caddy asks Let's Encrypt for the certificate; after that the
 certificate renews itself.
 
@@ -188,7 +249,7 @@ git clone https://github.com/Ahmed-Moustafa-ENG/Hassouna-Green.git
 cd Hassouna-Green
 python3 -m venv .venv
 .venv/bin/pip install -r requirements.txt
-DOMAIN=your.domain .venv/bin/python deploy/entrypoint.sh
+DOMAIN=hassounagreen-eg.com .venv/bin/python deploy/entrypoint.sh
 ```
 
 Run it under systemd so it starts with the machine
@@ -202,7 +263,7 @@ After=network.target
 [Service]
 User=www-data
 WorkingDirectory=/srv/Hassouna-Green
-Environment=DOMAIN=your.domain
+Environment=DOMAIN=hassounagreen-eg.com
 Environment=HASSOUNA_FEEDBACK_FILE=/var/lib/hassouna/feedback.json
 ExecStart=/srv/Hassouna-Green/.venv/bin/python /srv/Hassouna-Green/deploy/entrypoint.sh
 Restart=always

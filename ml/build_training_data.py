@@ -174,6 +174,22 @@ def _norm(name):
     return " ".join(t for t in name.lower().replace("×", " ").split() if t != "x")
 
 
+def _load_fallbacks() -> dict:
+    """Names that iNaturalist does not list as they are, and the name it uses.
+
+    A crop cultivar is recorded under its species, so the climate niche of
+    "Brassica oleracea var. capitata" (cabbage) is the niche of Brassica
+    oleracea. A few names differ from iNaturalist's accepted name. The
+    mapping is in species_fallbacks.csv.
+    """
+    path = ML_DIR / "species_fallbacks.csv"
+    if not path.exists():
+        return {}
+    with path.open(newline="", encoding="utf-8") as fh:
+        return {r["name"].strip(): r["fallback_name"].strip()
+                for r in csv.DictReader(fh) if r.get("name") and r.get("fallback_name")}
+
+
 def inat_match(name):
     rank = "genus" if len(name.split()) == 1 else "species,hybrid,subspecies,variety"
     d = http_get(INAT_TAXA, params={"q": name, "rank": rank, "is_active": "true", "per_page": 10},
@@ -196,7 +212,12 @@ def inat_points(key, cache_dir: Path, pages_per_box=1, kind="wild"):
     filename, filters = INAT_KINDS[kind]
     cache = cache_dir / filename.format(key=key)
     if cache.exists():
-        return json.loads(cache.read_text())
+        try:
+            return json.loads(cache.read_text())
+        except (json.JSONDecodeError, UnicodeDecodeError):
+            # A run that was interrupted can leave a half-written cache file.
+            # Download it again instead of stopping the whole build.
+            cache.unlink(missing_ok=True)
     base = {"taxon_id": key, "per_page": 200, "fields": "uuid,location", "d1": f"{MIN_YEAR}-01-01", **filters}
     seen = {}
 
@@ -296,9 +317,16 @@ def main():
     print(f"Matching {len(names)} names with {args.source} ...")
     match_cache = args.cache_dir / f"matches_{args.source}.json"
     cached = json.loads(match_cache.read_text()) if match_cache.exists() else {}
+    fallbacks = _load_fallbacks()
     taxa = {}
     for name in names:
         m = cached[name] if name in cached else src["match"](name)
+        if m is None and name in fallbacks:
+            # The name iNaturalist uses for this plant.
+            alt = fallbacks[name]
+            m = cached.get(alt) or src["match"](alt)
+            if m:
+                m = {**m, "match_type": f"FALLBACK ({alt})"}
         taxa[name] = m
         print(f"  {name:28s} -> " + (f"{m['matched_name']} [{m['rank']}, {m['match_type']}, id {m['key']}]"
                                      if m else "NO MATCH (not modeled)"))

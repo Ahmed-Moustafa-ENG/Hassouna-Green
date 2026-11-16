@@ -10,19 +10,29 @@ It sits on the results page next to the rule-based score. The rule-based score c
 
 | Item | Detail |
 |---|---|
-| Plant records | 284,491 iNaturalist observations since 1950: 150,054 wild (research grade) and 134,437 planted ones, counted only when other users agree with the identification (`captive=true, identifications=most_agree`) |
-| Plants | All 173 distinct scientific names in `plant_scientific_names.csv`, covering 192 of the 202 catalog plants (10 generic entries such as "Ornamental Palm" have no scientific name and are not judged) |
+| Plant records | 528,839 iNaturalist observations since 1950: 291,969 wild (research grade) and 236,870 planted ones, counted only when other users agree with the identification (`captive=true, identifications=most_agree`) |
+| Plants | 398 distinct scientific names in `plant_scientific_names.csv`, of which 397 matched an iNaturalist taxon and 372 were modelled, covering 417 of the 427 catalog plants (the 10 generic entries such as "Ornamental Palm" have no scientific name and are not judged) |
 | Climate | WorldClim 2.1 normals (1970–2000) at 10 arc-minutes (~18 km): annual mean temperature, temperature seasonality, warmest-month maximum, coldest-month minimum |
-| Training grid | 36,258 land cells that contain at least one record |
+| Training grid | 53,991 land cells that contain at least one record |
 
 **Why planted records are included:** in Egypt and the Gulf almost every landscape plant is planted and irrigated. Wild records alone gave 0 Bougainvillea records in Egypt and the Gulf, against 584 planted ones. With wild records only, the judge rated every plant in a typical Dubai design as unsuitable.
 
 **Why rainfall is left out:** in a landscape, irrigation replaces rain, and the app's ET₀ × Kc water engine already handles water demand.
 
+**How a crop variety is handled:** iNaturalist records a cultivar under its
+species, so "Brassica oleracea var. capitata" (cabbage) is not a taxon there.
+`species_fallbacks.csv` maps 26 names to the taxon iNaturalist actually uses -
+either the parent species or the accepted name (`Raphanus sativus` →
+`Raphanus raphanistrum sativus`, `Sechium edule` → `Sicyos edulis`,
+`Actinidia deliciosa` → `Actinidia chinensis`, `Feronia limonia` →
+`Limonia acidissima`). The crops therefore share their species' climate
+niche, which is what the observations actually describe. Only grapefruit
+(`Citrus paradisi`) has no taxon in iNaturalist and stays unjudged.
+
 ## The two models
 
 1. **Classic machine learning:** one logistic regression per plant on the 4 temperature variables and their squares (8 terms). This is the standard model in species-distribution research.
-2. **Deep learning:** one PyTorch neural network, 4 → 256 → 256 → 128 → 173 outputs (122,285 parameters, ReLU, dropout 0.2), predicting all plants at once.
+2. **Deep learning:** one PyTorch neural network, 4 → 256 → 256 → 128 → 372 outputs, predicting all plants at once.
 
 The app averages the two. It then reports a **climate match**: the site's percentile among the plant's own known locations.
 - Below the 10th percentile, the site is *outside the known range* (the standard 10%-omission threshold in species-distribution modelling).
@@ -36,12 +46,14 @@ Background (non-presence) cells are places where *other catalog plants* were rec
 
 | Method | Mean AUC | Median AUC | Plants with AUC ≥ 0.7 |
 |---|---|---|---|
-| Logistic regression (ML) | 0.790 | 0.791 | 85.5% |
-| Deep neural network (DL) | 0.804 | 0.808 | 91.3% |
-| Both combined (used in the app) | 0.803 | 0.809 | 90.8% |
-| App catalog temperature ranges (baseline) | 0.608 | 0.630 | 30.6% |
+| Logistic regression (ML) | 0.799 | 0.812 | 84.1% |
+| Deep neural network (DL) | 0.809 | 0.821 | 88.7% |
+| Both combined (used in the app) | 0.809 | 0.822 | 88.2% |
+| App catalog temperature ranges (baseline) | 0.612 | 0.629 | 34.7% |
 
 All numbers are computed by `train_ml_judge.py` and stored in `ml_judge_card.json` (with a per-plant table); none are typed in by hand. A wild-records-only, 7-variable version scored higher (combined AUC 0.861) but answered the wrong question for irrigated landscapes, as explained above.
+
+The earlier model, trained on 173 landscape plants only, scored 0.803 combined. Doubling the catalog to 372 taxa - mostly crops - did not cost accuracy.
 
 ## Limitations (also shown in the app)
 
@@ -49,9 +61,10 @@ All numbers are computed by `train_ml_judge.py` and stored in `ml_judge_card.jso
 - Temperature only. Soil, salinity and water are judged by the rule-based score and the water engine.
 - Climate normals are 1970–2000 at ~18 km, so city microclimates are not resolved.
 - Some planted records may be indoor or greenhouse plants, which can make a plant look more cold-tolerant than it is.
-- Year-round climate is used, so cool-season bedding plants (e.g. pansy) grown only in winter may be judged unfairly.
+- Year-round climate is used, so cool-season bedding plants (e.g. pansy) grown only in winter may be judged unfairly. The same applies to winter vegetables: the judge compares the site with the places the crop is recorded in all year.
 - Citizen-science records are densest in Europe and North America; the target-group background reduces this bias but does not remove it.
 - Genus-level entries (e.g. Bougainvillea, Cassia) are modelled at genus level.
+- Crops that share a species share a climate niche, so cabbage and cauliflower get the same score.
 - The warming slider adds +1/+2/+3 °C to all temperatures. It is a sensitivity test, not a climate projection.
 
 ## Files
@@ -59,10 +72,11 @@ All numbers are computed by `train_ml_judge.py` and stored in `ml_judge_card.jso
 | File | Needed to run the app? | Purpose |
 |---|---|---|
 | `../ml_judge.py` | yes | Runs the exported weights with numpy only (no PyTorch needed) |
-| `ml_judge_model.npz` | yes | Weights of both models plus percentile tables (~640 kB) |
+| `ml_judge_model.npz` | yes | Weights of both models plus percentile tables (~970 kB) |
 | `ml_judge_card.json` | yes | Data summary, test method, measured scores, per-plant AUCs, limitations |
 | `../hassouna_green.db` | yes | Schema v3: adds `plant_taxa` (scientific names and iNaturalist ids) and `location_climate` |
 | `plant_scientific_names.csv` | no | Editable mapping from catalog plant id to scientific name |
+| `species_fallbacks.csv` | no | Names iNaturalist does not list as they are, and the name it uses instead |
 | `build_training_data.py` | no | Downloads records and climate and builds `data/` |
 | `train_ml_judge.py` | no | Trains, cross-validates and exports the models |
 | `update_database.py` | no | Writes `plant_taxa` and `location_climate` into the database |

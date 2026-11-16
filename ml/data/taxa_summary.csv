@@ -1,174 +1,399 @@
 scientific_name,source,taxon_key,matched_name,rank,match_type,records_used,occupied_cells,modeled
-Abelia,inat,155567,Abelia,genus,EXACT,1788,858,True
-Acalypha wilkesiana,inat,281562,Acalypha wilkesiana,species,EXACT,2231,982,True
-Adansonia digitata,inat,81500,Adansonia digitata,species,EXACT,1031,479,True
-Adenium obesum,inat,124839,Adenium obesum,species,EXACT,1827,951,True
-Adiantum capillus-veneris,inat,63916,Adiantum capillus-veneris,species,EXACT,1657,843,True
-Agapanthus praecox,inat,199324,Agapanthus praecox,species,EXACT,2111,957,True
-Agave americana,inat,64103,Agave americana,species,EXACT,2562,1224,True
-Agave tequilana,inat,290889,Agave tequilana,species,EXACT,272,157,True
-Ageratum houstonianum,inat,120944,Ageratum houstonianum,species,EXACT,1808,918,True
-Aglaonema,inat,141512,Aglaonema,genus,EXACT,1582,851,True
-Aloe vera,inat,126882,Aloe vera,species,EXACT,2292,1216,True
-Alstroemeria,inat,81938,Alstroemeria,genus,EXACT,2101,1086,True
-Anemone coronaria,inat,244745,Anemone coronaria,species,EXACT,964,625,True
-Anthurium andraeanum,inat,69235,Anthurium andraeanum,species,EXACT,2060,1088,True
-Antigonon leptopus,inat,48380,Antigonon leptopus,species,EXACT,2156,879,True
-Araujia sericifera,inat,75499,Araujia sericifera,species,EXACT,1339,432,True
-Atriplex halimus,inat,82671,Atriplex halimus,species,EXACT,417,207,True
-Aubrieta deltoidea,inat,75721,Aubrieta deltoidea,species,EXACT,805,457,True
-Avicennia marina,inat,75723,Avicennia marina,species,EXACT,852,262,True
-Balanites aegyptiaca,inat,342713,Balanites aegyptiaca,species,EXACT,456,145,True
-Bambusa vulgaris,inat,122530,Bambusa vulgaris,species,EXACT,1822,734,True
-Beaucarnea recurvata,inat,206192,Beaucarnea recurvata,species,EXACT,999,554,True
-Bignonia,inat,67824,Bignonia,genus,EXACT,1211,687,True
-Bougainvillea,inat,53804,Bougainvillea,genus,EXACT,2407,1235,True
-Bouteloua dactyloides,inat,288038,Bouteloua dactyloides,species,EXACT,277,168,True
-Buxus sempervirens,inat,133397,Buxus sempervirens,species,EXACT,1253,754,True
-Calendula officinalis,inat,75931,Calendula officinalis,species,EXACT,2100,1142,True
+Abelia,inat,155567,Abelia,genus,EXACT,1793,863,True
+Abelmoschus esculentus,inat,157765,Abelmoschus esculentus,species,EXACT,1688,1070,True
+Acalypha wilkesiana,inat,281562,Acalypha wilkesiana,species,EXACT,2234,992,True
+Acca sellowiana,inat,1341071,Feijoa sellowiana,species,SYNONYM,1731,952,True
+Actinidia deliciosa,inat,55149,Actinidia chinensis,species,FALLBACK (Actinidia chinensis),911,571,True
+Adansonia digitata,inat,81500,Adansonia digitata,species,EXACT,1033,489,True
+Adenium obesum,inat,124839,Adenium obesum,species,EXACT,1807,937,True
+Adiantum capillus-veneris,inat,63916,Adiantum capillus-veneris,species,EXACT,1662,859,True
+Aegle marmelos,inat,325928,Aegle marmelos,species,EXACT,321,201,True
+Agapanthus praecox,inat,199324,Agapanthus praecox,species,EXACT,2118,964,True
+Agaricus bisporus,inat,61395,Agaricus bisporus,species,EXACT,380,227,True
+Agave americana,inat,64103,Agave americana,species,EXACT,2560,1214,True
+Agave tequilana,inat,290889,Agave tequilana,species,EXACT,273,158,True
+Ageratum houstonianum,inat,120944,Ageratum houstonianum,species,EXACT,1808,919,True
+Aglaonema,inat,141512,Aglaonema,genus,EXACT,1582,853,True
+Allium ampeloprasum var. porrum,inat,122912,Allium ampeloprasum,species,FALLBACK (Allium ampeloprasum),751,459,True
+Allium cepa,inat,48592,Allium cepa,species,EXACT,1332,982,True
+Allium cepa var. aggregatum,inat,48592,Allium cepa,species,FALLBACK (Allium cepa),1332,982,True
+Allium fistulosum,inat,126225,Allium fistulosum,species,EXACT,677,488,True
+Allium sativum,inat,75363,Allium sativum,species,EXACT,867,650,True
+Allium schoenoprasum,inat,59254,Allium schoenoprasum,species,EXACT,1555,1050,True
+Aloe vera,inat,126882,Aloe vera,species,EXACT,2293,1222,True
+Aloysia citrodora,inat,332455,Aloysia citrodora,species,EXACT,866,442,True
+Alstroemeria,inat,81938,Alstroemeria,genus,EXACT,2103,1083,True
+Amaranthus cruentus,inat,52328,Amaranthus cruentus,species,EXACT,1307,726,True
+Anacardium occidentale,inat,122988,Anacardium occidentale,species,EXACT,1716,1012,True
+Ananas comosus,inat,122965,Ananas comosus,species,EXACT,2476,1455,True
+Anemone coronaria,inat,244745,Anemone coronaria,species,EXACT,964,624,True
+Anethum graveolens,inat,75445,Anethum graveolens,species,EXACT,1108,871,True
+Annona cherimola,inat,126236,Annona cherimola,species,EXACT,729,340,True
+Annona muricata,inat,284503,Annona muricata,species,EXACT,1844,959,True
+Annona reticulata,inat,284506,Annona reticulata,species,EXACT,483,341,True
+Annona squamosa,inat,69973,Annona squamosa,species,EXACT,1996,1078,True
+Anthurium andraeanum,inat,69235,Anthurium andraeanum,species,EXACT,2064,1083,True
+Antigonon leptopus,inat,48380,Antigonon leptopus,species,EXACT,2156,883,True
+Apium graveolens,inat,58788,Apium graveolens,species,EXACT,1138,579,True
+Apium graveolens var. rapaceum,inat,58788,Apium graveolens,species,FALLBACK (Apium graveolens),1138,579,True
+Arachis hypogaea,inat,63205,Arachis hypogaea,species,EXACT,515,351,True
+Araujia sericifera,inat,75499,Araujia sericifera,species,EXACT,1342,442,True
+Armoracia rusticana,inat,75566,Armoracia rusticana,species,EXACT,1019,585,True
+Artemisia dracunculus,inat,57912,Artemisia dracunculus,species,EXACT,684,411,True
+Artocarpus altilis,inat,70027,Artocarpus altilis,species,EXACT,2163,917,True
+Artocarpus heterophyllus,inat,123003,Artocarpus heterophyllus,species,EXACT,2260,1042,True
+Asparagus officinalis,inat,60265,Asparagus officinalis,species,EXACT,1574,1019,True
+Atriplex halimus,inat,82671,Atriplex halimus,species,EXACT,418,205,True
+Aubrieta deltoidea,inat,75721,Aubrieta deltoidea,species,EXACT,805,456,True
+Averrhoa carambola,inat,146977,Averrhoa carambola,species,EXACT,2197,1083,True
+Avicennia marina,inat,75723,Avicennia marina,species,EXACT,853,262,True
+Balanites aegyptiaca,inat,342713,Balanites aegyptiaca,species,EXACT,458,147,True
+Bambusa vulgaris,inat,122530,Bambusa vulgaris,species,EXACT,1826,739,True
+Beaucarnea recurvata,inat,206192,Beaucarnea recurvata,species,EXACT,1000,551,True
+Bertholletia excelsa,inat,145603,Bertholletia excelsa,species,EXACT,221,153,True
+Beta vulgaris,inat,54498,Beta vulgaris,species,EXACT,1843,1012,True
+Beta vulgaris subsp. vulgaris,inat,54498,Beta vulgaris,species,FALLBACK (Beta vulgaris),1843,1012,True
+Beta vulgaris var. cicla,inat,54498,Beta vulgaris,species,FALLBACK (Beta vulgaris),1843,1012,True
+Bignonia,inat,67824,Bignonia,genus,EXACT,1213,695,True
+Borago officinalis,inat,52287,Borago officinalis,species,EXACT,1871,1125,True
+Bougainvillea,inat,53804,Bougainvillea,genus,EXACT,2408,1226,True
+Bouteloua dactyloides,inat,288038,Bouteloua dactyloides,species,EXACT,277,167,True
+Brassica juncea,inat,64241,Brassica juncea,species,EXACT,549,396,True
+Brassica napus subsp. rapifera,inat,75869,Brassica napus,species,FALLBACK (Brassica napus),1335,933,True
+Brassica oleracea var. acephala,inat,54516,Brassica oleracea,species,FALLBACK (Brassica oleracea),2186,1243,True
+Brassica oleracea var. alboglabra,inat,54516,Brassica oleracea,species,FALLBACK (Brassica oleracea),2186,1243,True
+Brassica oleracea var. botrytis,inat,54516,Brassica oleracea,species,FALLBACK (Brassica oleracea),2186,1243,True
+Brassica oleracea var. capitata,inat,54516,Brassica oleracea,species,FALLBACK (Brassica oleracea),2186,1243,True
+Brassica oleracea var. gemmifera,inat,54516,Brassica oleracea,species,FALLBACK (Brassica oleracea),2186,1243,True
+Brassica oleracea var. gongylodes,inat,54516,Brassica oleracea,species,FALLBACK (Brassica oleracea),2186,1243,True
+Brassica oleracea var. italica,inat,54516,Brassica oleracea,species,FALLBACK (Brassica oleracea),2186,1243,True
+Brassica oleracea var. viridis,inat,54516,Brassica oleracea,species,FALLBACK (Brassica oleracea),2186,1243,True
+Brassica rapa,inat,53271,Brassica rapa,species,EXACT,1581,815,True
+Brassica rapa subsp. chinensis,inat,53271,Brassica rapa,species,FALLBACK (Brassica rapa),1581,815,True
+Brassica rapa var. narinosa,inat,53271,Brassica rapa,species,FALLBACK (Brassica rapa),1581,815,True
+Brassica rapa var. pekinensis,inat,53271,Brassica rapa,species,FALLBACK (Brassica rapa),1581,815,True
+Brassica rapa var. perviridis,inat,53271,Brassica rapa,species,FALLBACK (Brassica rapa),1581,815,True
+Buxus sempervirens,inat,133397,Buxus sempervirens,species,EXACT,1253,735,True
+Cajanus cajan,inat,139444,Cajanus cajan,species,EXACT,1277,728,True
+Calendula officinalis,inat,75931,Calendula officinalis,species,EXACT,2102,1135,True
 Calligonum comosum,inat,496045,Calligonum comosum,species,EXACT,158,72,True
-Campsis radicans,inat,75995,Campsis radicans,species,EXACT,1484,1022,True
-Cananga odorata,inat,154842,Cananga odorata,species,EXACT,1014,490,True
-Carissa macrocarpa,inat,130215,Carissa macrocarpa,species,EXACT,1729,680,True
-Cascabela thevetia,inat,277115,Cascabela thevetia,species,EXACT,2558,1102,True
-Cassia,inat,68685,Cassia,genus,EXACT,2601,1229,True
-Cassia fistula,inat,68679,Cassia fistula,species,EXACT,2360,1101,True
-Casuarina,inat,62891,Casuarina,genus,EXACT,2745,1119,True
-Casuarina equisetifolia,inat,62888,Casuarina equisetifolia,species,EXACT,2325,927,True
-Ceratonia siliqua,inat,82742,Ceratonia siliqua,species,EXACT,1538,613,True
-Cereus,inat,49048,Cereus,genus,EXACT,1838,998,True
-Cestrum nocturnum,inat,76225,Cestrum nocturnum,species,EXACT,1549,780,True
-Chamaerops humilis,inat,132759,Chamaerops humilis,species,EXACT,1210,611,True
-Chlorophytum comosum,inat,322492,Chlorophytum comosum,species,EXACT,1993,1053,True
-Cinnamomum camphora,inat,1591063,Camphora officinarum,species,SYNONYM,1698,547,True
-Cissus,inat,72056,Cissus,genus,EXACT,1684,789,True
-Citrus aurantium,inat,331122,Citrus × aurantium,hybrid,EXACT,1696,1010,True
+Campsis radicans,inat,75995,Campsis radicans,species,EXACT,1486,1021,True
+Cananga odorata,inat,154842,Cananga odorata,species,EXACT,1017,492,True
+Capparis spinosa,inat,67715,Capparis spinosa,species,EXACT,590,311,True
+Capsicum annuum,inat,48514,Capsicum annuum,species,EXACT,2203,1311,True
+Capsicum chinense,inat,69135,Capsicum chinense,species,EXACT,400,269,True
+Capsicum frutescens,inat,122796,Capsicum frutescens,species,EXACT,531,370,True
+Carica papaya,inat,62811,Carica papaya,species,EXACT,3047,1439,True
+Carissa carandas,inat,430784,Carissa carandas,species,EXACT,306,212,True
+Carissa macrocarpa,inat,130215,Carissa macrocarpa,species,EXACT,1731,680,True
+Carthamus tinctorius,inat,76135,Carthamus tinctorius,species,EXACT,674,536,True
+Carum carvi,inat,160162,Carum carvi,species,EXACT,818,495,True
+Carya illinoinensis,inat,67593,Carya illinoinensis,species,EXACT,1317,618,True
+Cascabela thevetia,inat,277115,Cascabela thevetia,species,EXACT,2559,1105,True
+Cassia,inat,68685,Cassia,genus,EXACT,2603,1231,True
+Cassia fistula,inat,68679,Cassia fistula,species,EXACT,2360,1105,True
+Castanea sativa,inat,121763,Castanea sativa,species,EXACT,1708,861,True
+Casuarina,inat,62891,Casuarina,genus,EXACT,2749,1114,True
+Casuarina equisetifolia,inat,62888,Casuarina equisetifolia,species,EXACT,2327,917,True
+Ceratonia siliqua,inat,82742,Ceratonia siliqua,species,EXACT,1540,608,True
+Cereus,inat,49048,Cereus,genus,EXACT,1839,1006,True
+Cestrum nocturnum,inat,76225,Cestrum nocturnum,species,EXACT,1551,778,True
+Chamaerops humilis,inat,132759,Chamaerops humilis,species,EXACT,1210,622,True
+Chenopodium quinoa,inat,122848,Chenopodium quinoa,species,EXACT,85,64,True
+Chlorophytum comosum,inat,322492,Chlorophytum comosum,species,EXACT,1995,1053,True
+Cicer arietinum,inat,122854,Cicer arietinum,species,EXACT,161,143,True
+Cichorium endivia,inat,160574,Cichorium endivia,species,EXACT,271,106,True
+Cichorium intybus,inat,52913,Cichorium intybus,species,EXACT,1665,1079,True
+Cinnamomum camphora,inat,1591063,Camphora officinarum,species,SYNONYM,1701,544,True
+Cinnamomum verum,inat,122777,Cinnamomum verum,species,EXACT,236,160,True
+Cissus,inat,72056,Cissus,genus,EXACT,1684,793,True
+Citrullus lanatus,inat,70054,Citrullus lanatus,species,EXACT,1930,1445,True
+Citrus aurantiifolia,inat,331121,Citrus × aurantiifolia,hybrid,EXACT,963,659,True
+Citrus aurantium,inat,331122,Citrus × aurantium,hybrid,EXACT,1698,1011,True
+Citrus bergamia,inat,331124,Citrus × limon,hybrid,SYNONYM,1592,927,True
 Citrus limon,inat,331124,Citrus × limon,hybrid,EXACT,1592,927,True
-Clematis,inat,49877,Clematis,genus,EXACT,2444,1428,True
-Codiaeum variegatum,inat,127387,Codiaeum variegatum,species,EXACT,2795,1265,True
-Convolvulus sabatius,inat,319122,Convolvulus sabatius,species,EXACT,1004,402,True
-Cosmos bipinnatus,inat,68562,Cosmos bipinnatus,species,EXACT,2388,1416,True
-Crassula ovata,inat,76465,Crassula ovata,species,EXACT,2061,955,True
-Cupressus sempervirens,inat,64261,Cupressus sempervirens,species,EXACT,1315,716,True
-Cuprocyparis leylandii,inat,1515671,× Hesperotropsis leylandii,species,SYNONYM,205,157,True
-Cynodon dactylon,inat,58371,Cynodon dactylon,species,EXACT,1679,1004,True
-Cyperus papyrus,inat,161469,Cyperus papyrus,species,EXACT,2191,851,True
-Dahlia,inat,58465,Dahlia,genus,EXACT,2431,1310,True
-Delonix regia,inat,62839,Delonix regia,species,EXACT,3062,1290,True
-Delphinium elatum,inat,161664,Delphinium elatum,species,EXACT,471,297,True
-Dianthus,inat,60001,Dianthus,genus,EXACT,2540,1619,True
-Dianthus caryophyllus,inat,83063,Dianthus caryophyllus,species,EXACT,465,367,True
-Dieffenbachia,inat,147272,Dieffenbachia,genus,EXACT,2299,1150,True
-Dimorphotheca ecklonis,inat,76660,Dimorphotheca ecklonis,species,EXACT,1304,579,True
-Distichlis spicata,inat,58372,Distichlis spicata,species,EXACT,616,320,True
-Dodonaea viscosa,inat,122711,Dodonaea viscosa,species,EXACT,2218,861,True
-Dracaena,inat,124826,Dracaena,genus,EXACT,2855,1243,True
-Duranta erecta,inat,162153,Duranta erecta,species,EXACT,2858,1352,True
-Dypsis lutescens,inat,276548,Chrysalidocarpus lutescens,species,SYNONYM,2329,1142,True
-Echeveria,inat,153990,Echeveria,genus,EXACT,2012,922,True
-Eryngium maritimum,inat,162707,Eryngium maritimum,species,EXACT,461,273,True
-Eucalyptus camaldulensis,inat,64128,Eucalyptus camaldulensis,species,EXACT,1890,917,True
-Ferocactus,inat,54454,Ferocactus,genus,EXACT,1005,564,True
-Festuca arundinacea,inat,164708,Lolium arundinaceum,species,SYNONYM,999,638,True
-Ficus benjamina,inat,50996,Ficus benjamina,species,EXACT,2329,1053,True
-Ficus carica,inat,60218,Ficus carica,species,EXACT,2784,1477,True
-Ficus microcarpa,inat,54982,Ficus microcarpa,species,EXACT,2027,768,True
-Ficus sycomorus,inat,340164,Ficus sycomorus,species,EXACT,493,258,True
-Gardenia jasminoides,inat,210990,Gardenia jasminoides,species,EXACT,1136,657,True
-Gazania rigens,inat,884843,Gazania rigens,species,EXACT,1350,508,True
-Gladiolus,inat,59945,Gladiolus,genus,EXACT,2285,1348,True
-Haloxylon persicum,inat,464138,Haloxylon persicum,species,EXACT,64,40,True
-Haworthia,inat,272914,Haworthia,genus,EXACT,631,362,True
-Hedera helix,inat,55882,Hedera helix,species,EXACT,2276,1037,True
-Helianthemum nummularium,inat,84278,Helianthemum nummularium,species,EXACT,446,289,True
-Helianthus annuus,inat,57983,Helianthus annuus,species,EXACT,2447,1532,True
-Heliotropium arboreum,inat,769957,Heliotropium arboreum,species,EXACT,1391,412,True
-Hibiscus rosa-sinensis,inat,1628098,Hibiscus × rosa-sinensis,hybrid,EXACT,2499,1372,True
-Hippeastrum,inat,51833,Hippeastrum,genus,EXACT,1976,1335,True
-Hyphaene thebaica,inat,200831,Hyphaene thebaica,species,EXACT,230,107,True
-Ipomoea pes-caprae,inat,60879,Ipomoea pes-caprae,species,EXACT,1942,889,True
-Ipomoea purpurea,inat,52344,Ipomoea purpurea,species,EXACT,2257,1137,True
-Iris germanica,inat,709635,Iris × germanica,hybrid,EXACT,1384,946,True
-Ixora coccinea,inat,133309,Ixora coccinea,species,EXACT,2159,997,True
-Jacaranda mimosifolia,inat,77541,Jacaranda mimosifolia,species,EXACT,2688,1126,True
-Jasminum mesnyi,inat,164229,Jasminum mesnyi,species,EXACT,1535,754,True
-Jasminum officinale,inat,164233,Jasminum officinale,species,EXACT,233,178,True
-Jasminum sambac,inat,135425,Jasminum sambac,species,EXACT,1105,630,True
-Jatropha curcas,inat,164238,Jatropha curcas,species,EXACT,1222,728,True
-Lantana camara,inat,50333,Lantana camara,species,EXACT,2805,1347,True
-Lavandula angustifolia,inat,133395,Lavandula angustifolia,species,EXACT,1254,771,True
-Lavandula dentata,inat,71134,Lavandula dentata,species,EXACT,1809,721,True
-Lavandula subnuda,inat,847866,Lavandula subnuda,species,EXACT,200,36,True
-Leucaena leucocephala,inat,47447,Leucaena leucocephala,species,EXACT,2110,1024,True
-Marsdenia floribunda,inat,339914,Stephanotis floribunda,species,SYNONYM,209,140,True
-Melaleuca,inat,72232,Melaleuca,genus,EXACT,2684,1140,True
-Melaleuca citrina,inat,77976,Melaleuca citrina,species,EXACT,1546,792,True
-Melia azedarach,inat,53720,Melia azedarach,species,EXACT,2796,1345,True
-Mentha spicata,inat,62652,Mentha spicata,species,EXACT,1791,1236,True
-Moringa oleifera,inat,165529,Moringa oleifera,species,EXACT,2341,1104,True
-Narcissus tazetta,inat,56027,Narcissus tazetta,species,EXACT,1573,901,True
-Nerium oleander,inat,47563,Nerium oleander,species,EXACT,2827,1407,True
-Nymphaea,inat,51122,Nymphaea,genus,EXACT,2843,1448,True
-Nymphaea lotus,inat,165755,Nymphaea lotus,species,EXACT,1034,479,True
-Ocimum basilicum,inat,61398,Ocimum basilicum,species,EXACT,2047,1259,True
-Olea europaea,inat,57140,Olea europaea,species,EXACT,2275,969,True
-Opuntia,inat,47902,Opuntia,genus,EXACT,3081,1615,True
-Opuntia ficus-indica,inat,64119,Opuntia ficus-indica,species,EXACT,2162,1061,True
-Origanum vulgare,inat,61396,Origanum vulgare,species,EXACT,1607,1015,True
-Paspalum notatum,inat,166188,Paspalum notatum,species,EXACT,1103,600,True
-Passiflora caerulea,inat,51454,Passiflora caerulea,species,EXACT,2230,1180,True
-Pelargonium,inat,72281,Pelargonium,genus,EXACT,2371,1145,True
-Petunia,inat,55406,Petunia,genus,EXACT,2212,1323,True
-Philodendron,inat,69807,Philodendron,genus,EXACT,2378,1129,True
-Phoenix dactylifera,inat,78555,Phoenix dactylifera,species,EXACT,1518,773,True
-Phragmites australis,inat,64237,Phragmites australis,species,EXACT,1318,806,True
-Platanus orientalis,inat,181682,Platanus orientalis,species,EXACT,584,372,True
-Plumbago auriculata,inat,78631,Plumbago auriculata,species,EXACT,2771,1170,True
-Portulaca grandiflora,inat,167309,Portulaca grandiflora,species,EXACT,2394,1372,True
-Prosopis cineraria,inat,131133,Prosopis cineraria,species,EXACT,250,101,True
-Prunus laurocerasus,inat,61432,Prunus laurocerasus,species,EXACT,1516,706,True
-Punica granatum,inat,58300,Punica granatum,species,EXACT,2678,1523,True
-Pyrostegia venusta,inat,126634,Pyrostegia venusta,species,EXACT,2615,1135,True
+Citrus maxima,inat,54299,Citrus maxima,species,EXACT,1156,739,True
+Citrus medica,inat,123356,Citrus medica,species,EXACT,588,432,True
+Citrus paradisi,inat,,,,NONE,0,0,False
+Citrus reticulata,inat,1611056,Citrus reticulata,species,EXACT,24,24,True
+Citrus sinensis,inat,331122,Citrus × aurantium,hybrid,SYNONYM,1698,1011,True
+Citrus × microcarpa,inat,708697,Citrus × microcarpa,hybrid,EXACT,739,477,True
+Clematis,inat,49877,Clematis,genus,EXACT,2444,1411,True
+Cocos nucifera,inat,48865,Cocos nucifera,species,EXACT,3076,1277,True
+Codiaeum variegatum,inat,127387,Codiaeum variegatum,species,EXACT,2801,1258,True
+Coffea arabica,inat,64342,Coffea arabica,species,EXACT,2475,1110,True
+Colocasia esculenta,inat,122835,Colocasia esculenta,species,EXACT,2315,1144,True
+Convolvulus sabatius,inat,319122,Convolvulus sabatius,species,EXACT,1010,405,True
+Coriandrum sativum,inat,67759,Coriandrum sativum,species,EXACT,1851,1308,True
+Corylus avellana,inat,54491,Corylus avellana,species,EXACT,1120,567,True
+Cosmos bipinnatus,inat,68562,Cosmos bipinnatus,species,EXACT,2391,1420,True
+Crassula ovata,inat,76465,Crassula ovata,species,EXACT,2066,956,True
+Crocus sativus,inat,118933,Crocus sativus,species,EXACT,350,286,True
+Cucumis anguria,inat,161246,Cucumis anguria,species,EXACT,679,499,True
+Cucumis melo,inat,76538,Cucumis melo,species,EXACT,1477,1016,True
+Cucumis sativus,inat,54919,Cucumis sativus,species,EXACT,1431,1117,True
+Cucurbita maxima,inat,122866,Cucurbita maxima,species,EXACT,626,509,True
+Cucurbita moschata,inat,122869,Cucurbita moschata,species,EXACT,1805,1194,True
+Cucurbita pepo,inat,76541,Cucurbita pepo,species,EXACT,1516,1105,True
+Cuminum cyminum,inat,161251,Cuminum cyminum,species,EXACT,4,3,False
+Cupressus sempervirens,inat,64261,Cupressus sempervirens,species,EXACT,1321,716,True
+Cuprocyparis leylandii,inat,1515671,× Hesperotropsis leylandii,species,SYNONYM,206,158,True
+Curcuma longa,inat,119386,Curcuma longa,species,EXACT,640,388,True
+Cydonia oblonga,inat,82853,Cydonia oblonga,species,EXACT,1724,1089,True
+Cymbopogon citratus,inat,123728,Cymbopogon citratus,species,EXACT,1794,913,True
+Cynara cardunculus,inat,57563,Cynara cardunculus,species,EXACT,1737,886,True
+Cynara cardunculus var. scolymus,inat,57563,Cynara cardunculus,species,FALLBACK (Cynara cardunculus),1737,886,True
+Cynodon dactylon,inat,58371,Cynodon dactylon,species,EXACT,1681,1007,True
+Cyperus papyrus,inat,161469,Cyperus papyrus,species,EXACT,2201,852,True
+Dahlia,inat,58465,Dahlia,genus,EXACT,2436,1313,True
+Daucus carota,inat,76610,Daucus carota,species,EXACT,2031,1259,True
+Delonix regia,inat,62839,Delonix regia,species,EXACT,3062,1292,True
+Delphinium elatum,inat,161664,Delphinium elatum,species,EXACT,472,300,True
+Dianthus,inat,60001,Dianthus,genus,EXACT,2541,1611,True
+Dianthus caryophyllus,inat,83063,Dianthus caryophyllus,species,EXACT,467,369,True
+Dieffenbachia,inat,147272,Dieffenbachia,genus,EXACT,2300,1153,True
+Dimocarpus longan,inat,191503,Dimocarpus longan,species,EXACT,694,294,True
+Dimorphotheca ecklonis,inat,76660,Dimorphotheca ecklonis,species,EXACT,1305,580,True
+Dioscorea alata,inat,161930,Dioscorea alata,species,EXACT,523,239,True
+Distichlis spicata,inat,58372,Distichlis spicata,species,EXACT,616,317,True
+Dodonaea viscosa,inat,122711,Dodonaea viscosa,species,EXACT,2221,875,True
+Dracaena,inat,124826,Dracaena,genus,EXACT,2855,1242,True
+Duranta erecta,inat,162153,Duranta erecta,species,EXACT,2859,1334,True
+Dypsis lutescens,inat,276548,Chrysalidocarpus lutescens,species,SYNONYM,2335,1143,True
+Dysphania ambrosioides,inat,76746,Dysphania ambrosioides,species,EXACT,1510,739,True
+Echeveria,inat,153990,Echeveria,genus,EXACT,2012,925,True
+Elaeis guineensis,inat,132576,Elaeis guineensis,species,EXACT,1367,718,True
+Eleocharis dulcis,inat,122977,Eleocharis dulcis,species,EXACT,208,91,True
+Elettaria cardamomum,inat,119387,Elettaria cardamomum,species,EXACT,97,64,True
+Eriobotrya japonica,inat,76949,Eriobotrya japonica,species,EXACT,2776,1326,True
+Eruca vesicaria,inat,77058,Eruca vesicaria,species,EXACT,1046,652,True
+Eryngium maritimum,inat,162707,Eryngium maritimum,species,EXACT,461,269,True
+Eucalyptus camaldulensis,inat,64128,Eucalyptus camaldulensis,species,EXACT,1894,920,True
+Eutrema japonicum,inat,123047,Eutrema japonicum,species,EXACT,126,61,True
+Fagopyrum esculentum,inat,145601,Fagopyrum esculentum,species,EXACT,981,772,True
+Ferocactus,inat,54454,Ferocactus,genus,EXACT,1006,548,True
+Feronia limonia,inat,343928,Limonia acidissima,species,FALLBACK (Limonia acidissima),218,126,True
+Festuca arundinacea,inat,164708,Lolium arundinaceum,species,SYNONYM,1009,641,True
+Ficus benjamina,inat,50996,Ficus benjamina,species,EXACT,2328,1055,True
+Ficus carica,inat,60218,Ficus carica,species,EXACT,2784,1479,True
+Ficus microcarpa,inat,54982,Ficus microcarpa,species,EXACT,2029,765,True
+Ficus sycomorus,inat,340164,Ficus sycomorus,species,EXACT,497,259,True
+Foeniculum vulgare,inat,53052,Foeniculum vulgare,species,EXACT,1956,1060,True
+Fragaria vesca,inat,50298,Fragaria vesca,species,EXACT,1568,856,True
+Fragaria × ananassa,inat,55366,Fragaria × ananassa,hybrid,EXACT,1662,1041,True
+Garcinia mangostana,inat,123001,Garcinia mangostana,species,EXACT,361,236,True
+Gardenia jasminoides,inat,210990,Gardenia jasminoides,species,EXACT,1138,664,True
+Gazania rigens,inat,884843,Gazania rigens,species,EXACT,1356,512,True
+Gladiolus,inat,59945,Gladiolus,genus,EXACT,2295,1340,True
+Glycine max,inat,122902,Glycine max,species,EXACT,992,742,True
+Gossypium hirsutum,inat,77299,Gossypium hirsutum,species,EXACT,882,564,True
+Haloxylon persicum,inat,464138,Haloxylon persicum,species,EXACT,66,41,True
+Haworthia,inat,272914,Haworthia,genus,EXACT,646,369,True
+Hedera helix,inat,55882,Hedera helix,species,EXACT,2277,1027,True
+Helianthemum nummularium,inat,84278,Helianthemum nummularium,species,EXACT,446,283,True
+Helianthus annuus,inat,57983,Helianthus annuus,species,EXACT,2449,1534,True
+Helianthus tuberosus,inat,122970,Helianthus tuberosus,species,EXACT,1445,858,True
+Heliotropium arboreum,inat,769957,Heliotropium arboreum,species,EXACT,1393,414,True
+Hibiscus rosa-sinensis,inat,1628098,Hibiscus × rosa-sinensis,hybrid,EXACT,2497,1362,True
+Hibiscus sabdariffa,inat,1687652,Sabdariffa gossypiifolia,species,SYNONYM,1739,1061,True
+Hippeastrum,inat,51833,Hippeastrum,genus,EXACT,1981,1341,True
+Hordeum vulgare,inat,57182,Hordeum vulgare,species,EXACT,1150,869,True
+Hyphaene thebaica,inat,200831,Hyphaene thebaica,species,EXACT,230,108,True
+Ipomoea aquatica,inat,164077,Ipomoea aquatica,species,EXACT,1062,537,True
+Ipomoea batatas,inat,62941,Ipomoea batatas,species,EXACT,2501,1384,True
+Ipomoea pes-caprae,inat,60879,Ipomoea pes-caprae,species,EXACT,1943,905,True
+Ipomoea purpurea,inat,52344,Ipomoea purpurea,species,EXACT,2265,1157,True
+Iris germanica,inat,709635,Iris × germanica,hybrid,EXACT,1385,948,True
+Ixora coccinea,inat,133309,Ixora coccinea,species,EXACT,2164,1013,True
+Jacaranda mimosifolia,inat,77541,Jacaranda mimosifolia,species,EXACT,2688,1124,True
+Jasminum mesnyi,inat,164229,Jasminum mesnyi,species,EXACT,1537,754,True
+Jasminum officinale,inat,164233,Jasminum officinale,species,EXACT,236,181,True
+Jasminum sambac,inat,135425,Jasminum sambac,species,EXACT,1109,632,True
+Jatropha curcas,inat,164238,Jatropha curcas,species,EXACT,1233,734,True
+Juglans regia,inat,63935,Juglans regia,species,EXACT,1612,915,True
+Lablab purpureus,inat,146816,Lablab purpureus,species,EXACT,1264,782,True
+Lactuca sativa,inat,122976,Lactuca sativa,species,EXACT,1276,889,True
+Lagenaria siceraria,inat,164415,Lagenaria siceraria,species,EXACT,1144,860,True
+Lantana camara,inat,50333,Lantana camara,species,EXACT,2806,1336,True
+Lavandula angustifolia,inat,133395,Lavandula angustifolia,species,EXACT,1255,766,True
+Lavandula dentata,inat,71134,Lavandula dentata,species,EXACT,1813,723,True
+Lavandula subnuda,inat,847866,Lavandula subnuda,species,EXACT,200,38,True
+Lens culinaris,inat,1375470,Vicia lens,species,SYNONYM,107,91,True
+Lepidium sativum,inat,164527,Lepidium sativum,species,EXACT,253,191,True
+Leucaena leucocephala,inat,47447,Leucaena leucocephala,species,EXACT,2116,1016,True
+Litchi chinensis,inat,223964,Litchi chinensis,species,EXACT,828,434,True
+Luffa acutangula,inat,164869,Luffa acutangula,species,EXACT,268,201,True
+Luffa aegyptiaca,inat,1004655,Luffa aegyptiaca,species,EXACT,1913,1044,True
+Macadamia integrifolia,inat,287245,Macadamia integrifolia,species,EXACT,558,224,True
+Malus domestica,inat,469472,Malus domestica,species,EXACT,1997,1191,True
+Malva parviflora,inat,58202,Malva parviflora,species,EXACT,1261,700,True
+Mangifera indica,inat,48872,Mangifera indica,species,EXACT,2897,1350,True
+Manihot esculenta,inat,165138,Manihot esculenta,species,EXACT,2367,1251,True
+Manilkara zapota,inat,165144,Manilkara zapota,species,EXACT,1535,833,True
+Marsdenia floribunda,inat,339914,Stephanotis floribunda,species,SYNONYM,212,141,True
+Medicago sativa,inat,57057,Medicago sativa,species,EXACT,1613,987,True
+Melaleuca,inat,72232,Melaleuca,genus,EXACT,2687,1132,True
+Melaleuca citrina,inat,77976,Melaleuca citrina,species,EXACT,1549,794,True
+Melia azedarach,inat,53720,Melia azedarach,species,EXACT,2801,1328,True
+Melissa officinalis,inat,59901,Melissa officinalis,species,EXACT,1552,929,True
+Mentha spicata,inat,62652,Mentha spicata,species,EXACT,1798,1237,True
+Momordica charantia,inat,61369,Momordica charantia,species,EXACT,2526,1170,True
+Morinda citrifolia,inat,121022,Morinda citrifolia,species,EXACT,2518,989,True
+Moringa oleifera,inat,165529,Moringa oleifera,species,EXACT,2343,1103,True
+Morus alba,inat,56090,Morus alba,species,EXACT,2286,1120,True
+Morus nigra,inat,126741,Morus nigra,species,EXACT,1180,777,True
+Morus rubra,inat,54801,Morus rubra,species,EXACT,479,347,True
+Mucuna pruriens,inat,165536,Mucuna pruriens,species,EXACT,893,497,True
+Musa acuminata,inat,140907,Musa acuminata,species,EXACT,2784,1384,True
+Musa × paradisiaca,inat,170883,Musa × paradisiaca,hybrid,EXACT,2713,1468,True
+Myrciaria floribunda,inat,84058,Myrciaria floribunda,species,EXACT,71,48,True
+Narcissus tazetta,inat,56027,Narcissus tazetta,species,EXACT,1575,901,True
+Nasturtium officinale,inat,78174,Nasturtium officinale,species,EXACT,1431,859,True
+Nephelium lappaceum,inat,278605,Nephelium lappaceum,species,EXACT,827,472,True
+Nerium oleander,inat,47563,Nerium oleander,species,EXACT,2828,1416,True
+Nicotiana tabacum,inat,873768,Nicotiana tabacum,species,EXACT,1502,930,True
+Nigella sativa,inat,122834,Nigella sativa,species,EXACT,32,29,True
+Nymphaea,inat,51122,Nymphaea,genus,EXACT,2848,1450,True
+Nymphaea lotus,inat,165755,Nymphaea lotus,species,EXACT,1045,480,True
+Ocimum basilicum,inat,61398,Ocimum basilicum,species,EXACT,2052,1263,True
+Olea europaea,inat,57140,Olea europaea,species,EXACT,2275,973,True
+Opuntia,inat,47902,Opuntia,genus,EXACT,3081,1701,True
+Opuntia ficus-indica,inat,64119,Opuntia ficus-indica,species,EXACT,2162,1071,True
+Origanum majorana,inat,165925,Origanum majorana,species,EXACT,78,70,True
+Origanum vulgare,inat,61396,Origanum vulgare,species,EXACT,1607,1014,True
+Oryza sativa,inat,61381,Oryza sativa,species,EXACT,929,646,True
+Oxalis tuberosa,inat,122836,Oxalis tuberosa,species,EXACT,59,46,True
+Paspalum notatum,inat,166188,Paspalum notatum,species,EXACT,1105,603,True
+Passiflora caerulea,inat,51454,Passiflora caerulea,species,EXACT,2233,1180,True
+Passiflora edulis,inat,51446,Passiflora edulis,species,EXACT,2954,1475,True
+Pastinaca sativa,inat,59778,Pastinaca sativa,species,EXACT,1081,628,True
+Pelargonium,inat,72281,Pelargonium,genus,EXACT,2369,1108,True
+Persea americana,inat,62831,Persea americana,species,EXACT,2773,1579,True
+Petroselinum crispum,inat,78465,Petroselinum crispum,species,EXACT,1697,987,True
+Petunia,inat,55406,Petunia,genus,EXACT,2215,1330,True
+Phaseolus lunatus,inat,122849,Phaseolus lunatus,species,EXACT,173,115,True
+Phaseolus vulgaris,inat,122850,Phaseolus vulgaris,species,EXACT,802,573,True
+Philodendron,inat,69807,Philodendron,genus,EXACT,2379,1137,True
+Phoenix dactylifera,inat,78555,Phoenix dactylifera,species,EXACT,1519,775,True
+Phragmites australis,inat,64237,Phragmites australis,species,EXACT,1324,812,True
+Phyllanthus emblica,inat,68666,Phyllanthus emblica,species,EXACT,630,262,True
+Phyllostachys edulis,inat,122980,Phyllostachys edulis,species,EXACT,236,90,True
+Physalis philadelphica,inat,51734,Physalis philadelphica,species,EXACT,961,649,True
+Pimpinella anisum,inat,166878,Pimpinella anisum,species,EXACT,6,5,False
+Piper nigrum,inat,83583,Piper nigrum,species,EXACT,422,272,True
+Pistacia vera,inat,122975,Pistacia vera,species,EXACT,363,232,True
+Pisum sativum,inat,54522,Pisum sativum,species,EXACT,1641,1154,True
+Plantago major,inat,58961,Plantago major,species,EXACT,1557,843,True
+Platanus orientalis,inat,181682,Platanus orientalis,species,EXACT,589,369,True
+Pleurotus ostreatus,inat,48494,Pleurotus ostreatus,species,EXACT,1149,788,True
+Plumbago auriculata,inat,78631,Plumbago auriculata,species,EXACT,2772,1162,True
+Portulaca grandiflora,inat,167309,Portulaca grandiflora,species,EXACT,2394,1381,True
+Portulaca oleracea,inat,58991,Portulaca oleracea,species,EXACT,1874,1078,True
+Pouteria sapota,inat,126925,Pouteria sapota,species,EXACT,502,284,True
+Prosopis cineraria,inat,131133,Prosopis cineraria,species,EXACT,250,103,True
+Prunus armeniaca,inat,135331,Prunus armeniaca,species,EXACT,1285,814,True
+Prunus avium,inat,61964,Prunus avium,species,EXACT,1352,741,True
+Prunus cerasus,inat,68763,Prunus cerasus,species,EXACT,692,493,True
+Prunus domestica,inat,63735,Prunus domestica,species,EXACT,1537,1015,True
+Prunus dulcis,inat,69936,Prunus amygdalus,species,SYNONYM,1206,588,True
+Prunus laurocerasus,inat,61432,Prunus laurocerasus,species,EXACT,1516,700,True
+Prunus persica,inat,78755,Prunus persica,species,EXACT,2714,1605,True
+Prunus persica var. nucipersea,inat,78755,Prunus persica,species,FALLBACK (Prunus persica),2714,1605,True
+Prunus salicina,inat,464594,Prunus salicina,species,EXACT,209,134,True
+Psidium cattleianum,inat,278242,Psidium cattleyanum,species,SYNONYM,1809,803,True
+Psidium guajava,inat,62859,Psidium guajava,species,EXACT,2955,1390,True
+Psophocarpus tetragonolobus,inat,346168,Psophocarpus tetragonolobus,species,EXACT,275,153,True
+Punica granatum,inat,58300,Punica granatum,species,EXACT,2679,1519,True
+Pyrostegia venusta,inat,126634,Pyrostegia venusta,species,EXACT,2616,1135,True
+Pyrus communis,inat,63951,Pyrus communis,species,EXACT,1526,1036,True
 Ranunculus asiaticus,inat,346778,Ranunculus asiaticus,species,EXACT,409,263,True
+Raphanus sativus,inat,995125,Raphanus raphanistrum sativus,subspecies,FALLBACK (Raphanus raphanistrum sativus),1242,759,True
+Rheum rhabarbarum,inat,51251,Rheum rhabarbarum,species,EXACT,1523,1051,True
+Ribes nigrum,inat,54430,Ribes nigrum,species,EXACT,957,644,True
+Ribes rubrum,inat,54431,Ribes rubrum,species,EXACT,1075,743,True
+Ribes uva-crispa,inat,54429,Ribes uva-crispa,species,EXACT,1001,689,True
 Rosa damascena,inat,1455863,Rosa × damascena,hybrid,EXACT,44,25,True
-Salix babylonica,inat,58316,Salix babylonica,species,EXACT,2617,1359,True
-Salsola soda,inat,78960,Salsola soda,species,EXACT,462,162,True
+Rubus chamaemorus,inat,153003,Rubus chamaemorus,species,EXACT,805,429,True
+Rubus fruticosus,inat,1090496,Rubus fruticosus,species,EXACT,381,242,True
+Rubus idaeus,inat,54436,Rubus idaeus,species,EXACT,1592,1038,True
+Rumex acetosa,inat,55821,Rumex acetosa,species,EXACT,722,518,True
+Saccharum officinarum,inat,128270,Saccharum officinarum,species,EXACT,1626,959,True
+Salix babylonica,inat,58316,Salix babylonica,species,EXACT,2617,1361,True
+Salsola soda,inat,78960,Salsola soda,species,EXACT,464,163,True
 Salvia officinalis,inat,51738,Salvia officinalis,species,EXACT,1331,908,True
-Salvia rosmarinus,inat,636795,Salvia rosmarinus,species,EXACT,2464,1379,True
-Satureja thymbra,inat,508833,Satureja thymbra,species,EXACT,212,89,True
-Scaevola taccada,inat,363481,Scaevola taccada,species,EXACT,1903,623,True
-Sedum,inat,55735,Sedum,genus,EXACT,2665,1483,True
-Sempervivum tectorum,inat,51779,Sempervivum tectorum,species,EXACT,937,673,True
-Senna,inat,52348,Senna,genus,EXACT,2945,1367,True
-Senna artemisioides,inat,79058,Senna artemisioides,species,EXACT,735,287,True
-Sesuvium portulacastrum,inat,130743,Sesuvium portulacastrum,species,EXACT,1498,564,True
-Spathiphyllum,inat,206271,Spathiphyllum,genus,EXACT,1767,1041,True
-Stapelia,inat,54991,Stapelia,genus,EXACT,1323,778,True
-Stenotaphrum secundatum,inat,79210,Stenotaphrum secundatum,species,EXACT,1376,672,True
-Strelitzia reginae,inat,49143,Strelitzia reginae,species,EXACT,1981,871,True
-Streptosolen jamesonii,inat,244676,Streptosolen jamesonii,species,EXACT,971,309,True
-Suaeda,inat,57359,Suaeda,genus,EXACT,1245,604,True
-Tagetes erecta,inat,79312,Tagetes erecta,species,EXACT,1994,1270,True
-Tamarindus indica,inat,62844,Tamarindus indica,species,EXACT,2345,1168,True
-Tamarix aphylla,inat,56017,Tamarix aphylla,species,EXACT,794,366,True
+Salvia rosmarinus,inat,636795,Salvia rosmarinus,species,EXACT,2476,1348,True
+Satureja hortensis,inat,58460,Satureja hortensis,species,EXACT,145,108,True
+Satureja thymbra,inat,508833,Satureja thymbra,species,EXACT,212,90,True
+Scaevola taccada,inat,363481,Scaevola taccada,species,EXACT,1903,599,True
+Sechium edule,inat,866390,Sicyos edulis,species,FALLBACK (Sicyos edulis),1620,894,True
+Sedum,inat,55735,Sedum,genus,EXACT,2666,1496,True
+Selenicereus undatus,inat,1038928,Selenicereus undatus,species,EXACT,2284,1200,True
+Sempervivum tectorum,inat,51779,Sempervivum tectorum,species,EXACT,942,671,True
+Senna,inat,52348,Senna,genus,EXACT,2945,1359,True
+Senna artemisioides,inat,79058,Senna artemisioides,species,EXACT,737,283,True
+Sesamum indicum,inat,285850,Sesamum indicum,species,EXACT,1007,695,True
+Sesuvium portulacastrum,inat,130743,Sesuvium portulacastrum,species,EXACT,1499,583,True
+Solanum lycopersicum,inat,51737,Solanum lycopersicum,species,EXACT,2801,1492,True
+Solanum lycopersicum var. cerasiforme,inat,51737,Solanum lycopersicum,species,FALLBACK (Solanum lycopersicum),2801,1492,True
+Solanum melongena,inat,63190,Solanum melongena,species,EXACT,1792,1073,True
+Solanum muricatum,inat,290744,Solanum muricatum,species,EXACT,355,246,True
+Solanum tuberosum,inat,53858,Solanum tuberosum,species,EXACT,2416,1549,True
+Sorghum bicolor,inat,58389,Sorghum bicolor,species,EXACT,1464,1006,True
+Spathiphyllum,inat,206271,Spathiphyllum,genus,EXACT,1768,1047,True
+Spinacia oleracea,inat,84092,Spinacia oleracea,species,EXACT,293,248,True
+Stapelia,inat,54991,Stapelia,genus,EXACT,1322,776,True
+Stenotaphrum secundatum,inat,79210,Stenotaphrum secundatum,species,EXACT,1377,674,True
+Stevia rebaudiana,inat,320730,Stevia rebaudiana,species,EXACT,28,27,True
+Strelitzia reginae,inat,49143,Strelitzia reginae,species,EXACT,1984,879,True
+Streptosolen jamesonii,inat,244676,Streptosolen jamesonii,species,EXACT,974,308,True
+Suaeda,inat,57359,Suaeda,genus,EXACT,1245,601,True
+Syzygium aqueum,inat,345585,Syzygium aqueum,species,EXACT,268,162,True
+Syzygium cumini,inat,169518,Syzygium cumini,species,EXACT,1747,852,True
+Syzygium jambos,inat,84838,Syzygium jambos,species,EXACT,1471,567,True
+Syzygium samarangense,inat,322878,Syzygium samarangense,species,EXACT,641,304,True
+Tagetes erecta,inat,79312,Tagetes erecta,species,EXACT,1995,1266,True
+Tamarindus indica,inat,62844,Tamarindus indica,species,EXACT,2347,1164,True
+Tamarix aphylla,inat,56017,Tamarix aphylla,species,EXACT,795,368,True
 Tamarix nilotica,inat,444218,Tamarix nilotica,species,EXACT,71,43,True
-Tecoma stans,inat,48363,Tecoma stans,species,EXACT,2656,1095,True
-Tecomaria capensis,inat,286772,Tecomaria capensis,species,EXACT,2266,1039,True
-Thunbergia grandiflora,inat,129036,Thunbergia grandiflora,species,EXACT,2222,950,True
-Thymus serpyllum,inat,322051,Thymus serpyllum,species,EXACT,244,182,True
-Tulipa,inat,55800,Tulipa,genus,EXACT,1700,955,True
-Typha domingensis,inat,58392,Typha domingensis,species,EXACT,1210,732,True
-Vachellia nilotica,inat,557826,Vachellia nilotica,species,EXACT,600,289,True
-Vachellia tortilis,inat,489563,Vachellia tortilis,species,EXACT,616,343,True
-Vanilla planifolia,inat,61393,Vanilla planifolia,species,EXACT,787,386,True
-Verbascum,inat,56165,Verbascum,genus,EXACT,2106,1386,True
-Verbena,inat,53317,Verbena,genus,EXACT,2200,1346,True
-Viola wittrockiana,inat,171203,Viola × wittrockiana,hybrid,EXACT,1971,1099,True
-Wisteria sinensis,inat,127306,Wisteria sinensis,species,EXACT,1837,1032,True
-Yucca,inat,47787,Yucca,genus,EXACT,2571,1411,True
-Yucca filamentosa,inat,81605,Yucca filamentosa,species,EXACT,1045,684,True
-Zantedeschia aethiopica,inat,56006,Zantedeschia aethiopica,species,EXACT,2679,1248,True
-Zinnia elegans,inat,181901,Zinnia elegans,species,EXACT,2567,1638,True
+Taraxacum officinale,inat,47602,Taraxacum officinale,species,EXACT,1681,950,True
+Tecoma stans,inat,48363,Tecoma stans,species,EXACT,2657,1105,True
+Tecomaria capensis,inat,286772,Tecomaria capensis,species,EXACT,2267,1034,True
+Theobroma cacao,inat,64340,Theobroma cacao,species,EXACT,2257,996,True
+Thunbergia grandiflora,inat,129036,Thunbergia grandiflora,species,EXACT,2225,950,True
+Thymus serpyllum,inat,322051,Thymus serpyllum,species,EXACT,239,180,True
+Thymus vulgaris,inat,85469,Thymus vulgaris,species,EXACT,1204,681,True
+Trachyspermum ammi,inat,155843,Trachyspermum ammi,species,EXACT,5,5,False
+Tragopogon porrifolius,inat,54141,Tragopogon porrifolius,species,EXACT,902,474,True
+Trichosanthes dioica,inat,735996,Trichosanthes dioica,species,EXACT,12,9,False
+Trifolium alexandrinum,inat,79406,Trifolium alexandrinum,species,EXACT,270,188,True
+Trifolium repens,inat,55745,Trifolium repens,species,EXACT,1737,1003,True
+Trigonella foenum-graecum,inat,122771,Trigonella foenum-graecum,species,EXACT,30,27,True
+Triticum aestivum,inat,64161,Triticum aestivum,species,EXACT,1741,1310,True
+Tulipa,inat,55800,Tulipa,genus,EXACT,1700,947,True
+Typha domingensis,inat,58392,Typha domingensis,species,EXACT,1211,734,True
+Urtica dioica,inat,51884,Urtica dioica,species,EXACT,935,552,True
+Vaccinium corymbosum,inat,52740,Vaccinium corymbosum,species,EXACT,1063,674,True
+Vaccinium macrocarpon,inat,63749,Vaccinium macrocarpon,species,EXACT,599,278,True
+Vachellia nilotica,inat,557826,Vachellia nilotica,species,EXACT,601,289,True
+Vachellia tortilis,inat,489563,Vachellia tortilis,species,EXACT,619,344,True
+Valerianella locusta,inat,55752,Valerianella locusta,species,EXACT,745,510,True
+Vanilla planifolia,inat,61393,Vanilla planifolia,species,EXACT,792,388,True
+Verbascum,inat,56165,Verbascum,genus,EXACT,2107,1382,True
+Verbena,inat,53317,Verbena,genus,EXACT,2201,1392,True
+Vicia faba,inat,57309,Vicia faba,species,EXACT,1838,1072,True
+Vigna radiata,inat,122885,Vigna radiata,species,EXACT,117,89,True
+Vigna unguiculata,inat,122898,Vigna unguiculata,species,EXACT,354,245,True
+Vigna unguiculata subsp. sesquipedalis,inat,122898,Vigna unguiculata,species,FALLBACK (Vigna unguiculata),354,245,True
+Viola wittrockiana,inat,171203,Viola × wittrockiana,hybrid,EXACT,1973,1101,True
+Vitis vinifera,inat,79519,Vitis vinifera,species,EXACT,1856,1174,True
+Wisteria sinensis,inat,127306,Wisteria sinensis,species,EXACT,1839,1030,True
+Yucca,inat,47787,Yucca,genus,EXACT,2576,1393,True
+Yucca filamentosa,inat,81605,Yucca filamentosa,species,EXACT,1047,691,True
+Zantedeschia aethiopica,inat,56006,Zantedeschia aethiopica,species,EXACT,2679,1245,True
+Zea mays,inat,48448,Zea mays,species,EXACT,2343,1664,True
+Zingiber officinale,inat,122971,Zingiber officinale,species,EXACT,596,393,True
+Zinnia elegans,inat,181901,Zinnia elegans,species,EXACT,2567,1636,True
+Ziziphus jujuba,inat,428365,Ziziphus jujuba,species,EXACT,1261,796,True
 Ziziphus spina-christi,inat,322319,Ziziphus spina-christi,species,EXACT,277,103,True
-Zoysia,inat,155655,Zoysia,genus,EXACT,662,318,True
-Zoysia matrella,inat,170452,Zoysia matrella,species,EXACT,316,156,True
+Zoysia,inat,155655,Zoysia,genus,EXACT,669,321,True
+Zoysia matrella,inat,170452,Zoysia matrella,species,EXACT,321,160,True
